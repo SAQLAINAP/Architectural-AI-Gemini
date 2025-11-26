@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { ProjectConfig, GeneratedPlan, SavedProject } from './types';
+import { AuthProvider } from './contexts/AuthContext';
+import Login from './views/Login';
 import Home from './views/Home';
 import Configuration from './views/Configuration';
 import Dashboard from './views/Dashboard';
@@ -116,50 +118,53 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen font-sans flex flex-col transition-colors duration-300">
-      <Navbar isDark={isDark} toggleTheme={toggleTheme} />
+    <AuthProvider>
+      <div className={`min-h-screen bg-neo-bg dark:bg-slate-900 transition-colors font-sans text-black dark:text-white ${isDark ? 'dark' : ''}`}>
+        <Navbar isDark={isDark} toggleTheme={toggleTheme} />
 
-      {/* Error Toast */}
-      {error && (
-        <div className="fixed top-20 right-4 z-50 bg-red-100 dark:bg-red-900 border-2 border-black dark:border-white p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] max-w-sm">
-          <h4 className="font-bold text-red-600 dark:text-red-300 mb-1">Error</h4>
-          <p className="text-sm dark:text-white">{error}</p>
-          <button onClick={() => setError(null)} className="absolute top-1 right-1 font-bold text-xs px-2 hover:bg-red-200 dark:hover:bg-red-800 dark:text-white">X</button>
+        {/* Error Toast */}
+        {error && (
+          <div className="fixed top-20 right-4 z-50 bg-red-100 dark:bg-red-900 border-2 border-black dark:border-white p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] max-w-sm">
+            <h4 className="font-bold text-red-600 dark:text-red-300 mb-1">Error</h4>
+            <p className="text-sm dark:text-white">{error}</p>
+            <button onClick={() => setError(null)} className="absolute top-1 right-1 font-bold text-xs px-2 hover:bg-red-200 dark:hover:bg-red-800 dark:text-white">X</button>
+          </div>
+        )}
+
+        {/* Main Content Area */}
+        <div className="flex-1 flex flex-col">
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={
+              <Home
+                onLoadProject={() => navigate('/projects')}
+                onUploadImage={handleUploadImage}
+                isProcessing={isProcessing}
+              />
+            } />
+            <Route path="/configure" element={
+              <Configuration
+                onGenerate={handleGenerate}
+                isGenerating={isProcessing}
+              />
+            } />
+            <Route path="/dashboard" element={
+              <Dashboard
+                plan={generatedPlan}
+                onSave={handleSaveProject}
+              />
+            } />
+            <Route path="/materials" element={<MaterialCostEstimation plan={generatedPlan} />} /> {/* Added MaterialCostEstimation route */}
+            <Route path="/projects" element={
+              <Projects
+                onLoadProject={handleLoadSavedProject}
+              />
+            } />
+            <Route path="/docs" element={<Documentation />} />
+          </Routes>
         </div>
-      )}
-
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col">
-        <Routes>
-          <Route path="/" element={
-            <Home
-              onLoadProject={() => navigate('/projects')}
-              onUploadImage={handleUploadImage}
-              isProcessing={isProcessing}
-            />
-          } />
-          <Route path="/configure" element={
-            <Configuration
-              onGenerate={handleGenerate}
-              isGenerating={isProcessing}
-            />
-          } />
-          <Route path="/dashboard" element={
-            <Dashboard
-              plan={generatedPlan}
-              onSave={handleSaveProject}
-            />
-          } />
-          <Route path="/materials" element={<MaterialCostEstimation plan={generatedPlan} />} /> {/* Added MaterialCostEstimation route */}
-          <Route path="/projects" element={
-            <Projects
-              onLoadProject={handleLoadSavedProject}
-            />
-          } />
-          <Route path="/docs" element={<Documentation />} />
-        </Routes>
       </div>
-    </div>
+    </AuthProvider>
   );
 }
 

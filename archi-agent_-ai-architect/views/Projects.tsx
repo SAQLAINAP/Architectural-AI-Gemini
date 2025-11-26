@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { SavedProject } from '../types';
-import { getProjects, deleteProject } from '../services/storageService';
+import { getSavedProjects, deleteProject } from '../services/storageService';
 import { NeoButton, NeoCard } from '../components/NeoComponents';
 import { Edit2, Trash2, Share2, LayoutTemplate, Calendar } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -14,13 +14,18 @@ const Projects: React.FC<ProjectsProps> = ({ onLoadProject }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setProjects(getProjects()); // Assuming getProjects() is the correct function, as getSavedProjects() was not defined in the original context.
+    const fetchProjects = async () => {
+      const data = await getSavedProjects();
+      setProjects(data);
+    };
+    fetchProjects();
   }, []);
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     if (window.confirm("Are you sure you want to delete this project? This action cannot be undone.")) {
-      deleteProject(id);
-      setProjects(getProjects());
+      await deleteProject(id);
+      const data = await getSavedProjects();
+      setProjects(data);
     }
   };
 

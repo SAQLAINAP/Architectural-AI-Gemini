@@ -61,6 +61,13 @@ const Configuration: React.FC<ConfigurationProps> = ({ onGenerate, isGenerating 
       vastuLevel,
       facingDirection,
       surroundingContext,
+      floors,
+      floorPlanStyle,
+      bathrooms,
+      bathroomType,
+      parking,
+      kitchenType,
+      familyMembers,
       municipalCode,
     });
   };
@@ -139,6 +146,35 @@ w - 10 h - 10 rounded - full flex items - center justify - center font - bold bo
                 </div>
               </div>
 
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <NeoInput
+                  label="Floors"
+                  type="number"
+                  min={1}
+                  max={5}
+                  value={floors}
+                  onChange={(e) => setFloors(Number(e.target.value))}
+                />
+                <NeoSelect
+                  label="Style"
+                  options={['Simplex', 'Duplex', 'Triplex']}
+                  value={floorPlanStyle}
+                  onChange={(e) => setFloorPlanStyle(e.target.value as any)}
+                />
+                <NeoSelect
+                  label="Parking"
+                  options={['None', 'Bike Only', '1 Car', '2+ Cars']}
+                  value={parking}
+                  onChange={(e) => setParking(e.target.value as any)}
+                />
+                <NeoInput
+                  label="Family Members"
+                  type="number"
+                  value={familyMembers}
+                  onChange={(e) => setFamilyMembers(Number(e.target.value))}
+                />
+              </div>
+
               <div>
                 <label className="font-bold text-sm block mb-1">Room Requirements</label>
                 <div className="flex gap-2 mb-2">
@@ -166,6 +202,31 @@ w - 10 h - 10 rounded - full flex items - center justify - center font - bold bo
                     </span>
                   ))}
                 </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="flex gap-2 items-end">
+                  <NeoInput
+                    label="Bathrooms"
+                    type="number"
+                    value={bathrooms}
+                    onChange={(e) => setBathrooms(Number(e.target.value))}
+                    className="w-20"
+                  />
+                  <NeoSelect
+                    label="Type"
+                    options={['Western', 'Indian', 'Mixed']}
+                    value={bathroomType}
+                    onChange={(e) => setBathroomType(e.target.value as any)}
+                    className="flex-1"
+                  />
+                </div>
+                <NeoSelect
+                  label="Kitchen Style"
+                  options={['Open', 'Closed']}
+                  value={kitchenType}
+                  onChange={(e) => setKitchenType(e.target.value as any)}
+                />
               </div>
 
               <div>

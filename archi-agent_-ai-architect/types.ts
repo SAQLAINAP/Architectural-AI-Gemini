@@ -107,3 +107,69 @@ export interface SavedProject {
   config: ProjectConfig | null;
   plan: GeneratedPlan;
 }
+
+export interface MaterialEstimationConfig {
+  projectType: 'Residential' | 'Commercial' | 'Industrial';
+  location: string;
+  dimensions: {
+    length: number;
+    width: number;
+    floors: number;
+    totalArea: number;
+  };
+  soil: {
+    strength: 'Weak' | 'Medium' | 'Strong';
+    waterProximity: boolean;
+    fertility: 'Fertile' | 'Rocky' | 'Clayey';
+    issues: string[];
+  };
+  budget: {
+    level: 'Basic' | 'Medium' | 'Premium' | 'Luxury';
+    priority: string;
+    timeline: string;
+    sustainability: boolean;
+  };
+  preferences: {
+    localSourcing: boolean;
+    laborIncluded: boolean;
+    extras: string[];
+    customNotes: string;
+  };
+}
+
+export interface MaterialReport {
+  executiveSummary: {
+    totalCost: string;
+    costPerSqft: string;
+    timelineImpact: string;
+  };
+  grandTotal: number;
+  quotations: {
+    title: string;
+    description: string;
+    estimatedCost: number;
+    items: string[];
+  }[];
+  breakdown: {
+    category: string;
+    items: {
+      item: string;
+      quantity: string;
+      unitPrice: string;
+      total: string;
+    }[];
+  }[];
+  visuals: {
+    costDistribution: { name: string; value: number }[];
+  };
+  recommendations: string[];
+  risks: string[];
+}
+
+export interface SavedMaterialEstimate {
+  id: string;
+  name: string;
+  date: string;
+  config: MaterialEstimationConfig;
+  report: MaterialReport;
+}

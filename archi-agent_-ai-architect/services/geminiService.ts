@@ -1,5 +1,5 @@
 import { GoogleGenAI, Type } from "@google/genai";
-import { ProjectConfig, GeneratedPlan } from '../types';
+import { ProjectConfig, GeneratedPlan, MaterialEstimationConfig, MaterialReport } from '../types';
 
 const getClient = () => {
   const apiKey = process.env.API_KEY;
@@ -163,10 +163,18 @@ export const generateFloorPlan = async (config: ProjectConfig): Promise<Generate
     - Building Type: ${config.projectType}
     - Plot Dimensions: ${config.width}m (Width) x ${config.depth}m (Depth)
     - Total Plot Area: ${config.width * config.depth} sq.m
+    - Floors: ${config.floors} (${config.floorPlanStyle})
+    - Family Size: ${config.familyMembers} members
+    - Bathrooms: ${config.bathrooms} (${config.bathroomType})
+    - Kitchen: ${config.kitchenType} Style
+    - Parking: ${config.parking}
     - Building Authority: ${config.municipalCode}
     - Client Requirements: ${config.requirements.join(', ')}
     - Spatial Preferences: ${config.adjacency}
     - Cultural System: ${config.culturalSystem}
+    - Vastu Level: ${config.vastuLevel}
+    - Site Facing: ${config.facingDirection}
+    - Context: ${config.surroundingContext}
 
     **ARCHITECTURAL EXECUTION PROTOCOL (Systematic Approach)**:
     
@@ -232,6 +240,10 @@ export const generateFloorPlan = async (config: ProjectConfig): Promise<Generate
        - Mark as type: "circulation"
        - Ensure 1.2m minimum width for accessibility
        - **NO GAP RULE**: Circulation must fill spaces between rooms
+       
+    4. **MULTI-LEVEL & PARKING**:
+       - If Floors > 1: Place Staircase (avoid Brahmasthan/NE). Mark as 'circulation'.
+       - Parking: ${config.parking}. If 'Car', ensure minimum 2.5m x 5m space in front setback or stilt.
     
     ═══════════════════════════════════════════════════════════════════
     PHASE 4: DETAILED DESIGN & FEATURES (Execution Layer)
@@ -265,6 +277,8 @@ export const generateFloorPlan = async (config: ProjectConfig): Promise<Generate
        - Functional layout (e.g., "Work triangle: Stove-Sink-Fridge within 6m")
        - Storage recommendations
        - Color suggestions (if relevant)
+       - **BATHROOMS**: Specify "${config.bathroomType}" type fixtures.
+       - **KITCHEN**: Design as "${config.kitchenType}" layout.
     
     ═══════════════════════════════════════════════════════════════════
     PHASE 5: COMPLIANCE VALIDATION (Audit Layer)
@@ -607,4 +621,122 @@ export const analyzePlanFromImage = async (base64Image: string): Promise<Generat
   const plan = JSON.parse(text) as GeneratedPlan;
   plan.imageUrl = base64Image;
   return plan;
+};
+
+export const generateMaterialEstimate = async (config: MaterialEstimationConfig): Promise<MaterialReport> => {
+  const ai = getClient();
+
+  const prompt = `
+    You are a expert Civil Engineer and Construction Cost Analyst with 20+ years in Indian real estate. Your task is to generate a comprehensive, non-redundant material estimation report for a building project based on user inputs. Focus on accuracy, informativeness, and decision-making insights.
+
+    User Inputs:
+    - Project Type: ${config.projectType}
+    - Location: ${config.location} (use this for soil/foundation assumptions and regional pricing)
+    - Dimensions: Total Area = ${config.dimensions.totalArea} sqft, Floors = ${config.dimensions.floors}
+    - Soil Strength: ${config.soil.strength} (Issues: ${config.soil.issues.join(', ')})
+    - Budget Level: ${config.budget.level}
+    - Priority: ${config.budget.priority}
+    - Preferences: Local Sourcing: ${config.preferences.localSourcing}, Labor Included: ${config.preferences.laborIncluded}
+    - Notes: ${config.preferences.customNotes}
+
+    Steps to Follow:
+    1. **Research Real-Time Data**: Use web search or APIs to fetch current (as of ${new Date().toLocaleDateString()}) prices in ${config.location || 'India'}.
+    2. **Calculate 3 Quotation Tiers**:
+       - **Bare Shell**: Structure (RCC), Masonry, Plastering, Basic Flooring (Tiles), Basic Painting.
+       - **Interior Inclusive**: All above + Premium Flooring (Marble/Granite), False Ceiling, Modular Kitchen (Basic), Wardrobes, Electrical Fixtures, Plumbing Fixtures.
+       - **Fully Furnished**: All above + Loose Furniture (Sofas, Beds), Appliances (AC, TV, Fridge), Decor, Curtains, Smart Home features.
+    3. **Estimate Costs**: Break down by category. Total = Materials + Labor + Misc.
+    4. **Risks & Insights**: Flag issues (e.g., "Weak soil in ${config.location} risks settlement").
+    5. **Output Format**: 
+       - Executive Summary: Total Cost (Interior Inclusive), Per Sqft, Timeline.
+       - Quotations: 3 distinct tiers with descriptions and costs.
+       - Detailed Breakdown: Itemized list for the "Interior Inclusive" tier.
+       - Visuals: Cost distribution data for charts.
+
+    Ensure output is concise, uses tables for clarity, and cites sources.
+  `;
+
+  const response = await ai.models.generateContent({
+    model: 'gemini-2.5-flash',
+    contents: prompt,
+    config: {
+      responseMimeType: "application/json",
+      responseSchema: {
+        type: Type.OBJECT,
+        properties: {
+          executiveSummary: {
+            type: Type.OBJECT,
+            properties: {
+              totalCost: { type: Type.STRING },
+              costPerSqft: { type: Type.STRING },
+              timelineImpact: { type: Type.STRING }
+            },
+            required: ["totalCost", "costPerSqft", "timelineImpact"]
+          },
+          grandTotal: { type: Type.NUMBER, description: "Numeric total cost for Interior Inclusive tier" },
+          quotations: {
+            type: Type.ARRAY,
+            items: {
+              type: Type.OBJECT,
+              properties: {
+                title: { type: Type.STRING },
+                description: { type: Type.STRING },
+                estimatedCost: { type: Type.NUMBER },
+                items: { type: Type.ARRAY, items: { type: Type.STRING } }
+              },
+              required: ["title", "description", "estimatedCost", "items"]
+            }
+          },
+          breakdown: {
+            type: Type.ARRAY,
+            items: {
+              type: Type.OBJECT,
+              properties: {
+                category: { type: Type.STRING },
+                items: {
+                  type: Type.ARRAY,
+                  items: {
+                    type: Type.OBJECT,
+                    properties: {
+                      item: { type: Type.STRING },
+                      quantity: { type: Type.STRING },
+                      unitPrice: { type: Type.STRING },
+                      total: { type: Type.STRING }
+                    },
+                    required: ["item", "quantity", "unitPrice", "total"]
+                  }
+                }
+              },
+              required: ["category", "items"]
+            }
+          },
+          visuals: {
+            type: Type.OBJECT,
+            properties: {
+              costDistribution: {
+                type: Type.ARRAY,
+                items: {
+                  type: Type.OBJECT,
+                  properties: {
+                    name: { type: Type.STRING },
+                    value: { type: Type.NUMBER }
+                  },
+                  required: ["name", "value"]
+                }
+              }
+            },
+            required: ["costDistribution"]
+          },
+          recommendations: { type: Type.ARRAY, items: { type: Type.STRING } },
+          risks: { type: Type.ARRAY, items: { type: Type.STRING } }
+        },
+        required: ["executiveSummary", "grandTotal", "quotations", "breakdown", "visuals", "recommendations", "risks"]
+      }
+    }
+  });
+
+  const text = response.text;
+  if (!text) throw new Error("No response from AI");
+
+  return JSON.parse(text) as MaterialReport;
 };
