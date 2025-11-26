@@ -1,20 +1,99 @@
 <div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+  <img width="1200" height="475" alt="Architectural AI Agent Banner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+  
+  # Architectural AI Agent
+  
+  **An intelligent AI-powered assistant for generating architectural floor plans, estimating construction costs, and ensuring regulatory compliance.**
+
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  [![React](https://img.shields.io/badge/React-18.2-blue)](https://reactjs.org/)
+  [![Vite](https://img.shields.io/badge/Vite-5.0-purple)](https://vitejs.dev/)
+  [![Supabase](https://img.shields.io/badge/Supabase-Integrated-green)](https://supabase.com/)
+  [![Gemini AI](https://img.shields.io/badge/AI-Gemini%20Pro-orange)](https://deepmind.google/technologies/gemini/)
 </div>
 
-# Run and deploy your AI Studio app
+---
 
-This contains everything you need to run your app locally.
+## 🚀 Overview
 
-View your app in AI Studio: https://ai.studio/apps/drive/1uat4gNpyv9Orpye2V7AtBsQ_1yK1wrVd
+The **Architectural AI Agent** is a cutting-edge web application designed to assist architects, home builders, and enthusiasts in the initial stages of building design. By leveraging Google's **Gemini AI**, the application generates detailed floor plans, provides comprehensive material and cost estimates, and checks for compliance with local building codes and cultural design principles (like Vastu Shastra).
 
-## Run Locally
+## ✨ Key Features
 
-**Prerequisites:**  Node.js
+-   **AI-Powered Floor Plan Generation**: Generate optimized floor plans based on plot dimensions, requirements, and family size.
+-   **Intelligent Material & Cost Estimation**: Get detailed cost breakdowns with multi-tier quotations (Basic, Premium, Luxury) and visual cost distribution charts.
+-   **Regulatory & Cultural Compliance**: Automatically checks designs against local building codes (e.g., NBC, BBMP) and cultural guidelines (Vastu, Islamic beliefs).
+-   **Interactive Stepper Interface**: User-friendly, step-by-step configuration for accurate project inputs.
+-   **History & Cloud Storage**: Save and retrieve your estimates and projects securely using Supabase authentication and storage.
+-   **Visualizations**: Interactive charts and detailed tables for financial planning.
 
+## 🛠️ Tech Stack
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+-   **Frontend**: React, TypeScript, Vite, Tailwind CSS
+-   **AI Integration**: Google Gemini Pro (via `@google/genai`)
+-   **Backend/Storage**: Supabase (Auth & Database)
+-   **Routing**: React Router DOM
+-   **Visualization**: Recharts
+-   **Icons**: Lucide React
+
+## 🏁 Getting Started
+
+Follow these steps to set up the project locally.
+
+### Prerequisites
+
+-   **Node.js** (v18 or higher)
+-   **npm** or **yarn**
+-   A **Google Gemini API Key**
+-   A **Supabase** Project (URL and Anon Key)
+
+### Installation
+
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/SAQLAINAP/Architectural_Gemini.git
+    cd Architectural_Gemini
+    ```
+
+2.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
+
+3.  **Configure Environment Variables**:
+    Create a `.env.local` file in the root directory and add your keys:
+    ```env
+    VITE_GEMINI_API_KEY=your_gemini_api_key_here
+    VITE_SUPABASE_URL=your_supabase_project_url
+    VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+    ```
+
+4.  **Run the development server**:
+    ```bash
+    npm run dev
+    ```
+
+5.  **Open the app**:
+    Visit `http://localhost:5173` in your browser.
+
+## 📂 Project Structure
+
+```
+src/
+├── components/     # Reusable UI components (NeoComponents, etc.)
+├── contexts/       # React Contexts (AuthContext)
+├── lib/            # Library configurations (Supabase client)
+├── services/       # API services (Gemini AI, Storage)
+├── views/          # Page components (Home, Configuration, MaterialCostEstimation)
+├── types.ts        # TypeScript interfaces and types
+├── App.tsx         # Main application component with routing
+└── main.tsx        # Entry point
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
