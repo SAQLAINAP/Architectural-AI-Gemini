@@ -1,0 +1,5 @@
+{
+  "name": "Archi-Agent: AI Architect",
+  "description": "An automated floor plan generation tool with regulatory and cultural compliance checking.",
+  "requestFramePermissions": []
+}
