@@ -9,6 +9,27 @@ const getClient = () => {
   return new GoogleGenAI({ apiKey });
 };
 
+const PRIMARY_MODEL = 'gemini-3.0-nano-banana';
+const FALLBACK_MODEL = 'gemini-2.5-pro';
+
+const generateWithFallback = async (ai: GoogleGenAI, contents: any, config: any) => {
+  try {
+    console.log(`Attempting generation with ${PRIMARY_MODEL}...`);
+    return await ai.models.generateContent({
+      model: PRIMARY_MODEL,
+      contents,
+      config
+    });
+  } catch (error) {
+    console.warn(`Model ${PRIMARY_MODEL} failed, falling back to ${FALLBACK_MODEL}. Error:`, error);
+    return await ai.models.generateContent({
+      model: FALLBACK_MODEL,
+      contents,
+      config
+    });
+  }
+};
+
 export const generateFloorPlan = async (config: ProjectConfig): Promise<GeneratedPlan> => {
   const ai = getClient();
 
@@ -329,122 +350,118 @@ export const generateFloorPlan = async (config: ProjectConfig): Promise<Generate
     ✓ Windows provide 10% natural light?
   `;
 
-  const response = await ai.models.generateContent({
-    model: 'gemini-2.5-flash',
-    contents: prompt,
-    config: {
-      responseMimeType: "application/json",
-      responseSchema: {
-        type: Type.OBJECT,
-        properties: {
-          designLog: {
-            type: Type.ARRAY,
-            items: { type: Type.STRING },
-            description: "Detailed list of architectural decisions with reasoning (8-15 entries minimum)."
-          },
-          rooms: {
-            type: Type.ARRAY,
-            items: {
-              type: Type.OBJECT,
-              properties: {
-                id: { type: Type.STRING },
-                name: { type: Type.STRING },
-                type: {
-                  type: Type.STRING,
-                  enum: ["room", "circulation", "outdoor", "setback", "service"],
-                  description: "Space classification: 'room' for enclosed spaces, 'circulation' for corridors/halls, 'setback' for mandatory open areas, 'outdoor' for gardens/landscaping."
-                },
-                x: { type: Type.NUMBER, description: "X coordinate (meters from left)" },
-                y: { type: Type.NUMBER, description: "Y coordinate (meters from top)" },
-                width: { type: Type.NUMBER, description: "Width in meters" },
-                height: { type: Type.NUMBER, description: "Height in meters (length in Y direction)" },
-                direction: {
-                  type: Type.STRING,
-                  description: "Primary cardinal direction of room (N, NE, E, SE, S, SW, W, NW, Center)"
-                },
-                features: {
-                  type: Type.ARRAY,
-                  items: {
-                    type: Type.OBJECT,
-                    properties: {
-                      type: { type: Type.STRING, enum: ["door", "window", "opening"] },
-                      wall: { type: Type.STRING, enum: ["top", "bottom", "left", "right"] },
-                      position: { type: Type.NUMBER, description: "Distance from wall start (meters)" },
-                      width: { type: Type.NUMBER, description: "Opening width (meters)" }
-                    },
-                    required: ["type", "wall", "position", "width"]
-                  }
-                },
-                guidance: {
-                  type: Type.STRING,
-                  description: "Comprehensive guidance: furniture placement with cardinal directions, cultural compliance reasoning (Vastu/Islamic), functional layout tips, storage recommendations, color suggestions. Example: 'Place bed in SW corner with headboard on South wall for Vastu stability. Wardrobe on West wall. Dressing table in NE. Use earthy tones (beige, brown). Avoid mirrors facing bed.'"
-                }
-              },
-              required: ["id", "name", "type", "x", "y", "width", "height", "direction", "features", "guidance"]
-            }
-          },
-          totalArea: { type: Type.NUMBER, description: "Total plot area (should equal width × depth)" },
-          builtUpArea: { type: Type.NUMBER, description: "Sum of all 'room' type areas" },
-          circulationArea: { type: Type.NUMBER, description: "Sum of all 'circulation' type areas" },
-          setbackArea: { type: Type.NUMBER, description: "Sum of all 'setback' type areas" },
-          plotCoverageRatio: { type: Type.NUMBER, description: "Built-up Area / Total Area (as decimal)" },
-          compliance: {
+  const response = await generateWithFallback(ai, prompt, {
+    responseMimeType: "application/json",
+    responseSchema: {
+      type: Type.OBJECT,
+      properties: {
+        designLog: {
+          type: Type.ARRAY,
+          items: { type: Type.STRING },
+          description: "Detailed list of architectural decisions with reasoning (8-15 entries minimum)."
+        },
+        rooms: {
+          type: Type.ARRAY,
+          items: {
             type: Type.OBJECT,
             properties: {
-              regulatory: {
+              id: { type: Type.STRING },
+              name: { type: Type.STRING },
+              type: {
+                type: Type.STRING,
+                enum: ["room", "circulation", "outdoor", "setback", "service"],
+                description: "Space classification: 'room' for enclosed spaces, 'circulation' for corridors/halls, 'setback' for mandatory open areas, 'outdoor' for gardens/landscaping."
+              },
+              x: { type: Type.NUMBER, description: "X coordinate (meters from left)" },
+              y: { type: Type.NUMBER, description: "Y coordinate (meters from top)" },
+              width: { type: Type.NUMBER, description: "Width in meters" },
+              height: { type: Type.NUMBER, description: "Height in meters (length in Y direction)" },
+              direction: {
+                type: Type.STRING,
+                description: "Primary cardinal direction of room (N, NE, E, SE, S, SW, W, NW, Center)"
+              },
+              features: {
                 type: Type.ARRAY,
                 items: {
                   type: Type.OBJECT,
                   properties: {
-                    rule: { type: Type.STRING, description: "Building code rule checked" },
-                    status: { type: Type.STRING, enum: ["PASS", "FAIL", "WARN"] },
-                    message: { type: Type.STRING, description: "Compliance status details" },
-                    recommendation: { type: Type.STRING, description: "Suggestions if non-compliant" }
+                    type: { type: Type.STRING, enum: ["door", "window", "opening"] },
+                    wall: { type: Type.STRING, enum: ["top", "bottom", "left", "right"] },
+                    position: { type: Type.NUMBER, description: "Distance from wall start (meters)" },
+                    width: { type: Type.NUMBER, description: "Opening width (meters)" }
                   },
-                  required: ["rule", "status", "message"]
+                  required: ["type", "wall", "position", "width"]
                 }
               },
-              cultural: {
-                type: Type.ARRAY,
-                items: {
-                  type: Type.OBJECT,
-                  properties: {
-                    rule: { type: Type.STRING, description: "Vastu/Cultural principle checked" },
-                    status: { type: Type.STRING, enum: ["PASS", "FAIL", "WARN"] },
-                    message: { type: Type.STRING, description: "Cultural compliance details" },
-                    recommendation: { type: Type.STRING, description: "Remedies if non-compliant" }
-                  },
-                  required: ["rule", "status", "message"]
-                }
+              guidance: {
+                type: Type.STRING,
+                description: "Comprehensive guidance: furniture placement with cardinal directions, cultural compliance reasoning (Vastu/Islamic), functional layout tips, storage recommendations, color suggestions. Example: 'Place bed in SW corner with headboard on South wall for Vastu stability. Wardrobe on West wall. Dressing table in NE. Use earthy tones (beige, brown). Avoid mirrors facing bed.'"
               }
             },
-            required: ["regulatory", "cultural"]
-          },
-          bom: {
-            type: Type.ARRAY,
-            items: {
-              type: Type.OBJECT,
-              properties: {
-                material: { type: Type.STRING },
-                quantity: { type: Type.STRING },
-                unit: { type: Type.STRING },
-                estimatedCost: { type: Type.NUMBER, description: "Cost in local currency" }
-              },
-              required: ["material", "quantity", "unit", "estimatedCost"]
-            }
-          },
-          totalCostRange: {
-            type: Type.OBJECT,
-            properties: {
-              min: { type: Type.NUMBER },
-              max: { type: Type.NUMBER },
-              currency: { type: Type.STRING, description: "INR, USD, etc." }
-            },
-            required: ["min", "max", "currency"]
+            required: ["id", "name", "type", "x", "y", "width", "height", "direction", "features", "guidance"]
           }
         },
-        required: ["designLog", "rooms", "totalArea", "builtUpArea", "compliance", "bom", "totalCostRange"]
-      }
+        totalArea: { type: Type.NUMBER, description: "Total plot area (should equal width × depth)" },
+        builtUpArea: { type: Type.NUMBER, description: "Sum of all 'room' type areas" },
+        circulationArea: { type: Type.NUMBER, description: "Sum of all 'circulation' type areas" },
+        setbackArea: { type: Type.NUMBER, description: "Sum of all 'setback' type areas" },
+        plotCoverageRatio: { type: Type.NUMBER, description: "Built-up Area / Total Area (as decimal)" },
+        compliance: {
+          type: Type.OBJECT,
+          properties: {
+            regulatory: {
+              type: Type.ARRAY,
+              items: {
+                type: Type.OBJECT,
+                properties: {
+                  rule: { type: Type.STRING, description: "Building code rule checked" },
+                  status: { type: Type.STRING, enum: ["PASS", "FAIL", "WARN"] },
+                  message: { type: Type.STRING, description: "Compliance status details" },
+                  recommendation: { type: Type.STRING, description: "Suggestions if non-compliant" }
+                },
+                required: ["rule", "status", "message"]
+              }
+            },
+            cultural: {
+              type: Type.ARRAY,
+              items: {
+                type: Type.OBJECT,
+                properties: {
+                  rule: { type: Type.STRING, description: "Vastu/Cultural principle checked" },
+                  status: { type: Type.STRING, enum: ["PASS", "FAIL", "WARN"] },
+                  message: { type: Type.STRING, description: "Cultural compliance details" },
+                  recommendation: { type: Type.STRING, description: "Remedies if non-compliant" }
+                },
+                required: ["rule", "status", "message"]
+              }
+            }
+          },
+          required: ["regulatory", "cultural"]
+        },
+        bom: {
+          type: Type.ARRAY,
+          items: {
+            type: Type.OBJECT,
+            properties: {
+              material: { type: Type.STRING },
+              quantity: { type: Type.STRING },
+              unit: { type: Type.STRING },
+              estimatedCost: { type: Type.NUMBER, description: "Cost in local currency" }
+            },
+            required: ["material", "quantity", "unit", "estimatedCost"]
+          }
+        },
+        totalCostRange: {
+          type: Type.OBJECT,
+          properties: {
+            min: { type: Type.NUMBER },
+            max: { type: Type.NUMBER },
+            currency: { type: Type.STRING, description: "INR, USD, etc." }
+          },
+          required: ["min", "max", "currency"]
+        }
+      },
+      required: ["designLog", "rooms", "totalArea", "builtUpArea", "compliance", "bom", "totalCostRange"]
     }
   });
 
@@ -502,113 +519,109 @@ export const analyzePlanFromImage = async (base64Image: string): Promise<Generat
     and comprehensive furniture guidance for each room.
   `;
 
-  const response = await ai.models.generateContent({
-    model: 'gemini-2.5-flash',
-    contents: {
-      parts: [
-        {
-          inlineData: {
-            mimeType: 'image/jpeg',
-            data: base64Data
+  const response = await generateWithFallback(ai, {
+    parts: [
+      {
+        inlineData: {
+          mimeType: 'image/jpeg',
+          data: base64Data
+        }
+      },
+      { text: prompt }
+    ]
+  }, {
+    responseMimeType: "application/json",
+    responseSchema: {
+      type: Type.OBJECT,
+      properties: {
+        designLog: {
+          type: Type.ARRAY,
+          items: { type: Type.STRING },
+          description: "Observations and analysis notes from the image"
+        },
+        rooms: {
+          type: Type.ARRAY,
+          items: {
+            type: Type.OBJECT,
+            properties: {
+              id: { type: Type.STRING },
+              name: { type: Type.STRING },
+              type: {
+                type: Type.STRING,
+                enum: ["room", "circulation", "outdoor", "setback", "service"]
+              },
+              x: { type: Type.NUMBER, description: "Estimated X coordinate" },
+              y: { type: Type.NUMBER, description: "Estimated Y coordinate" },
+              width: { type: Type.NUMBER, description: "Estimated width" },
+              height: { type: Type.NUMBER, description: "Estimated height" },
+              direction: { type: Type.STRING, description: "Cardinal direction if determinable" },
+              features: {
+                type: Type.ARRAY,
+                items: {
+                  type: Type.OBJECT,
+                  properties: {
+                    type: { type: Type.STRING, enum: ["door", "window", "opening"] },
+                    wall: { type: Type.STRING, enum: ["top", "bottom", "left", "right"] },
+                    position: { type: Type.NUMBER },
+                    width: { type: Type.NUMBER }
+                  }
+                }
+              },
+              guidance: { type: Type.STRING, description: "Detailed furniture placement and Vastu guidance" }
+            },
+            required: ["id", "name", "type", "guidance"]
           }
         },
-        { text: prompt }
-      ]
-    },
-    config: {
-      responseMimeType: "application/json",
-      responseSchema: {
-        type: Type.OBJECT,
-        properties: {
-          designLog: {
-            type: Type.ARRAY,
-            items: { type: Type.STRING },
-            description: "Observations and analysis notes from the image"
-          },
-          rooms: {
-            type: Type.ARRAY,
-            items: {
-              type: Type.OBJECT,
-              properties: {
-                id: { type: Type.STRING },
-                name: { type: Type.STRING },
-                type: {
-                  type: Type.STRING,
-                  enum: ["room", "circulation", "outdoor", "setback", "service"]
-                },
-                x: { type: Type.NUMBER, description: "Estimated X coordinate" },
-                y: { type: Type.NUMBER, description: "Estimated Y coordinate" },
-                width: { type: Type.NUMBER, description: "Estimated width" },
-                height: { type: Type.NUMBER, description: "Estimated height" },
-                direction: { type: Type.STRING, description: "Cardinal direction if determinable" },
-                features: {
-                  type: Type.ARRAY,
-                  items: {
-                    type: Type.OBJECT,
-                    properties: {
-                      type: { type: Type.STRING, enum: ["door", "window", "opening"] },
-                      wall: { type: Type.STRING, enum: ["top", "bottom", "left", "right"] },
-                      position: { type: Type.NUMBER },
-                      width: { type: Type.NUMBER }
-                    }
-                  }
-                },
-                guidance: { type: Type.STRING, description: "Detailed furniture placement and Vastu guidance" }
-              },
-              required: ["id", "name", "type", "guidance"]
-            }
-          },
-          totalArea: { type: Type.NUMBER, description: "Estimated total plot area" },
-          builtUpArea: { type: Type.NUMBER, description: "Estimated built-up area" },
-          plotCoverageRatio: { type: Type.NUMBER },
-          compliance: {
-            type: Type.OBJECT,
-            properties: {
-              regulatory: {
-                type: Type.ARRAY,
-                items: {
-                  type: Type.OBJECT,
-                  properties: {
-                    rule: { type: Type.STRING },
-                    status: { type: Type.STRING, enum: ["PASS", "FAIL", "WARN", "UNKNOWN"] },
-                    message: { type: Type.STRING },
-                    recommendation: { type: Type.STRING }
-                  }
+        totalArea: { type: Type.NUMBER, description: "Estimated total plot area" },
+        builtUpArea: { type: Type.NUMBER, description: "Estimated built-up area" },
+        plotCoverageRatio: { type: Type.NUMBER },
+        compliance: {
+          type: Type.OBJECT,
+          properties: {
+            regulatory: {
+              type: Type.ARRAY,
+              items: {
+                type: Type.OBJECT,
+                properties: {
+                  rule: { type: Type.STRING },
+                  status: { type: Type.STRING, enum: ["PASS", "FAIL", "WARN", "UNKNOWN"] },
+                  message: { type: Type.STRING },
+                  recommendation: { type: Type.STRING }
                 }
-              },
-              cultural: {
-                type: Type.ARRAY,
-                items: {
-                  type: Type.OBJECT,
-                  properties: {
-                    rule: { type: Type.STRING },
-                    status: { type: Type.STRING, enum: ["PASS", "FAIL", "WARN", "UNKNOWN"] },
-                    message: { type: Type.STRING },
-                    recommendation: { type: Type.STRING }
-                  }
+              }
+            },
+            cultural: {
+              type: Type.ARRAY,
+              items: {
+                type: Type.OBJECT,
+                properties: {
+                  rule: { type: Type.STRING },
+                  status: { type: Type.STRING, enum: ["PASS", "FAIL", "WARN", "UNKNOWN"] },
+                  message: { type: Type.STRING },
+                  recommendation: { type: Type.STRING }
                 }
               }
             }
-          },
-          bom: {
-            type: Type.ARRAY,
-            items: {
-              type: Type.OBJECT,
-              properties: {
-                material: { type: Type.STRING },
-                quantity: { type: Type.STRING },
-                unit: { type: Type.STRING },
-                estimatedCost: { type: Type.NUMBER }
-              }
-            }
-          },
-          totalCostRange: {
+          }
+        },
+        bom: {
+          type: Type.ARRAY,
+          items: {
             type: Type.OBJECT,
             properties: {
-              min: { type: Type.NUMBER },
-              max: { type: Type.NUMBER },
-              currency: { type: Type.STRING }
+              material: { type: Type.STRING },
+              quantity: { type: Type.STRING },
+              unit: { type: Type.STRING },
+              estimatedCost: { type: Type.NUMBER }
             }
+          }
+        },
+        totalCostRange: {
+          type: Type.OBJECT,
+          properties: {
+            min: { type: Type.NUMBER },
+            max: { type: Type.NUMBER },
+            currency: { type: Type.STRING }
           }
         }
       }
@@ -656,82 +669,78 @@ export const generateMaterialEstimate = async (config: MaterialEstimationConfig)
     Ensure output is concise, uses tables for clarity, and cites sources.
   `;
 
-  const response = await ai.models.generateContent({
-    model: 'gemini-2.5-flash',
-    contents: prompt,
-    config: {
-      responseMimeType: "application/json",
-      responseSchema: {
-        type: Type.OBJECT,
-        properties: {
-          executiveSummary: {
+  const response = await generateWithFallback(ai, prompt, {
+    responseMimeType: "application/json",
+    responseSchema: {
+      type: Type.OBJECT,
+      properties: {
+        executiveSummary: {
+          type: Type.OBJECT,
+          properties: {
+            totalCost: { type: Type.STRING },
+            costPerSqft: { type: Type.STRING },
+            timelineImpact: { type: Type.STRING }
+          },
+          required: ["totalCost", "costPerSqft", "timelineImpact"]
+        },
+        grandTotal: { type: Type.NUMBER, description: "Numeric total cost for Interior Inclusive tier" },
+        quotations: {
+          type: Type.ARRAY,
+          items: {
             type: Type.OBJECT,
             properties: {
-              totalCost: { type: Type.STRING },
-              costPerSqft: { type: Type.STRING },
-              timelineImpact: { type: Type.STRING }
+              title: { type: Type.STRING },
+              description: { type: Type.STRING },
+              estimatedCost: { type: Type.NUMBER },
+              items: { type: Type.ARRAY, items: { type: Type.STRING } }
             },
-            required: ["totalCost", "costPerSqft", "timelineImpact"]
-          },
-          grandTotal: { type: Type.NUMBER, description: "Numeric total cost for Interior Inclusive tier" },
-          quotations: {
-            type: Type.ARRAY,
-            items: {
-              type: Type.OBJECT,
-              properties: {
-                title: { type: Type.STRING },
-                description: { type: Type.STRING },
-                estimatedCost: { type: Type.NUMBER },
-                items: { type: Type.ARRAY, items: { type: Type.STRING } }
-              },
-              required: ["title", "description", "estimatedCost", "items"]
-            }
-          },
-          breakdown: {
-            type: Type.ARRAY,
-            items: {
-              type: Type.OBJECT,
-              properties: {
-                category: { type: Type.STRING },
-                items: {
-                  type: Type.ARRAY,
-                  items: {
-                    type: Type.OBJECT,
-                    properties: {
-                      item: { type: Type.STRING },
-                      quantity: { type: Type.STRING },
-                      unitPrice: { type: Type.STRING },
-                      total: { type: Type.STRING }
-                    },
-                    required: ["item", "quantity", "unitPrice", "total"]
-                  }
-                }
-              },
-              required: ["category", "items"]
-            }
-          },
-          visuals: {
+            required: ["title", "description", "estimatedCost", "items"]
+          }
+        },
+        breakdown: {
+          type: Type.ARRAY,
+          items: {
             type: Type.OBJECT,
             properties: {
-              costDistribution: {
+              category: { type: Type.STRING },
+              items: {
                 type: Type.ARRAY,
                 items: {
                   type: Type.OBJECT,
                   properties: {
-                    name: { type: Type.STRING },
-                    value: { type: Type.NUMBER }
+                    item: { type: Type.STRING },
+                    quantity: { type: Type.STRING },
+                    unitPrice: { type: Type.STRING },
+                    total: { type: Type.STRING }
                   },
-                  required: ["name", "value"]
+                  required: ["item", "quantity", "unitPrice", "total"]
                 }
               }
             },
-            required: ["costDistribution"]
-          },
-          recommendations: { type: Type.ARRAY, items: { type: Type.STRING } },
-          risks: { type: Type.ARRAY, items: { type: Type.STRING } }
+            required: ["category", "items"]
+          }
         },
-        required: ["executiveSummary", "grandTotal", "quotations", "breakdown", "visuals", "recommendations", "risks"]
-      }
+        visuals: {
+          type: Type.OBJECT,
+          properties: {
+            costDistribution: {
+              type: Type.ARRAY,
+              items: {
+                type: Type.OBJECT,
+                properties: {
+                  name: { type: Type.STRING },
+                  value: { type: Type.NUMBER }
+                },
+                required: ["name", "value"]
+              }
+            }
+          },
+          required: ["costDistribution"]
+        },
+        recommendations: { type: Type.ARRAY, items: { type: Type.STRING } },
+        risks: { type: Type.ARRAY, items: { type: Type.STRING } }
+      },
+      required: ["executiveSummary", "grandTotal", "quotations", "breakdown", "visuals", "recommendations", "risks"]
     }
   });
 
