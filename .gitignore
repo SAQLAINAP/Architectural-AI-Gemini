@@ -1,0 +1,6 @@
+# Ignore everything by default
+*
+
+# Exceptions (Whitelist)
+!archi-agent_-ai-architect/
+!.gitignore

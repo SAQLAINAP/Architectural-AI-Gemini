@@ -5,7 +5,15 @@ import { supabase } from '../lib/supabaseClient';
 const STORAGE_KEY = 'archi_projects'; // Updated to match new local storage key
 
 export const saveProject = async (project: Omit<SavedProject, 'id' | 'date'>): Promise<SavedProject> => {
-  const user = supabase ? (await supabase.auth.getUser()).data.user : null;
+  let user = null;
+  try {
+    if (supabase) {
+      const { data } = await supabase.auth.getUser();
+      user = data.user;
+    }
+  } catch (e) {
+    console.warn("Supabase auth check failed:", e);
+  }
 
   if (user && supabase) {
     // Save to Supabase

@@ -97,7 +97,10 @@ export interface GeneratedPlan {
   totalCostRange: {
     min: number;
     max: number;
+    currency: string;
   };
+  version?: string; // e.g., "1.0", "1.1"
+  timestamp?: number; // Unix timestamp
 }
 
 export interface SavedProject {
@@ -172,4 +175,13 @@ export interface SavedMaterialEstimate {
   date: string;
   config: MaterialEstimationConfig;
   report: MaterialReport;
+}
+
+export interface ModificationAnalysis {
+  originalRequest: string;
+  analysis: string;
+  feasibility: 'FEASIBLE' | 'CAUTION' | 'NOT_RECOMMENDED';
+  vastuImplications: string;
+  regulatoryImplications: string;
+  suggestion: string;
 }

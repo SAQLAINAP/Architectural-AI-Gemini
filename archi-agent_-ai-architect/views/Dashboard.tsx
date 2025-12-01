@@ -1,8 +1,8 @@
 
 import React, { useState, useRef } from 'react';
-import { GeneratedPlan, ViewState, Room, WallFeature } from '../types';
+import { GeneratedPlan, ViewState, Room, WallFeature, ModificationAnalysis } from '../types';
 import { NeoButton, NeoCard } from '../components/NeoComponents';
-import { ArrowLeft, Download, AlertTriangle, CheckCircle, XCircle, Layers, Maximize2, ZoomIn, ZoomOut, Sparkles, Save, Grid, Ruler, Lightbulb, Info, FileText } from 'lucide-react';
+import { ArrowLeft, Download, AlertTriangle, CheckCircle, XCircle, Layers, Maximize2, ZoomIn, ZoomOut, Sparkles, Save, Grid, Ruler, Lightbulb, Info, FileText, RefreshCw, MessageSquare, Send, ThumbsUp, ThumbsDown, Clock } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
 import { useNavigate } from 'react-router-dom';
@@ -10,9 +10,16 @@ import { useNavigate } from 'react-router-dom';
 interface DashboardProps {
   plan: GeneratedPlan | null;
   onSave?: () => void;
+  onRegenerate?: () => void;
+  onAnalyzeModification?: (request: string) => Promise<ModificationAnalysis>;
+  onApplyModification?: (request: string) => Promise<void>;
+  isProcessing?: boolean;
+  planHistory?: GeneratedPlan[];
+  currentPlanIndex?: number;
+  onVersionChange?: (index: number) => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ plan, onSave }) => {
+const Dashboard: React.FC<DashboardProps> = ({ plan, onSave, onRegenerate, onAnalyzeModification, onApplyModification, isProcessing, planHistory, currentPlanIndex, onVersionChange }) => {
   const [activeTab, setActiveTab] = useState<'PLAN' | 'BOM'>('PLAN');
   const [zoom, setZoom] = useState(1);
   const [selectedRoomId, setSelectedRoomId] = useState<string | null>(null);
@@ -22,6 +29,35 @@ const Dashboard: React.FC<DashboardProps> = ({ plan, onSave }) => {
   const [isMeasuring, setIsMeasuring] = useState(false);
   const [measurePoints, setMeasurePoints] = useState<{ x: number, y: number }[]>([]);
   const svgRef = useRef<SVGSVGElement>(null);
+
+  // Modification State
+  const [modRequest, setModRequest] = useState("");
+  const [modAnalysis, setModAnalysis] = useState<ModificationAnalysis | null>(null);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+
+  if (!plan) return <div>No plan data available.</div>;
+
+  const handleAnalyze = async () => {
+    if (!modRequest.trim() || !onAnalyzeModification) return;
+    setIsAnalyzing(true);
+    setModAnalysis(null);
+    try {
+      const result = await onAnalyzeModification(modRequest);
+      setModAnalysis(result);
+    } catch (e) {
+      console.error(e);
+      alert("Analysis failed.");
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
+
+  const handleApply = async () => {
+    if (!modAnalysis || !onApplyModification) return;
+    await onApplyModification(modAnalysis.originalRequest);
+    setModRequest("");
+    setModAnalysis(null);
+  };
 
   if (!plan) return <div>No plan data available.</div>;
 
@@ -195,11 +231,35 @@ const Dashboard: React.FC<DashboardProps> = ({ plan, onSave }) => {
               <Save size={16} /> Save
             </NeoButton>
           )}
+          {onRegenerate && (
+            <NeoButton className="px-4 py-2 text-sm bg-purple-200 hover:bg-purple-300 dark:text-black" onClick={onRegenerate} disabled={isProcessing}>
+              <RefreshCw size={16} className={isProcessing ? "animate-spin" : ""} /> Regenerate
+            </NeoButton>
+          )}
           <NeoButton className="px-4 py-2 text-sm dark:bg-slate-700 dark:text-white" onClick={() => window.print()}>
             <Download size={16} /> Export
           </NeoButton>
         </div>
       </div>
+
+      {/* Version Bar */}
+      {planHistory && planHistory.length > 1 && onVersionChange && (
+        <div className="bg-gray-200 dark:bg-slate-700 px-4 py-1 flex items-center gap-2 overflow-x-auto border-b-2 border-black dark:border-white">
+          <span className="text-xs font-bold uppercase dark:text-gray-300">Versions:</span>
+          {planHistory.map((p, idx) => (
+            <button
+              key={idx}
+              onClick={() => onVersionChange(idx)}
+              className={`px-2 py-0.5 text-xs font-bold rounded-full border border-black transition-colors ${idx === currentPlanIndex
+                ? 'bg-neo-primary text-black'
+                : 'bg-white dark:bg-slate-600 dark:text-white hover:bg-gray-100 dark:hover:bg-slate-500'
+                }`}
+            >
+              v{p.version || "1.0"}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Main Content */}
       <div className="flex flex-col lg:flex-row flex-1 overflow-hidden">
@@ -382,6 +442,70 @@ const Dashboard: React.FC<DashboardProps> = ({ plan, onSave }) => {
               </NeoCard>
             </div>
           </div>
+
+          {/* AI Modification Assistant */}
+          {!plan.imageUrl && onAnalyzeModification && (
+            <NeoCard className="border-t-4 border-neo-primary">
+              <h3 className="font-black text-lg mb-4 flex items-center gap-2 dark:text-white">
+                <MessageSquare size={20} className="text-neo-primary" /> AI Modification Assistant
+              </h3>
+
+              <div className="flex gap-2 mb-4">
+                <input
+                  className="flex-1 p-3 border-2 border-black dark:border-white bg-white dark:bg-slate-800 dark:text-white focus:outline-none"
+                  placeholder="Describe a change (e.g., 'Move the kitchen to the North side')..."
+                  value={modRequest}
+                  onChange={(e) => setModRequest(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleAnalyze()}
+                  disabled={isProcessing || isAnalyzing}
+                />
+                <NeoButton onClick={handleAnalyze} disabled={!modRequest.trim() || isProcessing || isAnalyzing}>
+                  {isAnalyzing ? <RefreshCw className="animate-spin" /> : <Send size={20} />}
+                </NeoButton>
+              </div>
+
+              {modAnalysis && (
+                <div className="bg-gray-50 dark:bg-slate-700 p-4 border-2 border-black dark:border-gray-500 animate-in fade-in slide-in-from-top-2">
+                  <div className="flex justify-between items-start mb-2">
+                    <h4 className="font-bold text-lg dark:text-white">Analysis Result</h4>
+                    <span className={`px-2 py-1 text-xs font-bold border border-black ${modAnalysis.feasibility === 'FEASIBLE' ? 'bg-green-200 text-green-900' :
+                      modAnalysis.feasibility === 'CAUTION' ? 'bg-yellow-200 text-yellow-900' : 'bg-red-200 text-red-900'
+                      }`}>
+                      {modAnalysis.feasibility}
+                    </span>
+                  </div>
+
+                  <p className="text-sm mb-3 dark:text-gray-200">{modAnalysis.analysis}</p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm mb-4">
+                    <div className="bg-white dark:bg-slate-800 p-2 border border-gray-200 dark:border-gray-600">
+                      <strong className="block text-neo-secondary mb-1">Vastu Impact</strong>
+                      <p className="dark:text-gray-300">{modAnalysis.vastuImplications}</p>
+                    </div>
+                    <div className="bg-white dark:bg-slate-800 p-2 border border-gray-200 dark:border-gray-600">
+                      <strong className="block text-neo-accent mb-1">Regulatory Impact</strong>
+                      <p className="dark:text-gray-300">{modAnalysis.regulatoryImplications}</p>
+                    </div>
+                  </div>
+
+                  {modAnalysis.suggestion && (
+                    <div className="flex items-start gap-2 text-sm bg-blue-50 dark:bg-blue-900/30 p-2 mb-4">
+                      <Lightbulb size={16} className="text-blue-600 shrink-0 mt-1" />
+                      <p className="dark:text-blue-100"><span className="font-bold">Suggestion:</span> {modAnalysis.suggestion}</p>
+                    </div>
+                  )}
+
+                  {modAnalysis.feasibility !== 'NOT_RECOMMENDED' && (
+                    <div className="flex justify-end">
+                      <NeoButton onClick={handleApply} className="bg-green-500 hover:bg-green-600 text-white border-green-700" disabled={isProcessing}>
+                        {isProcessing ? 'Applying...' : 'Yes, Apply Changes'}
+                      </NeoButton>
+                    </div>
+                  )}
+                </div>
+              )}
+            </NeoCard>
+          )}
         </div>
 
         {/* Right Sidebar: Details Only */}

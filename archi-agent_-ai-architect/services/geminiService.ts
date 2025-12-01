@@ -1,5 +1,5 @@
 import { GoogleGenAI, Type } from "@google/genai";
-import { ProjectConfig, GeneratedPlan, MaterialEstimationConfig, MaterialReport } from '../types';
+import { ProjectConfig, GeneratedPlan, MaterialEstimationConfig, MaterialReport, ModificationAnalysis } from '../types';
 
 const getClient = () => {
   const apiKey = process.env.API_KEY;
@@ -30,7 +30,7 @@ const generateWithFallback = async (ai: GoogleGenAI, contents: any, config: any)
   }
 };
 
-export const generateFloorPlan = async (config: ProjectConfig): Promise<GeneratedPlan> => {
+export const generateFloorPlan = async (config: ProjectConfig, isRegeneration: boolean = false): Promise<GeneratedPlan> => {
   const ai = getClient();
 
   // Construct comprehensive culturally aware directives
@@ -748,4 +748,188 @@ export const generateMaterialEstimate = async (config: MaterialEstimationConfig)
   if (!text) throw new Error("No response from AI");
 
   return JSON.parse(text) as MaterialReport;
+};
+
+export const analyzePlanModification = async (currentPlan: GeneratedPlan, request: string, config: ProjectConfig): Promise<ModificationAnalysis> => {
+  const ai = getClient();
+
+  const prompt = `
+    Analyze the feasibility of the following modification request for an architectural floor plan.
+    
+    **CURRENT CONTEXT**:
+    - Project Type: ${config.projectType}
+    - Cultural System: ${config.culturalSystem} (Vastu Level: ${config.vastuLevel})
+    - Current Layout: ${currentPlan.rooms.map(r => `${r.name} (${r.width}x${r.height}m) at (${r.x},${r.y})`).join(', ')}
+    
+    **USER REQUEST**: "${request}"
+    
+    **ANALYSIS TASKS**:
+    1. Check Vastu/Cultural compliance of the requested change.
+    2. Check Regulatory compliance (setbacks, minimum dimensions).
+    3. Assess structural/functional feasibility (e.g., moving a toilet to the center of the house).
+    
+    **OUTPUT**:
+    Return a JSON object with:
+    - feasibility: "FEASIBLE", "CAUTION", or "NOT_RECOMMENDED"
+    - vastuImplications: Explanation of Vastu impact.
+    - regulatoryImplications: Explanation of building code impact.
+    - suggestion: A refined suggestion or alternative if the request is problematic.
+    - analysis: General analysis summary.
+  `;
+
+  const response = await generateWithFallback(ai, prompt, {
+    responseMimeType: "application/json",
+    responseSchema: {
+      type: Type.OBJECT,
+      properties: {
+        originalRequest: { type: Type.STRING },
+        analysis: { type: Type.STRING },
+        feasibility: { type: Type.STRING, enum: ["FEASIBLE", "CAUTION", "NOT_RECOMMENDED"] },
+        vastuImplications: { type: Type.STRING },
+        regulatoryImplications: { type: Type.STRING },
+        suggestion: { type: Type.STRING }
+      },
+      required: ["analysis", "feasibility", "vastuImplications", "regulatoryImplications", "suggestion"]
+    }
+  });
+
+  const text = response.text;
+  if (!text) throw new Error("No response from AI");
+
+  const result = JSON.parse(text);
+  result.originalRequest = request;
+  return result as ModificationAnalysis;
+};
+
+export const applyPlanModification = async (currentPlan: GeneratedPlan, request: string, config: ProjectConfig): Promise<GeneratedPlan> => {
+  const ai = getClient();
+
+  // Re-construct the full context for the "Master Prompt"
+  let culturalDirectives = "";
+  if (config.culturalSystem.includes("Vastu")) {
+    culturalDirectives = "Strictly adhere to Vastu Shastra principles as originally defined.";
+  }
+
+  const prompt = `
+    Act as a Senior Principal Architect. Modify the existing floor plan based on the user's request, while maintaining all original constraints and ensuring the result is a perfect, code-compliant, culturally sensitive design.
+    
+    **ORIGINAL SPECIFICATIONS**:
+    - Plot: ${config.width}m x ${config.depth}m
+    - Requirements: ${config.requirements.join(', ')}
+    - Cultural System: ${config.culturalSystem}
+    
+    **CURRENT PLAN STATE**:
+    - Rooms: ${JSON.stringify(currentPlan.rooms)}
+    
+    **MODIFICATION REQUEST**: "${request}"
+    
+    **INSTRUCTIONS**:
+    1. Apply the modification if feasible.
+    2. Adjust adjacent spaces to maintain 100% plot coverage and valid circulation.
+    3. Ensure all Vastu/Regulatory rules are still met.
+    4. Update the 'designLog' to reflect this change.
+    
+    **OUTPUT**:
+    Generate the complete updated 'GeneratedPlan' JSON object, following the exact same schema as the original generation.
+  `;
+
+  const response = await generateWithFallback(ai, prompt, {
+    responseMimeType: "application/json",
+    responseSchema: {
+      type: Type.OBJECT,
+      properties: {
+        designLog: { type: Type.ARRAY, items: { type: Type.STRING } },
+        rooms: {
+          type: Type.ARRAY,
+          items: {
+            type: Type.OBJECT,
+            properties: {
+              id: { type: Type.STRING },
+              name: { type: Type.STRING },
+              type: { type: Type.STRING, enum: ["room", "circulation", "outdoor", "setback", "service"] },
+              x: { type: Type.NUMBER },
+              y: { type: Type.NUMBER },
+              width: { type: Type.NUMBER },
+              height: { type: Type.NUMBER },
+              direction: { type: Type.STRING },
+              features: {
+                type: Type.ARRAY,
+                items: {
+                  type: Type.OBJECT,
+                  properties: {
+                    type: { type: Type.STRING, enum: ["door", "window", "opening"] },
+                    wall: { type: Type.STRING, enum: ["top", "bottom", "left", "right"] },
+                    position: { type: Type.NUMBER },
+                    width: { type: Type.NUMBER }
+                  }
+                }
+              },
+              guidance: { type: Type.STRING }
+            },
+            required: ["id", "name", "type", "x", "y", "width", "height", "direction", "features", "guidance"]
+          }
+        },
+        totalArea: { type: Type.NUMBER },
+        builtUpArea: { type: Type.NUMBER },
+        circulationArea: { type: Type.NUMBER },
+        setbackArea: { type: Type.NUMBER },
+        plotCoverageRatio: { type: Type.NUMBER },
+        compliance: {
+          type: Type.OBJECT,
+          properties: {
+            regulatory: {
+              type: Type.ARRAY,
+              items: {
+                type: Type.OBJECT,
+                properties: {
+                  rule: { type: Type.STRING },
+                  status: { type: Type.STRING, enum: ["PASS", "FAIL", "WARN"] },
+                  message: { type: Type.STRING },
+                  recommendation: { type: Type.STRING }
+                }
+              }
+            },
+            cultural: {
+              type: Type.ARRAY,
+              items: {
+                type: Type.OBJECT,
+                properties: {
+                  rule: { type: Type.STRING },
+                  status: { type: Type.STRING, enum: ["PASS", "FAIL", "WARN"] },
+                  message: { type: Type.STRING },
+                  recommendation: { type: Type.STRING }
+                }
+              }
+            }
+          }
+        },
+        bom: {
+          type: Type.ARRAY,
+          items: {
+            type: Type.OBJECT,
+            properties: {
+              material: { type: Type.STRING },
+              quantity: { type: Type.STRING },
+              unit: { type: Type.STRING },
+              estimatedCost: { type: Type.NUMBER }
+            }
+          }
+        },
+        totalCostRange: {
+          type: Type.OBJECT,
+          properties: {
+            min: { type: Type.NUMBER },
+            max: { type: Type.NUMBER },
+            currency: { type: Type.STRING }
+          }
+        }
+      },
+      required: ["designLog", "rooms", "totalArea", "builtUpArea", "compliance", "bom", "totalCostRange"]
+    }
+  });
+
+  const text = response.text;
+  if (!text) throw new Error("No response from AI");
+
+  return JSON.parse(text) as GeneratedPlan;
 };
