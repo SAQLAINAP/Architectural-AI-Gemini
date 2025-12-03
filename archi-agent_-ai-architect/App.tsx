@@ -1,23 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { ProjectConfig, GeneratedPlan, SavedProject, ModificationAnalysis } from './types';
 import { AuthProvider } from './contexts/AuthContext';
-import Login from './views/Login';
-import ForgotPassword from './views/ForgotPassword';
-import ResetPassword from './views/ResetPassword';
-import Home from './views/Home';
-import Configuration from './views/Configuration';
-import Dashboard from './views/Dashboard';
-import OverviewDashboard from './views/OverviewDashboard';
-import Projects from './views/Projects';
-import MaterialCostEstimation from './views/MaterialCostEstimation';
-import Documentation from './views/Documentation';
 import { generateFloorPlan, analyzePlanFromImage, analyzePlanModification, applyPlanModification } from './services/geminiService';
 import { saveProject, saveFloorPlan, FloorPlanData } from './services/storageService';
 import { Navbar } from './components/NeoComponents';
 import ProtectedRoute from './components/ProtectedRoute';
 
-import ResumeModal from './views/ResumeModal';
+// Lazy load views for code splitting
+const Login = lazy(() => import('./views/Login'));
+const ForgotPassword = lazy(() => import('./views/ForgotPassword'));
+const ResetPassword = lazy(() => import('./views/ResetPassword'));
+const Home = lazy(() => import('./views/Home'));
+const Configuration = lazy(() => import('./views/Configuration'));
+const Dashboard = lazy(() => import('./views/Dashboard'));
+const OverviewDashboard = lazy(() => import('./views/OverviewDashboard'));
+const Projects = lazy(() => import('./views/Projects'));
+const MaterialCostEstimation = lazy(() => import('./views/MaterialCostEstimation'));
+const Documentation = lazy(() => import('./views/Documentation'));
+const ResumeModal = lazy(() => import('./views/ResumeModal'));
 
 function App() {
   const [config, setConfig] = useState<ProjectConfig | null>(null);
@@ -343,12 +344,21 @@ function App() {
       <div className={`min-h-screen bg-neo-bg dark:bg-slate-900 transition-colors font-sans text-black dark:text-white ${isDark ? 'dark' : ''}`}>
         <Navbar isDark={isDark} toggleTheme={toggleTheme} />
 
-        <ResumeModal
-          isOpen={showResumeModal}
-          onResume={handleResumeSession}
-          onDiscard={handleDiscardSession}
-          lastSaved={lastSessionTime}
-        />
+        <Suspense fallback={
+          <div className="flex items-center justify-center min-h-screen">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black dark:border-white mx-auto mb-4"></div>
+              <p className="font-bold">Loading...</p>
+            </div>
+          </div>
+        }>
+          <ResumeModal
+            isOpen={showResumeModal}
+            onResume={handleResumeSession}
+            onDiscard={handleDiscardSession}
+            lastSaved={lastSessionTime}
+          />
+        </Suspense>
 
         {/* Error Toast */}
         {error && (
@@ -361,7 +371,15 @@ function App() {
 
         {/* Main Content Area */}
         <div className="flex-1 flex flex-col">
-          <Routes>
+          <Suspense fallback={
+            <div className="flex items-center justify-center min-h-screen">
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black dark:border-white mx-auto mb-4"></div>
+                <p className="font-bold">Loading...</p>
+              </div>
+            </div>
+          }>
+            <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
@@ -414,6 +432,7 @@ function App() {
             } />
             <Route path="/docs" element={<Documentation />} />
           </Routes>
+          </Suspense>
         </div>
       </div>
     </AuthProvider>
