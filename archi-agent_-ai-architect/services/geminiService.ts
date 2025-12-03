@@ -13,8 +13,8 @@ const getClient = () => {
   return new GoogleGenAI({ apiKey });
 };
 
-const PRIMARY_MODEL = 'gemini-3.0-nano-banana';
-const FALLBACK_MODEL = 'gemini-2.5-pro';
+const PRIMARY_MODEL = 'gemini-2.5-pro';
+const FALLBACK_MODEL = 'gemini-2.5-flash';
 
 const generateWithFallback = async (ai: GoogleGenAI, contents: any, config: any) => {
   try {
