@@ -12,6 +12,11 @@ interface Props {
 }
 
 const MaterialCostEstimation: React.FC<Props> = ({ plan }) => {
+    // Location dropdown options
+    const STATES = ['Maharashtra', 'Karnataka', 'Gujarat', 'Tamil Nadu', 'Delhi', 'West Bengal', 'Uttar Pradesh', 'Telangana', 'Rajasthan'];
+    const CITIES = ['Mumbai', 'Pune', 'Bengaluru', 'Chennai', 'Delhi', 'Kolkata', 'Hyderabad', 'Ahmedabad', 'Jaipur'];
+    const [selectedCity, setSelectedCity] = useState<string>('');
+    const [selectedState, setSelectedState] = useState<string>('');
     const [view, setView] = useState<'form' | 'report' | 'history'>('form');
     const [step, setStep] = useState(1);
     const [loading, setLoading] = useState(false);
@@ -73,11 +78,19 @@ const MaterialCostEstimation: React.FC<Props> = ({ plan }) => {
         const name = prompt('Enter a name for this estimate:', defaultName);
         if (!name) return;
 
-        // Call storage service with correct arguments
-        await saveMaterialEstimate(name, config, report);
+        try {
+            await saveMaterialEstimate({
+                name,
+                config,
+                report
+            });
 
-        alert('Estimate saved successfully!');
-        loadHistory();
+            alert('Estimate saved successfully!');
+            loadHistory();
+        } catch (error) {
+            console.error('Error saving estimate:', error);
+            alert('Failed to save estimate. Please try again.');
+        }
     };
 
     const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
@@ -92,12 +105,30 @@ const MaterialCostEstimation: React.FC<Props> = ({ plan }) => {
                     value={config.projectType}
                     onChange={e => setConfig({ ...config, projectType: e.target.value as any })}
                 />
-                <NeoInput
-                    label="Location (City/State)"
-                    value={config.location}
-                    onChange={e => setConfig({ ...config, location: e.target.value })}
-                    placeholder="e.g., Mumbai, Maharashtra"
-                />
+                <div className="grid grid-cols-2 gap-3">
+                    <NeoSelect
+                        label="City"
+                        options={CITIES}
+                        value={selectedCity}
+                        onChange={e => {
+                            const city = e.target.value;
+                            setSelectedCity(city);
+                            const loc = city && selectedState ? `${city}, ${selectedState}` : city || selectedState || '';
+                            setConfig({ ...config, location: loc });
+                        }}
+                    />
+                    <NeoSelect
+                        label="State"
+                        options={STATES}
+                        value={selectedState}
+                        onChange={e => {
+                            const state = e.target.value;
+                            setSelectedState(state);
+                            const loc = selectedCity && state ? `${selectedCity}, ${state}` : selectedCity || state || '';
+                            setConfig({ ...config, location: loc });
+                        }}
+                    />
+                </div>
                 <div className="grid grid-cols-3 gap-2 col-span-1 md:col-span-2">
                     <NeoInput
                         label="Length (ft)"
@@ -198,10 +229,10 @@ const MaterialCostEstimation: React.FC<Props> = ({ plan }) => {
                             <button
                                 key={level}
                                 onClick={() => setConfig({ ...config, budget: { ...config.budget, level: level as any } })}
-                                className={`p - 3 border - 2 border - black font - bold transition - all ${config.budget.level === level
+                                className={`p-3 border-2 border-black font-bold transition-all ${config.budget.level === level
                                     ? 'bg-black text-white shadow-[4px_4px_0px_0px_rgba(100,100,100,1)]'
                                     : 'bg-white hover:bg-gray-100'
-                                    } `}
+                                    }`}
                             >
                                 {level}
                             </button>
@@ -316,7 +347,7 @@ const MaterialCostEstimation: React.FC<Props> = ({ plan }) => {
                 {/* Quotation Comparison */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {report.quotations.map((quote, idx) => (
-                        <NeoCard key={idx} className={`flex flex - col ${quote.title.includes('Interior') ? 'border-green-500 bg-green-50' : ''} `}>
+                        <NeoCard key={idx} className={`flex flex-col ${quote.title.includes('Interior') ? 'border-green-500 bg-green-50' : ''}`}>
                             <h3 className="font-black text-lg mb-2">{quote.title}</h3>
                             <div className="text-2xl font-bold mb-4 text-gray-800">
                                 {quote.estimatedCost.toLocaleString('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 })}
@@ -345,7 +376,7 @@ const MaterialCostEstimation: React.FC<Props> = ({ plan }) => {
                                         dataKey="value"
                                     >
                                         {report.visuals.costDistribution.map((entry, index) => (
-                                            <Cell key={`cell - ${index} `} fill={COLORS[index % COLORS.length]} />
+                                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                         ))}
                                     </Pie>
                                     <RechartsTooltip />
@@ -456,13 +487,13 @@ const MaterialCostEstimation: React.FC<Props> = ({ plan }) => {
                 <div className="flex gap-2">
                     <button
                         onClick={() => setView('form')}
-                        className={`px - 4 py - 2 font - bold border - 2 border - black ${view === 'form' ? 'bg-black text-white' : 'bg-white hover:bg-gray-100'} `}
+                        className={`px-4 py-2 font-bold border-2 border-black ${view === 'form' ? 'bg-black text-white' : 'bg-white hover:bg-gray-100'}`}
                     >
                         New Estimate
                     </button>
                     <button
                         onClick={() => { setView('history'); loadHistory(); }}
-                        className={`px - 4 py - 2 font - bold border - 2 border - black ${view === 'history' ? 'bg-black text-white' : 'bg-white hover:bg-gray-100'} `}
+                        className={`px-4 py-2 font-bold border-2 border-black ${view === 'history' ? 'bg-black text-white' : 'bg-white hover:bg-gray-100'}`}
                     >
                         History
                     </button>
@@ -481,11 +512,11 @@ const MaterialCostEstimation: React.FC<Props> = ({ plan }) => {
                         {/* Stepper Header */}
                         <div className="flex justify-between mb-8 px-2">
                             {[1, 2, 3, 4, 5].map(i => (
-                                <div key={i} className={`flex flex - col items - center gap - 1 ${i <= step ? 'text-black' : 'text-gray-300'} `}>
+                                <div key={i} className={`flex flex-col items-center gap-1 ${i <= step ? 'text-black' : 'text-gray-300'}`}>
                                     <div className={`
-w - 8 h - 8 rounded - full flex items - center justify - center font - bold border - 2 
+w-8 h-8 rounded-full flex items-center justify-center font-bold border-2 
                                         ${i <= step ? 'bg-black text-white border-black' : 'bg-white border-gray-300'}
-transition - all duration - 300
+transition-all duration-300
     `}>
                                         {i}
                                     </div>

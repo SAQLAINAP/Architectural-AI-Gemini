@@ -1,8 +1,9 @@
 
 import React, { useState } from 'react';
-import { Menu, X, Home, FilePlus, Upload, ShieldCheck, Folder, BookOpen, Sun, Moon, Coins } from 'lucide-react';
+import { Menu, X, Home, FilePlus, Upload, ShieldCheck, Folder, BookOpen, Sun, Moon, Coins, User, LogOut, LogIn, LayoutDashboard } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { ViewState } from '../types';
+import { useAuth } from '../contexts/AuthContext';
 
 export const NeoCard: React.FC<{ children?: React.ReactNode, className?: string }> = ({ children, className = "" }) => (
   <div className={`bg-white dark:bg-slate-800 dark:border-white border-2 border-black shadow-neo dark:shadow-neoDark p-6 ${className}`}>
@@ -62,11 +63,24 @@ export const NeoSelect = ({ label, options, ...props }: React.SelectHTMLAttribut
 export const Navbar = ({ isDark, toggleTheme }: { isDark: boolean, toggleTheme: () => void }) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const { user, signOut } = useAuth();
+
+  const handleAuthAction = async () => {
+    if (user) {
+      const confirmed = window.confirm('Are you sure you want to logout?');
+      if (!confirmed) return;
+      await signOut();
+      navigate('/login');
+    } else {
+      navigate('/login');
+    }
+    setIsOpen(false);
+  };
 
   const NavItem = ({ icon: Icon, label, target }: { icon: any, label: string, target: string }) => (
     <button
       onClick={() => { navigate(target); setIsOpen(false); }}
-      className="flex items-center gap-2 font-bold text-black dark:text-white hover:bg-neo-primary hover:text-black px-4 py-2 border-2 border-transparent hover:border-black dark:hover:border-white transition-all w-full md:w-auto rounded-none"
+      className="flex items-center gap-2 font-bold text-black dark:text-white hover:bg-neo-primary hover:text-black px-4 py-2 h-10 border-2 border-transparent hover:border-black dark:hover:border-white transition-all w-full md:w-auto rounded-none leading-none"
     >
       <Icon size={20} /> {label}
     </button>
@@ -89,10 +103,30 @@ export const Navbar = ({ isDark, toggleTheme }: { isDark: boolean, toggleTheme: 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-4">
           <NavItem icon={Home} label="Home" target="/" />
+          <NavItem icon={LayoutDashboard} label="Dashboard" target="/overview" />
           <NavItem icon={FilePlus} label="New Project" target="/configure" />
           <NavItem icon={Coins} label="Materials" target="/materials" />
           <NavItem icon={Folder} label="My Projects" target="/projects" />
           <NavItem icon={BookOpen} label="Docs" target="/docs" />
+
+          {/* Auth Button */}
+          <button
+            onClick={handleAuthAction}
+            className="flex items-center gap-2 font-bold bg-neo-accent hover:bg-teal-300 text-black px-4 py-0 h-10 border-2 border-black transition-all leading-none"
+            title={user ? 'Logout' : 'Login'}
+          >
+            {user ? (
+              <>
+                <LogOut size={20} />
+                <span className="hidden lg:inline">Logout</span>
+              </>
+            ) : (
+              <>
+                <LogIn size={20} />
+                <span className="hidden lg:inline">Login</span>
+              </>
+            )}
+          </button>
 
           <button
             onClick={toggleTheme}
@@ -121,10 +155,29 @@ export const Navbar = ({ isDark, toggleTheme }: { isDark: boolean, toggleTheme: 
       {isOpen && (
         <div className="md:hidden border-t-2 border-black dark:border-white bg-white dark:bg-slate-800 p-4 flex flex-col gap-2">
           <NavItem icon={Home} label="Home" target="/" />
+          <NavItem icon={LayoutDashboard} label="Dashboard" target="/overview" />
           <NavItem icon={FilePlus} label="New Project" target="/configure" />
           <NavItem icon={Coins} label="Materials" target="/materials" />
           <NavItem icon={Folder} label="My Projects" target="/projects" />
           <NavItem icon={BookOpen} label="Docs" target="/docs" />
+          
+          {/* Mobile Auth Button */}
+          <button
+            onClick={handleAuthAction}
+            className="flex items-center gap-2 font-bold bg-neo-accent hover:bg-teal-300 text-black px-4 py-2 border-2 border-black transition-all w-full"
+          >
+            {user ? (
+              <>
+                <LogOut size={20} />
+                Logout
+              </>
+            ) : (
+              <>
+                <LogIn size={20} />
+                Login
+              </>
+            )}
+          </button>
         </div>
       )}
     </nav>

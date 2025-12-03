@@ -2,9 +2,13 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { ProjectConfig, GeneratedPlan, MaterialEstimationConfig, MaterialReport, ModificationAnalysis } from '../types';
 
 const getClient = () => {
-  const apiKey = process.env.API_KEY;
+  // Support multiple env conventions
+  const apiKey =
+    import.meta.env.VITE_GEMINI_API_KEY ||
+    import.meta.env.NEXT_PUBLIC_GEMINI_API_KEY ||
+    import.meta.env.GEMINI_API_KEY;
   if (!apiKey) {
-    throw new Error("API Key not found in environment");
+    throw new Error("API Key not found in environment. Please set VITE_GEMINI_API_KEY or NEXT_PUBLIC_GEMINI_API_KEY or GEMINI_API_KEY in .env.local");
   }
   return new GoogleGenAI({ apiKey });
 };

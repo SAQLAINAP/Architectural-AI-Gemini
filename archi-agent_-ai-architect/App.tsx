@@ -3,15 +3,19 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { ProjectConfig, GeneratedPlan, SavedProject, ModificationAnalysis } from './types';
 import { AuthProvider } from './contexts/AuthContext';
 import Login from './views/Login';
+import ForgotPassword from './views/ForgotPassword';
+import ResetPassword from './views/ResetPassword';
 import Home from './views/Home';
 import Configuration from './views/Configuration';
 import Dashboard from './views/Dashboard';
+import OverviewDashboard from './views/OverviewDashboard';
 import Projects from './views/Projects';
 import MaterialCostEstimation from './views/MaterialCostEstimation';
 import Documentation from './views/Documentation';
 import { generateFloorPlan, analyzePlanFromImage, analyzePlanModification, applyPlanModification } from './services/geminiService';
-import { saveProject } from './services/storageService';
+import { saveProject, saveFloorPlan, FloorPlanData } from './services/storageService';
 import { Navbar } from './components/NeoComponents';
+import ProtectedRoute from './components/ProtectedRoute';
 
 import ResumeModal from './views/ResumeModal';
 
@@ -117,6 +121,31 @@ function App() {
 
       setPlanHistory([plan]);
       setCurrentPlanIndex(0);
+
+            // Save floor plan to Supabase
+            try {
+              const savedFloorPlan = await saveFloorPlan({
+                name: `${newConfig.buildingType} - ${new Date().toLocaleDateString()}`,
+                version: 1,
+                config: newConfig,
+                planData: plan,
+                sourceType: 'generated',
+                generationModel: 'gemini-2.0-flash-exp',
+                generationParams: {
+                  buildingType: newConfig.buildingType,
+                  sqft: newConfig.sqft,
+                  floors: newConfig.floors,
+                  bedrooms: newConfig.bedrooms,
+                  bathrooms: newConfig.bathrooms
+                },
+                status: 'completed'
+              });
+              setCurrentProjectId(savedFloorPlan.id);
+            } catch (saveError) {
+              console.error('Error saving floor plan:', saveError);
+              // Continue to dashboard even if save fails
+            }
+
       navigate('/dashboard');
     } catch (err: any) {
       console.error(err);
@@ -136,6 +165,25 @@ function App() {
       try {
         const base64 = reader.result as string;
         const plan = await analyzePlanFromImage(base64);
+
+                // Save analyzed floor plan to Supabase
+                try {
+                  const savedFloorPlan = await saveFloorPlan({
+                    name: `Analyzed Plan - ${file.name}`,
+                    version: 1,
+                    config: config || {}, // May not have config for analyzed images
+                    planData: plan,
+                    sourceType: 'analyzed_image',
+                    sourceImageUrl: base64, // Store the image data URL
+                    generationModel: 'gemini-2.0-flash-exp',
+                    status: 'completed'
+                  });
+                  setCurrentProjectId(savedFloorPlan.id);
+                } catch (saveError) {
+                  console.error('Error saving analyzed floor plan:', saveError);
+                  // Continue to dashboard even if save fails
+                }
+
         plan.version = "1.0";
         plan.timestamp = Date.now();
 
@@ -200,6 +248,32 @@ function App() {
 
         setPlanHistory(prev => [...prev, plan]);
         setCurrentPlanIndex(prev => prev + 1);
+
+              // Save regenerated floor plan
+              try {
+                const savedFloorPlan = await saveFloorPlan({
+                  name: `${config.buildingType} - Regenerated v${major}`,
+                  version: major,
+                  config: config,
+                  planData: plan,
+                  sourceType: 'generated',
+                  parentPlanId: currentProjectId || undefined,
+                  generationModel: 'gemini-2.0-flash-exp',
+                  generationParams: {
+                    buildingType: config.buildingType,
+                    sqft: config.sqft,
+                    floors: config.floors,
+                    bedrooms: config.bedrooms,
+                    bathrooms: config.bathrooms,
+                    isRegeneration: true
+                  },
+                  status: 'completed'
+                });
+                setCurrentProjectId(savedFloorPlan.id);
+              } catch (saveError) {
+                console.error('Error saving regenerated floor plan:', saveError);
+              }
+
       } catch (err: any) {
         console.error(err);
         setError(err.message || "Failed to regenerate.");
@@ -229,6 +303,28 @@ function App() {
       newPlan.timestamp = Date.now();
 
       setPlanHistory(prev => [...prev, newPlan]);
+
+            // Save modified floor plan as new version
+            try {
+              const savedFloorPlan = await saveFloorPlan({
+                name: `Modified - ${new Date().toLocaleString()}`,
+                version: minor + 1,
+                config: config,
+                planData: newPlan,
+                sourceType: 'modified',
+                parentPlanId: currentProjectId || undefined,
+                generationModel: 'gemini-2.0-flash-exp',
+                generationParams: {
+                  modificationType: 'user_modification',
+                  modificationRequest: request
+                },
+                status: 'completed'
+              });
+              setCurrentProjectId(savedFloorPlan.id);
+            } catch (saveError) {
+              console.error('Error saving modified floor plan:', saveError);
+            }
+
       setCurrentPlanIndex(prev => prev + 1);
     } catch (err: any) {
       console.error(err);
@@ -267,6 +363,8 @@ function App() {
         <div className="flex-1 flex flex-col">
           <Routes>
             <Route path="/login" element={<Login />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/" element={
               <Home
                 onLoadProject={() => navigate('/projects')}
@@ -274,30 +372,45 @@ function App() {
                 isProcessing={isProcessing}
               />
             } />
+            <Route path="/overview" element={
+              <ProtectedRoute>
+                <OverviewDashboard />
+              </ProtectedRoute>
+            } />
             <Route path="/configure" element={
-              <Configuration
-                onGenerate={handleGenerate}
-                isGenerating={isProcessing}
-              />
+              <ProtectedRoute>
+                <Configuration
+                  onGenerate={handleGenerate}
+                  isGenerating={isProcessing}
+                />
+              </ProtectedRoute>
             } />
             <Route path="/dashboard" element={
-              <Dashboard
-                plan={generatedPlan}
-                onSave={handleSaveProject}
-                onRegenerate={handleRegenerate}
-                onAnalyzeModification={handleAnalyzeModification}
-                onApplyModification={handleApplyModification}
-                isProcessing={isProcessing}
-                planHistory={planHistory}
-                currentPlanIndex={currentPlanIndex}
-                onVersionChange={handleVersionChange}
-              />
+              <ProtectedRoute>
+                <Dashboard
+                  plan={generatedPlan}
+                  onSave={handleSaveProject}
+                  onRegenerate={handleRegenerate}
+                  onAnalyzeModification={handleAnalyzeModification}
+                  onApplyModification={handleApplyModification}
+                  isProcessing={isProcessing}
+                  planHistory={planHistory}
+                  currentPlanIndex={currentPlanIndex}
+                  onVersionChange={handleVersionChange}
+                />
+              </ProtectedRoute>
             } />
-            <Route path="/materials" element={<MaterialCostEstimation plan={generatedPlan} />} /> {/* Added MaterialCostEstimation route */}
+            <Route path="/materials" element={
+              <ProtectedRoute>
+                <MaterialCostEstimation plan={generatedPlan} />
+              </ProtectedRoute>
+            } />
             <Route path="/projects" element={
-              <Projects
-                onLoadProject={handleLoadSavedProject}
-              />
+              <ProtectedRoute>
+                <Projects
+                  onLoadProject={handleLoadSavedProject}
+                />
+              </ProtectedRoute>
             } />
             <Route path="/docs" element={<Documentation />} />
           </Routes>

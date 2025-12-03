@@ -51,6 +51,11 @@ Follow these steps to set up the project locally.
     VITE_SUPABASE_URL=your_supabase_project_url
     VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
     ```
+    
+    > **Note**: This project uses Vite, so environment variables must be prefixed with `VITE_`
+    VITE_SUPABASE_URL=your_supabase_project_url
+    VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+    ```
 
 4.  **Run the development server**:
     ```bash
