@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { NeoCard, NeoButton, NeoInput, NeoSelect } from '../components/NeoComponents';
 import { MaterialEstimationConfig, MaterialReport, GeneratedPlan, SavedMaterialEstimate } from '../types';
-import { generateMaterialEstimate } from '../services/geminiService';
+import { generateMaterialEstimate } from '../services/apiService';
 import { saveMaterialEstimate, getMaterialEstimates } from '../services/storageService';
 import { ChevronRight, ChevronLeft, Check, Loader2, AlertTriangle, History, Save, BarChart2 } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip as RechartsTooltip, Legend } from 'recharts';

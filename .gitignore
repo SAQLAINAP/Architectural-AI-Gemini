@@ -3,4 +3,12 @@
 
 # Exceptions (Whitelist)
 !archi-agent_-ai-architect/
+!archi-agent_-ai-architect/**
+!backend/
+!backend/**
 !.gitignore
+
+# Always ignore node_modules and build artifacts
+node_modules/
+dist/
+*.env

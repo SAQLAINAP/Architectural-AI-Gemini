@@ -1,11 +1,4 @@
-
-export enum ViewState {
-  HOME = 'HOME',
-  CONFIG = 'CONFIG',
-  DASHBOARD = 'DASHBOARD',
-  PROJECTS = 'PROJECTS',
-  DOCS = 'DOCS',
-}
+// Wire-compatible copies of frontend types
 
 export enum BuildingType {
   RESIDENTIAL = 'Residential',
@@ -52,20 +45,20 @@ export interface ProjectConfig {
 export interface WallFeature {
   type: 'door' | 'window' | 'opening';
   wall: 'top' | 'bottom' | 'left' | 'right';
-  position: number; // 0 to 1 normalized along the wall
-  width: number; // meters
+  position: number;
+  width: number;
 }
 
 export interface Room {
   id: string;
   name: string;
   type: 'room' | 'circulation' | 'outdoor' | 'setback' | 'service';
-  x: number; // in meters
-  y: number; // in meters
-  width: number; // in meters
-  height: number; // in meters
+  x: number;
+  y: number;
+  width: number;
+  height: number;
   features: WallFeature[];
-  guidance?: string; // Cultural/Furniture placement advice
+  guidance?: string;
 }
 
 export interface ComplianceItem {
@@ -83,9 +76,9 @@ export interface MaterialItem {
 }
 
 export interface GeneratedPlan {
-  imageUrl?: string; // For uploaded plans
-  designLog?: string[]; // AI's reasoning steps
-  rooms: Room[]; // "Rooms" now encompasses all zones. Can be empty if analyzing an image without geometry extraction.
+  imageUrl?: string;
+  designLog?: string[];
+  rooms: Room[];
   totalArea: number;
   builtUpArea: number;
   plotCoverageRatio: number;
@@ -99,8 +92,8 @@ export interface GeneratedPlan {
     max: number;
     currency: string;
   };
-  version?: string; // e.g., "1.0", "1.1"
-  timestamp?: number; // Unix timestamp
+  version?: string;
+  timestamp?: number;
 }
 
 export interface SavedProject {
@@ -169,14 +162,6 @@ export interface MaterialReport {
   risks: string[];
 }
 
-export interface SavedMaterialEstimate {
-  id: string;
-  name: string;
-  date: string;
-  config: MaterialEstimationConfig;
-  report: MaterialReport;
-}
-
 export interface ModificationAnalysis {
   originalRequest: string;
   analysis: string;
@@ -184,53 +169,4 @@ export interface ModificationAnalysis {
   vastuImplications: string;
   regulatoryImplications: string;
   suggestion: string;
-}
-
-// --- Multi-Agent Streaming Types ---
-
-export interface GenerationStreamEvent {
-  type: 'connected' | 'iteration_start' | 'agent_start' | 'agent_complete' | 'score_update' | 'violation_update' | 'moe_routing' | 'completed' | 'error';
-  data: any;
-}
-
-export interface GenerationProgress {
-  jobId: string;
-  status: 'pending' | 'running' | 'completed' | 'failed';
-  currentIteration: number;
-  maxIterations: number;
-  currentAgent?: string;
-  scores: Array<{
-    iteration: number;
-    finalScore: number;
-    breakdown: Array<{
-      category: string;
-      weight: number;
-      score: number;
-      weightedScore: number;
-    }>;
-  }>;
-  violations: ViolationSummary[];
-  agentHistory: AgentLogEntry[];
-  moeDecisions: MoeDecision[];
-  finalPlan: GeneratedPlan | null;
-}
-
-export interface ViolationSummary {
-  iteration: number;
-  total: number;
-  regulatory: number;
-  cultural: number;
-}
-
-export interface AgentLogEntry {
-  agent: string;
-  model: string;
-  durationMs: number;
-  timestamp: number;
-}
-
-export interface MoeDecision {
-  agent: string;
-  model: string;
-  reason: string;
 }
