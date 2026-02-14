@@ -59,6 +59,25 @@ export interface Room {
   height: number;
   features: WallFeature[];
   guidance?: string;
+  floor?: number;
+}
+
+export interface FurnitureItem {
+  id: string;
+  roomId: string;
+  type: string;
+  name: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  rotation: number;
+}
+
+export interface FloorData {
+  floorNumber: number;
+  floorLabel: string;
+  rooms: Room[];
 }
 
 export interface ComplianceItem {
@@ -92,6 +111,8 @@ export interface GeneratedPlan {
     max: number;
     currency: string;
   };
+  furniture?: FurnitureItem[];
+  floors?: FloorData[];
   version?: string;
   timestamp?: number;
 }

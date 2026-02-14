@@ -1,14 +1,19 @@
 
 import React, { useState, useRef } from 'react';
-import { GeneratedPlan, ViewState, Room, WallFeature, ModificationAnalysis } from '../types';
+import { GeneratedPlan, ViewState, Room, WallFeature, ModificationAnalysis, ProjectConfig, ChatMessage, FurnitureItem } from '../types';
 import { NeoButton, NeoCard } from '../components/NeoComponents';
-import { ArrowLeft, Download, AlertTriangle, CheckCircle, XCircle, Layers, Maximize2, ZoomIn, ZoomOut, Sparkles, Save, Grid, Ruler, Lightbulb, Info, FileText, RefreshCw, MessageSquare, Send, ThumbsUp, ThumbsDown, Clock } from 'lucide-react';
+import { ArrowLeft, Download, AlertTriangle, CheckCircle, XCircle, Layers, Maximize2, ZoomIn, ZoomOut, Sparkles, Save, Grid, Ruler, Lightbulb, Info, FileText, RefreshCw, MessageSquare, Send, ThumbsUp, ThumbsDown, Clock, ChevronDown, Image, FileDown, GitCompare, Sofa, Wand2 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
-
 import { useNavigate } from 'react-router-dom';
+import { exportSvgAsPng, exportPlanAsPdf } from '../utils/exportUtils';
+import FloorPlanSvg from '../components/FloorPlanSvg';
+import ChatPanel from '../components/ChatPanel';
+import VersionDiffView from '../components/VersionDiffView';
+import AlternativesGallery from '../components/AlternativesGallery';
 
 interface DashboardProps {
   plan: GeneratedPlan | null;
+  config?: ProjectConfig | null;
   onSave?: () => void;
   onRegenerate?: () => void;
   onAnalyzeModification?: (request: string) => Promise<ModificationAnalysis>;
@@ -17,9 +22,12 @@ interface DashboardProps {
   planHistory?: GeneratedPlan[];
   currentPlanIndex?: number;
   onVersionChange?: (index: number) => void;
+  alternatives?: GeneratedPlan[];
+  onGenerateAlternatives?: () => void;
+  onSelectAlternative?: (index: number) => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ plan, onSave, onRegenerate, onAnalyzeModification, onApplyModification, isProcessing, planHistory, currentPlanIndex, onVersionChange }) => {
+const Dashboard: React.FC<DashboardProps> = ({ plan, config, onSave, onRegenerate, onAnalyzeModification, onApplyModification, isProcessing, planHistory, currentPlanIndex, onVersionChange, alternatives, onGenerateAlternatives, onSelectAlternative }) => {
   const [activeTab, setActiveTab] = useState<'PLAN' | 'BOM'>('PLAN');
   const [zoom, setZoom] = useState(1);
   const [selectedRoomId, setSelectedRoomId] = useState<string | null>(null);
@@ -30,83 +38,30 @@ const Dashboard: React.FC<DashboardProps> = ({ plan, onSave, onRegenerate, onAna
   const [measurePoints, setMeasurePoints] = useState<{ x: number, y: number }[]>([]);
   const svgRef = useRef<SVGSVGElement>(null);
 
-  // Modification State
-  const [modRequest, setModRequest] = useState("");
-  const [modAnalysis, setModAnalysis] = useState<ModificationAnalysis | null>(null);
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  // Export Menu State
+  const [showExportMenu, setShowExportMenu] = useState(false);
+
+  // Diff View State
+  const [diffMode, setDiffMode] = useState(false);
+
+  // Furniture Toggle State
+  const [showFurniture, setShowFurniture] = useState(true);
+
+  // Multi-floor State
+  const [activeFloor, setActiveFloor] = useState(0);
+
+  // Alternatives Gallery State
+  const [showAlternatives, setShowAlternatives] = useState(false);
 
   if (!plan) return <div>No plan data available.</div>;
 
-  const handleAnalyze = async () => {
-    if (!modRequest.trim() || !onAnalyzeModification) return;
-    setIsAnalyzing(true);
-    setModAnalysis(null);
-    try {
-      const result = await onAnalyzeModification(modRequest);
-      setModAnalysis(result);
-    } catch (e) {
-      console.error(e);
-      alert("Analysis failed.");
-    } finally {
-      setIsAnalyzing(false);
-    }
-  };
-
-  const handleApply = async () => {
-    if (!modAnalysis || !onApplyModification) return;
-    await onApplyModification(modAnalysis.originalRequest);
-    setModRequest("");
-    setModAnalysis(null);
-  };
-
-  if (!plan) return <div>No plan data available.</div>;
+  // Determine which rooms to show based on active floor
+  const displayRooms = plan.floors && plan.floors.length > 1
+    ? plan.floors[activeFloor]?.rooms || plan.rooms
+    : plan.rooms;
 
   // Derive selected room
-  const selectedRoom = plan.rooms.find(r => r.id === selectedRoomId);
-
-  // SVG Bounds logic
-  const maxX = plan.rooms.length > 0 ? Math.max(...plan.rooms.map(r => r.x + r.width)) : 20;
-  const maxY = plan.rooms.length > 0 ? Math.max(...plan.rooms.map(r => r.y + r.height)) : 20;
-
-  const WALL_THICKNESS = 0.2;
-
-  const getZoneStyle = (type: Room['type'], isSelected: boolean) => {
-    const isBuilt = ['room', 'circulation', 'service'].includes(type);
-
-    // High contrast styling
-    const strokeColor = isSelected ? '#a388ee' : 'black';
-    const strokeWidth = isSelected ? 0.3 : (isBuilt ? WALL_THICKNESS : 0.05);
-    const strokeDash = isBuilt ? 'none' : '0.2 0.2';
-
-    let fill = 'white';
-
-    switch (type) {
-      case 'circulation':
-        fill = '#f3f4f6'; // Light gray
-        break;
-      case 'service':
-        fill = '#e2e8f0'; // Darker gray
-        break;
-      case 'outdoor':
-        fill = 'url(#outdoorPattern)';
-        break;
-      case 'setback':
-        fill = 'url(#setbackPattern)';
-        break;
-      case 'room':
-      default:
-        fill = 'white';
-        break;
-    }
-
-    return {
-      fill,
-      stroke: strokeColor,
-      strokeWidth,
-      strokeDasharray: strokeDash,
-      opacity: isBuilt ? 1 : 0.8
-    };
-  };
+  const selectedRoom = displayRooms.find(r => r.id === selectedRoomId);
 
   const handleSvgClick = (e: React.MouseEvent) => {
     if (!isMeasuring || !svgRef.current) return;
@@ -155,60 +110,25 @@ const Dashboard: React.FC<DashboardProps> = ({ plan, onSave, onRegenerate, onAna
     );
   };
 
-  const renderFeature = (room: Room, feature: WallFeature, index: number) => {
-    let cx = 0, cy = 0, rot = 0;
-    const featWidth = feature.width || 0.9;
-
-    if (feature.wall === 'top') {
-      cx = room.x + (room.width * feature.position);
-      cy = room.y;
-      rot = 0;
-    } else if (feature.wall === 'bottom') {
-      cx = room.x + (room.width * feature.position);
-      cy = room.y + room.height;
-      rot = 180;
-    } else if (feature.wall === 'left') {
-      cx = room.x;
-      cy = room.y + (room.height * feature.position);
-      rot = 270;
-    } else if (feature.wall === 'right') {
-      cx = room.x + room.width;
-      cy = room.y + (room.height * feature.position);
-      rot = 90;
-    }
-
-    const transform = `translate(${cx}, ${cy}) rotate(${rot}) translate(${-featWidth / 2}, ${-WALL_THICKNESS / 2})`;
-
-    if (room.type === 'outdoor' || room.type === 'setback') return null;
-
-    if (feature.type === 'door') {
-      return (
-        <g key={`${room.id}-feat-${index}`} transform={transform}>
-          {/* White background to hide wall line */}
-          <rect x={-0.05} y={-0.05} width={featWidth + 0.1} height={WALL_THICKNESS + 0.1} fill="white" />
-          {/* Door Arc */}
-          <path d={`M 0 ${WALL_THICKNESS} A ${featWidth} ${featWidth} 0 0 1 ${featWidth} ${WALL_THICKNESS - featWidth}`} fill="none" stroke="black" strokeWidth="0.05" />
-          {/* Door Leaf */}
-          <line x1={0} y1={WALL_THICKNESS} x2={0} y2={WALL_THICKNESS - featWidth} stroke="black" strokeWidth="0.08" />
-        </g>
-      );
-    } else if (feature.type === 'window') {
-      return (
-        <g key={`${room.id}-feat-${index}`} transform={transform}>
-          <rect x={0} y={0} width={featWidth} height={WALL_THICKNESS} fill="white" stroke="none" />
-          {/* Window Jambs */}
-          <line x1={0} y1={0} x2={0} y2={WALL_THICKNESS} stroke="black" strokeWidth="0.08" />
-          <line x1={featWidth} y1={0} x2={featWidth} y2={WALL_THICKNESS} stroke="black" strokeWidth="0.08" />
-          {/* Glass panes */}
-          <line x1={0} y1={WALL_THICKNESS * 0.35} x2={featWidth} y2={WALL_THICKNESS * 0.35} stroke="black" strokeWidth="0.03" />
-          <line x1={0} y1={WALL_THICKNESS * 0.65} x2={featWidth} y2={WALL_THICKNESS * 0.65} stroke="black" strokeWidth="0.03" />
-        </g>
-      );
-    }
-    return null;
-  };
-
   return (
+    <>
+    {/* Diff View Modal */}
+    {diffMode && planHistory && planHistory.length >= 2 && (
+      <VersionDiffView
+        planHistory={planHistory}
+        onClose={() => setDiffMode(false)}
+      />
+    )}
+
+    {/* Alternatives Gallery Modal */}
+    {showAlternatives && alternatives && alternatives.length > 0 && onSelectAlternative && (
+      <AlternativesGallery
+        alternatives={alternatives}
+        onSelect={(idx) => { onSelectAlternative(idx); setShowAlternatives(false); }}
+        onClose={() => setShowAlternatives(false)}
+      />
+    )}
+
     <div className="flex flex-col h-full overflow-hidden dark:bg-slate-900 transition-colors">
       {/* Header */}
       <div className="bg-white dark:bg-slate-800 border-b-4 border-black dark:border-white p-4 flex flex-wrap justify-between items-center z-10 shadow-md gap-4">
@@ -236,9 +156,32 @@ const Dashboard: React.FC<DashboardProps> = ({ plan, onSave, onRegenerate, onAna
               <RefreshCw size={16} className={isProcessing ? "animate-spin" : ""} /> Regenerate
             </NeoButton>
           )}
-          <NeoButton className="px-4 py-2 text-sm dark:bg-slate-700 dark:text-white" onClick={() => window.print()}>
-            <Download size={16} /> Export
-          </NeoButton>
+          {onGenerateAlternatives && (
+            <NeoButton className="px-4 py-2 text-sm bg-indigo-200 hover:bg-indigo-300 dark:text-black" onClick={() => { onGenerateAlternatives(); setShowAlternatives(true); }} disabled={isProcessing}>
+              <Wand2 size={16} /> Alternatives
+            </NeoButton>
+          )}
+          <div className="relative">
+            <NeoButton className="px-4 py-2 text-sm dark:bg-slate-700 dark:text-white" onClick={() => setShowExportMenu(!showExportMenu)}>
+              <Download size={16} /> Export <ChevronDown size={14} />
+            </NeoButton>
+            {showExportMenu && (
+              <div className="absolute right-0 top-full mt-1 bg-white dark:bg-slate-700 border-2 border-black dark:border-white shadow-neo dark:shadow-neoDark z-30 min-w-[180px]">
+                <button
+                  className="w-full px-4 py-2 text-sm font-bold text-left hover:bg-gray-100 dark:hover:bg-slate-600 dark:text-white flex items-center gap-2"
+                  onClick={() => { if (svgRef.current) exportSvgAsPng(svgRef.current); setShowExportMenu(false); }}
+                >
+                  <Image size={14} /> Download PNG
+                </button>
+                <button
+                  className="w-full px-4 py-2 text-sm font-bold text-left hover:bg-gray-100 dark:hover:bg-slate-600 dark:text-white flex items-center gap-2"
+                  onClick={() => { if (svgRef.current) exportPlanAsPdf(svgRef.current, plan, config); setShowExportMenu(false); }}
+                >
+                  <FileDown size={14} /> Download PDF Report
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -256,6 +199,33 @@ const Dashboard: React.FC<DashboardProps> = ({ plan, onSave, onRegenerate, onAna
                 }`}
             >
               v{p.version || "1.0"}
+            </button>
+          ))}
+          {planHistory.length >= 2 && (
+            <button
+              onClick={() => setDiffMode(true)}
+              className="ml-2 px-2 py-0.5 text-xs font-bold border border-black bg-orange-200 hover:bg-orange-300 rounded-full flex items-center gap-1"
+            >
+              <GitCompare size={12} /> Compare
+            </button>
+          )}
+        </div>
+      )}
+
+      {/* Floor Tabs */}
+      {plan.floors && plan.floors.length > 1 && (
+        <div className="bg-gray-100 dark:bg-slate-800 px-4 py-1 flex items-center gap-2 border-b-2 border-black dark:border-white">
+          <span className="text-xs font-bold uppercase dark:text-gray-300">Floors:</span>
+          {plan.floors.map((f, idx) => (
+            <button
+              key={idx}
+              onClick={() => setActiveFloor(idx)}
+              className={`px-3 py-0.5 text-xs font-bold border border-black transition-colors ${idx === activeFloor
+                ? 'bg-blue-400 text-black'
+                : 'bg-white dark:bg-slate-600 dark:text-white hover:bg-gray-100 dark:hover:bg-slate-500'
+                }`}
+            >
+              {f.floorLabel}
             </button>
           ))}
         </div>
@@ -292,109 +262,32 @@ const Dashboard: React.FC<DashboardProps> = ({ plan, onSave, onRegenerate, onAna
                     >
                       <Ruler size={20} />
                     </button>
+                    {plan.furniture && plan.furniture.length > 0 && (
+                      <>
+                        <div className="h-px bg-black dark:bg-white my-1"></div>
+                        <button
+                          title="Toggle Furniture"
+                          onClick={() => setShowFurniture(!showFurniture)}
+                          className={`p-2 hover:bg-gray-100 dark:hover:bg-slate-600 dark:text-white ${showFurniture ? 'bg-amber-200 text-black' : ''}`}
+                        >
+                          <Sofa size={20} />
+                        </button>
+                      </>
+                    )}
                   </div>
 
                   <div style={{ transform: `scale(${zoom})`, transition: 'transform 0.2s' }} className="w-full h-full flex items-center justify-center cursor-crosshair">
-                    <svg
-                      ref={svgRef}
-                      viewBox={`-2 -2 ${maxX + 4} ${maxY + 4}`}
-                      className="max-w-full max-h-full shadow-lg bg-white"
-                      onClick={handleSvgClick}
-                    >
-                      <defs>
-                        <pattern id="grid" width="1" height="1" patternUnits="userSpaceOnUse">
-                          <path d="M 1 0 L 0 0 0 1" fill="none" stroke="#f0f0f0" strokeWidth="0.05" />
-                        </pattern>
-                        {/* Setback Pattern: Diagonal Lines */}
-                        <pattern id="setbackPattern" width="0.5" height="0.5" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
-                          <rect width="0.5" height="0.5" fill="#f8fafc" />
-                          <line x1="0" y1="0" x2="0" y2="0.5" stroke="#cbd5e1" strokeWidth="0.05" />
-                        </pattern>
-                        {/* Outdoor Pattern: Dots/Grass-like */}
-                        <pattern id="outdoorPattern" width="0.5" height="0.5" patternUnits="userSpaceOnUse">
-                          <rect width="0.5" height="0.5" fill="#f0fdf4" />
-                          <circle cx="0.1" cy="0.1" r="0.05" fill="#bbf7d0" />
-                          <circle cx="0.35" cy="0.35" r="0.05" fill="#bbf7d0" />
-                        </pattern>
-                      </defs>
-
-                      <rect x={-2} y={-2} width={maxX + 4} height={maxY + 4} fill="white" />
-                      <rect width="100%" height="100%" fill="url(#grid)" />
-
-                      {/* Render Zones sorted so small rooms are on top of large zones if any overlap, though they shouldn't */}
-                      {plan.rooms
-                        .sort((a, b) => (a.type === 'setback' ? -1 : 1))
-                        .map((room) => {
-                          const isSelected = selectedRoomId === room.id;
-                          const style = getZoneStyle(room.type, isSelected);
-                          return (
-                            <g
-                              key={room.id}
-                              onClick={(e) => {
-                                if (!isMeasuring) {
-                                  e.stopPropagation();
-                                  setSelectedRoomId(room.id);
-                                }
-                              }}
-                              className={!isMeasuring ? "cursor-pointer hover:opacity-90" : ""}
-                            >
-                              <rect
-                                x={room.x}
-                                y={room.y}
-                                width={room.width}
-                                height={room.height}
-                                fill={style.fill}
-                                stroke={style.stroke}
-                                strokeWidth={style.strokeWidth}
-                                strokeDasharray={style.strokeDasharray}
-                                opacity={style.opacity}
-                              />
-                              {room.features && room.features.map((feature, idx) => renderFeature(room, feature, idx))}
-
-                              {/* Room Label */}
-                              <text
-                                x={room.x + room.width / 2}
-                                y={room.y + room.height / 2 - 0.15}
-                                textAnchor="middle"
-                                dominantBaseline="middle"
-                                fontSize={room.type === 'room' ? "0.25" : "0.20"}
-                                fontWeight={room.type === 'room' ? 'bold' : 'normal'}
-                                fill={room.type === 'outdoor' ? '#166534' : room.type === 'setback' ? '#94a3b8' : 'black'}
-                                className="uppercase tracking-wider pointer-events-none select-none"
-                                style={{ textShadow: '0px 0px 2px white' }}
-                              >
-                                {room.name}
-                              </text>
-                              {/* Dimensions in Plan */}
-                              <text
-                                x={room.x + room.width / 2}
-                                y={room.y + room.height / 2 + 0.25}
-                                textAnchor="middle"
-                                dominantBaseline="middle"
-                                fontSize="0.18"
-                                fill="black"
-                                className="pointer-events-none select-none"
-                                style={{ textShadow: '0px 0px 2px white' }}
-                              >
-                                {room.width}m x {room.height}m
-                              </text>
-                            </g>
-                          );
-                        })}
-
-                      {/* Measurement Overlay */}
-                      {renderMeasurementOverlay()}
-
-                      {/* Overall Dimensions */}
-                      <g transform={`translate(0, ${maxY + 1})`}>
-                        <line x1={0} y1={0} x2={maxX} y2={0} stroke="black" strokeWidth="0.05" />
-                        <line x1={0} y1={-0.2} x2={0} y2={0.2} stroke="black" strokeWidth="0.05" />
-                        <line x1={maxX} y1={-0.2} x2={maxX} y2={0.2} stroke="black" strokeWidth="0.05" />
-                        <text x={maxX / 2} y={-0.3} textAnchor="middle" fontSize="0.3" fontFamily="monospace">
-                          PLOT WIDTH: {maxX}m
-                        </text>
-                      </g>
-                    </svg>
+                    <FloorPlanSvg
+                      rooms={displayRooms}
+                      svgRef={svgRef}
+                      onRoomClick={(roomId) => { if (!isMeasuring) setSelectedRoomId(roomId); }}
+                      selectedRoomId={selectedRoomId}
+                      furniture={plan.furniture}
+                      showFurniture={showFurniture}
+                      onSvgClick={handleSvgClick}
+                      measurementOverlay={renderMeasurementOverlay()}
+                      isMeasuring={isMeasuring}
+                    />
                   </div>
                 </>
               )}
@@ -443,68 +336,14 @@ const Dashboard: React.FC<DashboardProps> = ({ plan, onSave, onRegenerate, onAna
             </div>
           </div>
 
-          {/* AI Modification Assistant */}
+          {/* Chat Modification Panel */}
           {!plan.imageUrl && onAnalyzeModification && (
-            <NeoCard className="border-t-4 border-neo-primary">
-              <h3 className="font-black text-lg mb-4 flex items-center gap-2 dark:text-white">
-                <MessageSquare size={20} className="text-neo-primary" /> AI Modification Assistant
-              </h3>
-
-              <div className="flex gap-2 mb-4">
-                <input
-                  className="flex-1 p-3 border-2 border-black dark:border-white bg-white dark:bg-slate-800 dark:text-white focus:outline-none"
-                  placeholder="Describe a change (e.g., 'Move the kitchen to the North side')..."
-                  value={modRequest}
-                  onChange={(e) => setModRequest(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleAnalyze()}
-                  disabled={isProcessing || isAnalyzing}
-                />
-                <NeoButton onClick={handleAnalyze} disabled={!modRequest.trim() || isProcessing || isAnalyzing}>
-                  {isAnalyzing ? <RefreshCw className="animate-spin" /> : <Send size={20} />}
-                </NeoButton>
-              </div>
-
-              {modAnalysis && (
-                <div className="bg-gray-50 dark:bg-slate-700 p-4 border-2 border-black dark:border-gray-500 animate-in fade-in slide-in-from-top-2">
-                  <div className="flex justify-between items-start mb-2">
-                    <h4 className="font-bold text-lg dark:text-white">Analysis Result</h4>
-                    <span className={`px-2 py-1 text-xs font-bold border border-black ${modAnalysis.feasibility === 'FEASIBLE' ? 'bg-green-200 text-green-900' :
-                      modAnalysis.feasibility === 'CAUTION' ? 'bg-yellow-200 text-yellow-900' : 'bg-red-200 text-red-900'
-                      }`}>
-                      {modAnalysis.feasibility}
-                    </span>
-                  </div>
-
-                  <p className="text-sm mb-3 dark:text-gray-200">{modAnalysis.analysis}</p>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm mb-4">
-                    <div className="bg-white dark:bg-slate-800 p-2 border border-gray-200 dark:border-gray-600">
-                      <strong className="block text-neo-secondary mb-1">Vastu Impact</strong>
-                      <p className="dark:text-gray-300">{modAnalysis.vastuImplications}</p>
-                    </div>
-                    <div className="bg-white dark:bg-slate-800 p-2 border border-gray-200 dark:border-gray-600">
-                      <strong className="block text-neo-accent mb-1">Regulatory Impact</strong>
-                      <p className="dark:text-gray-300">{modAnalysis.regulatoryImplications}</p>
-                    </div>
-                  </div>
-
-                  {modAnalysis.suggestion && (
-                    <div className="flex items-start gap-2 text-sm bg-blue-50 dark:bg-blue-900/30 p-2 mb-4">
-                      <Lightbulb size={16} className="text-blue-600 shrink-0 mt-1" />
-                      <p className="dark:text-blue-100"><span className="font-bold">Suggestion:</span> {modAnalysis.suggestion}</p>
-                    </div>
-                  )}
-
-                  {modAnalysis.feasibility !== 'NOT_RECOMMENDED' && (
-                    <div className="flex justify-end">
-                      <NeoButton onClick={handleApply} className="bg-green-500 hover:bg-green-600 text-white border-green-700" disabled={isProcessing}>
-                        {isProcessing ? 'Applying...' : 'Yes, Apply Changes'}
-                      </NeoButton>
-                    </div>
-                  )}
-                </div>
-              )}
-            </NeoCard>
+            <ChatPanel
+              plan={plan}
+              onAnalyzeModification={onAnalyzeModification}
+              onApplyModification={onApplyModification}
+              isProcessing={isProcessing}
+            />
           )}
         </div>
 
@@ -565,6 +404,7 @@ const Dashboard: React.FC<DashboardProps> = ({ plan, onSave, onRegenerate, onAna
         </div>
       </div>
     </div>
+    </>
   );
 };
 

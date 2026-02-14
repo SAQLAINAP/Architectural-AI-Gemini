@@ -2,7 +2,7 @@ import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { ProjectConfig, GeneratedPlan, SavedProject, ModificationAnalysis, GenerationProgress } from './types';
 import { AuthProvider } from './contexts/AuthContext';
-import { generateFloorPlanWithProgress, analyzePlanFromImage, analyzePlanModification, applyPlanModification } from './services/apiService';
+import { generateFloorPlanWithProgress, analyzePlanFromImage, analyzePlanModification, applyPlanModification, generateAlternatives } from './services/apiService';
 import { saveProject, saveFloorPlan, FloorPlanData } from './services/storageService';
 import { Navbar } from './components/NeoComponents';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -29,6 +29,7 @@ function App() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [generationProgress, setGenerationProgress] = useState<GenerationProgress | null>(null);
+  const [alternatives, setAlternatives] = useState<GeneratedPlan[]>([]);
   const [isDark, setIsDark] = useState(false);
   const [showResumeModal, setShowResumeModal] = useState(false);
   const [lastSessionTime, setLastSessionTime] = useState<string>("");
@@ -133,7 +134,7 @@ function App() {
                 config: newConfig,
                 planData: plan,
                 sourceType: 'generated',
-                generationModel: 'gemini-2.5-pro',
+                generationModel: 'gemini-3-pro-preview',
                 generationParams: {
                   projectType: newConfig.projectType,
                   width: newConfig.width,
@@ -179,7 +180,7 @@ function App() {
                     planData: plan,
                     sourceType: 'analyzed_image',
                     sourceImageUrl: base64, // Store the image data URL
-                    generationModel: 'gemini-2.0-flash-exp',
+                    generationModel: 'gemini-3-flash-preview',
                     status: 'completed'
                   });
                   setCurrentProjectId(savedFloorPlan.id);
@@ -262,7 +263,7 @@ function App() {
                   planData: plan,
                   sourceType: 'generated',
                   parentPlanId: currentProjectId || undefined,
-                  generationModel: 'gemini-2.5-pro',
+                  generationModel: 'gemini-3-pro-preview',
                   generationParams: {
                     projectType: config.projectType,
                     width: config.width,
@@ -318,7 +319,7 @@ function App() {
                 planData: newPlan,
                 sourceType: 'modified',
                 parentPlanId: currentProjectId || undefined,
-                generationModel: 'gemini-2.0-flash-exp',
+                generationModel: 'gemini-3-flash-preview',
                 generationParams: {
                   modificationType: 'user_modification',
                   modificationRequest: request
@@ -341,6 +342,31 @@ function App() {
 
   const handleVersionChange = (index: number) => {
     setCurrentPlanIndex(index);
+  };
+
+  const handleGenerateAlternatives = async () => {
+    if (!config) return;
+    setIsProcessing(true);
+    setAlternatives([]);
+    try {
+      const alts = await generateAlternatives(config);
+      setAlternatives(alts);
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message || 'Failed to generate alternatives.');
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handleSelectAlternative = (index: number) => {
+    const selected = alternatives[index];
+    if (!selected) return;
+    selected.version = `alt-${index + 1}`;
+    selected.timestamp = Date.now();
+    setPlanHistory(prev => [...prev, selected]);
+    setCurrentPlanIndex(planHistory.length); // point to newly appended plan
+    setAlternatives([]);
   };
 
   return (
@@ -414,6 +440,7 @@ function App() {
               <ProtectedRoute>
                 <Dashboard
                   plan={generatedPlan}
+                  config={config}
                   onSave={handleSaveProject}
                   onRegenerate={handleRegenerate}
                   onAnalyzeModification={handleAnalyzeModification}
@@ -422,6 +449,9 @@ function App() {
                   planHistory={planHistory}
                   currentPlanIndex={currentPlanIndex}
                   onVersionChange={handleVersionChange}
+                  alternatives={alternatives}
+                  onGenerateAlternatives={handleGenerateAlternatives}
+                  onSelectAlternative={handleSelectAlternative}
                 />
               </ProtectedRoute>
             } />

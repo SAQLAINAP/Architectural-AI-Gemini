@@ -2,6 +2,7 @@ import { Router } from 'express';
 import type { Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import { orchestrate } from '../orchestrator/design.orchestrator.js';
+import { FurnitureAgent } from '../agents/furniture.agent.js';
 import { createJob, getJob, updateJob } from '../memory/session.memory.js';
 import { generationLimiter } from '../middleware/rate-limiter.js';
 import { generateStructuredContent } from '../models/gemini.client.js';
@@ -318,10 +319,11 @@ Analyze this architectural floor plan image with expert precision.
 // POST /api/modify/analyze — Modification feasibility
 router.post('/modify/analyze', async (req: Request, res: Response) => {
   try {
-    const { plan, request, config } = req.body as {
+    const { plan, request, config, chatHistory } = req.body as {
       plan: GeneratedPlan;
       request: string;
       config: ProjectConfig;
+      chatHistory?: Array<{ role: string; content: string }>;
     };
 
     if (!plan || !request || !config) {
@@ -329,9 +331,13 @@ router.post('/modify/analyze', async (req: Request, res: Response) => {
       return;
     }
 
+    const chatContext = chatHistory && chatHistory.length > 0
+      ? `\n**CONVERSATION HISTORY**:\n${chatHistory.map(m => `${m.role}: ${m.content}`).join('\n')}\n`
+      : '';
+
     const prompt = `
 Analyze the feasibility of the following modification request for an architectural floor plan.
-
+${chatContext}
 **CURRENT CONTEXT**:
 - Project Type: ${config.projectType}
 - Cultural System: ${config.culturalSystem} (Vastu Level: ${config.vastuLevel})
@@ -619,6 +625,85 @@ Provide:
   } catch (err: any) {
     logger.error({ err }, 'Material estimation failed');
     res.status(500).json({ error: err.message });
+  }
+});
+
+// POST /api/furniture — Generate furniture for existing plan
+router.post('/furniture', async (req: Request, res: Response) => {
+  try {
+    const { rooms } = req.body as { rooms: GeneratedPlan['rooms'] };
+    if (!rooms || rooms.length === 0) {
+      res.status(400).json({ error: 'Missing rooms data' });
+      return;
+    }
+
+    const agent = new FurnitureAgent();
+    const result = await agent.execute({ rooms });
+    res.json({ furniture: result.data });
+  } catch (err: any) {
+    logger.error({ err }, 'Furniture generation failed');
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST /api/generate-alternatives — Generate 3 alternative designs
+router.post('/generate-alternatives', generationLimiter, async (req: Request, res: Response) => {
+  try {
+    const config = req.body as ProjectConfig;
+    if (!config || !config.width || !config.depth) {
+      res.status(400).json({ error: 'Invalid project configuration' });
+      return;
+    }
+
+    const jobId = uuidv4();
+    const userId = req.userId || 'anonymous';
+    createJob(jobId, userId);
+
+    // Set up SSE
+    res.writeHead(200, {
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache',
+      Connection: 'keep-alive',
+      'X-Accel-Buffering': 'no',
+    });
+
+    res.write(`data: ${JSON.stringify({ type: 'connected', data: { jobId } })}\n\n`);
+
+    const strategies = [
+      { prompt: 'Optimize for natural light and ventilation. Maximize window placement, orient living spaces toward south/east for sunlight, ensure cross-ventilation paths.', tempOffset: 0 },
+      { prompt: 'Optimize for privacy gradient and zone separation. Create clear public-to-private transitions, separate guest areas from family zones, add buffer spaces.', tempOffset: 0.15 },
+      { prompt: 'Optimize for open-plan living with minimal corridors. Merge living/dining/kitchen into flowing spaces, minimize circulation area, maximize usable room space.', tempOffset: 0.25 },
+    ];
+
+    const results: GeneratedPlan[] = [];
+
+    // Run all 3 in parallel
+    const promises = strategies.map(async (strategy, idx) => {
+      try {
+        res.write(`data: ${JSON.stringify({ type: 'alternative_start', data: { index: idx, strategy: strategy.prompt.slice(0, 50) } })}\n\n`);
+
+        const result = await orchestrate(config, (event) => {
+          res.write(`data: ${JSON.stringify({ type: 'alternative_progress', data: { index: idx, ...event.data } })}\n\n`);
+        }, { strategyPrompt: strategy.prompt, temperatureOffset: strategy.tempOffset });
+
+        results[idx] = result.finalPlan;
+
+        res.write(`data: ${JSON.stringify({ type: 'alternative_complete', data: { index: idx } })}\n\n`);
+      } catch (err: any) {
+        logger.error({ err, strategyIndex: idx }, 'Alternative generation failed');
+        res.write(`data: ${JSON.stringify({ type: 'alternative_error', data: { index: idx, message: err.message } })}\n\n`);
+      }
+    });
+
+    await Promise.all(promises);
+
+    res.write(`data: ${JSON.stringify({ type: 'alternatives_completed', data: { alternatives: results.filter(Boolean) } })}\n\n`);
+    res.end();
+  } catch (err: any) {
+    logger.error({ err }, 'Alternatives generation failed');
+    if (!res.headersSent) {
+      res.status(500).json({ error: err.message });
+    }
   }
 });
 

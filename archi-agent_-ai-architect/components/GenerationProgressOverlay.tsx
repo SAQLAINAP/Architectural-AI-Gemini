@@ -12,6 +12,7 @@ const agentColors: Record<string, string> = {
   CriticAgent: 'bg-orange-400',
   RefinementAgent: 'bg-green-400',
   CostAgent: 'bg-pink-400',
+  FurnitureAgent: 'bg-amber-400',
 };
 
 const GenerationProgressOverlay: React.FC<Props> = ({ progress }) => {

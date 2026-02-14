@@ -66,6 +66,7 @@ export interface Room {
   height: number; // in meters
   features: WallFeature[];
   guidance?: string; // Cultural/Furniture placement advice
+  floor?: number;
 }
 
 export interface ComplianceItem {
@@ -99,6 +100,8 @@ export interface GeneratedPlan {
     max: number;
     currency: string;
   };
+  furniture?: FurnitureItem[];
+  floors?: FloorData[];
   version?: string; // e.g., "1.0", "1.1"
   timestamp?: number; // Unix timestamp
 }
@@ -233,4 +236,31 @@ export interface MoeDecision {
   agent: string;
   model: string;
   reason: string;
+}
+
+export interface ChatMessage {
+  id: string;
+  role: 'user' | 'assistant';
+  content: string;
+  timestamp: number;
+  analysis?: ModificationAnalysis;
+  applied?: boolean;
+}
+
+export interface FurnitureItem {
+  id: string;
+  roomId: string;
+  type: string;
+  name: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  rotation: number;
+}
+
+export interface FloorData {
+  floorNumber: number;
+  floorLabel: string;
+  rooms: Room[];
 }

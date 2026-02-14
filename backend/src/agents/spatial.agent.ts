@@ -9,6 +9,10 @@ export class SpatialAgent extends BaseAgent<NormalizedSpec, FloorPlanGraph> {
   readonly name = 'SpatialAgent';
   readonly role: AgentRole = 'spatial';
 
+  // Optional overrides set by orchestrator
+  _strategyPrompt?: string;
+  _temperatureOffset?: number;
+
   async execute(spec: NormalizedSpec): Promise<AgentResult<FloorPlanGraph>> {
     const startTime = Date.now();
     const { config, plotGeometry, requiredRooms, setbackRequirements, municipalConfig } = spec;
@@ -70,10 +74,21 @@ Label all setback areas as type: "setback"
 8. **PARKING**: ${config.parking !== 'None' ? `Provide parking space (min 2.5m x 5m for car)` : 'No parking required'}
 
 For each room provide detailed "guidance" including furniture placement, functional layout tips, and storage recommendations.
-
+${(config.floors || 1) > 1 ? `
+**MULTI-FLOOR REQUIREMENTS**:
+- This is a ${config.floors}-floor building. Each room MUST include a "floor" field (0 = ground, 1 = first floor, etc.)
+- Staircase rooms MUST have IDENTICAL (x, y, width, height) values across ALL floors for structural alignment
+- Ground floor (floor=0): Public spaces (living, dining, kitchen, parking, entrance)
+- Upper floors (floor=1+): Private spaces (bedrooms, study)
+- Bathrooms may appear on any floor
+` : ''}
+${this._strategyPrompt ? `\n**DESIGN STRATEGY**: ${this._strategyPrompt}\n` : ''}
 Generate the complete floor plan with designLog documenting key architectural decisions.`;
 
-    const modelConfig = getModelConfig(this.role);
+    const modelConfig = { ...getModelConfig(this.role) };
+    if (this._temperatureOffset) {
+      modelConfig.temperature = Math.min(modelConfig.temperature + this._temperatureOffset, 1.0);
+    }
     const { data: rawPlan, tokenCount } = await generateStructuredContent<any>({
       prompt,
       modelConfig,
@@ -113,6 +128,7 @@ Generate the complete floor plan with designLog documenting key architectural de
                   },
                 },
                 guidance: { type: Type.STRING },
+                floor: { type: Type.NUMBER },
               },
               required: ['id', 'name', 'type', 'x', 'y', 'width', 'height', 'features', 'guidance'],
             },
@@ -127,8 +143,14 @@ Generate the complete floor plan with designLog documenting key architectural de
       },
     });
 
+    // Preserve floor field from raw rooms
+    const roomsWithFloor = (rawPlan.rooms || []).map((r: any) => ({
+      ...r,
+      floor: r.floor ?? 0,
+    }));
+
     // Enrich rooms with direction data
-    const enrichedRooms = enrichRoomsWithDirection(rawPlan.rooms, plotGeometry);
+    const enrichedRooms = enrichRoomsWithDirection(roomsWithFloor, plotGeometry);
 
     const builtUpArea = enrichedRooms
       .filter(r => r.type === 'room' || r.type === 'service')

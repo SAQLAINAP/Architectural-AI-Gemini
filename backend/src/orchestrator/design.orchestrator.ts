@@ -6,12 +6,13 @@ import type {
   CritiqueResult,
   PlanScore,
 } from '../types/agent.types.js';
-import type { ProjectConfig, GeneratedPlan, ComplianceItem } from '../types/shared.types.js';
+import type { ProjectConfig, GeneratedPlan, ComplianceItem, FloorData } from '../types/shared.types.js';
 import { InputAgent } from '../agents/input.agent.js';
 import { SpatialAgent } from '../agents/spatial.agent.js';
 import { CriticAgent } from '../agents/critic.agent.js';
 import { RefinementAgent } from '../agents/refinement.agent.js';
 import { CostAgent } from '../agents/cost.agent.js';
+import { FurnitureAgent } from '../agents/furniture.agent.js';
 import { validateVastu } from '../validators/vastu.validator.js';
 import { validateRegulatory } from '../validators/regulatory.validator.js';
 import { scorePlan } from '../scoring/plan.scorer.js';
@@ -26,15 +27,30 @@ export interface ProgressCallback {
   }): void;
 }
 
+export interface OrchestrationOptions {
+  strategyPrompt?: string;
+  temperatureOffset?: number;
+}
+
 export async function orchestrate(
   config: ProjectConfig,
-  onProgress?: ProgressCallback
+  onProgress?: ProgressCallback,
+  options?: OrchestrationOptions
 ): Promise<OrchestrationResult> {
   const inputAgent = new InputAgent();
   const spatialAgent = new SpatialAgent();
   const criticAgent = new CriticAgent();
   const refinementAgent = new RefinementAgent();
   const costAgent = new CostAgent();
+  const furnitureAgent = new FurnitureAgent();
+
+  // Pass strategy options to spatial agent
+  if (options?.strategyPrompt) {
+    (spatialAgent as any)._strategyPrompt = options.strategyPrompt;
+  }
+  if (options?.temperatureOffset) {
+    (spatialAgent as any)._temperatureOffset = options.temperatureOffset;
+  }
 
   const iterations: IterationRecord[] = [];
 
@@ -170,24 +186,62 @@ export async function orchestrate(
     model: costResult.metadata.modelUsed,
   });
 
-  // Step 5: Assemble final GeneratedPlan
+  // Step 5: Furniture placement
+  emitProgress(onProgress, 'agent_start', { agent: 'FurnitureAgent', phase: 'furniture_placement' });
+  let allFurniture: any[] = [];
+  try {
+    const furnitureResult = await furnitureAgent.execute({ rooms: currentPlan.rooms });
+    allFurniture = furnitureResult.data;
+    emitProgress(onProgress, 'agent_complete', {
+      agent: 'FurnitureAgent',
+      durationMs: furnitureResult.metadata.durationMs,
+      model: furnitureResult.metadata.modelUsed,
+    });
+  } catch (err) {
+    logger.warn({ err }, 'Furniture placement failed, continuing without furniture');
+    emitProgress(onProgress, 'agent_complete', {
+      agent: 'FurnitureAgent',
+      durationMs: 0,
+      model: 'skipped',
+    });
+  }
+
+  // Step 6: Assemble final GeneratedPlan
   const lastIteration = iterations[iterations.length - 1];
   const allComplianceRegulatory: ComplianceItem[] = lastIteration?.regulatoryResult.complianceItems || [];
   const allComplianceCultural: ComplianceItem[] = lastIteration?.vastuResult.complianceItems || [];
 
+  const planRooms = currentPlan.rooms.map(r => ({
+    id: r.id,
+    name: r.name,
+    type: r.type,
+    x: r.x,
+    y: r.y,
+    width: r.width,
+    height: r.height,
+    features: r.features,
+    guidance: r.guidance,
+    floor: r.floor,
+  }));
+
+  // Assemble per-floor data if multi-floor
+  let floors: FloorData[] | undefined;
+  const floorCount = config.floors || 1;
+  if (floorCount > 1) {
+    floors = [];
+    for (let f = 0; f < floorCount; f++) {
+      const floorRooms = planRooms.filter(r => (r.floor ?? 0) === f);
+      floors.push({
+        floorNumber: f,
+        floorLabel: f === 0 ? 'Ground Floor' : `Floor ${f}`,
+        rooms: floorRooms.length > 0 ? floorRooms : planRooms, // fallback if floor field not set
+      });
+    }
+  }
+
   const finalPlan: GeneratedPlan = {
     designLog: currentPlan.designLog,
-    rooms: currentPlan.rooms.map(r => ({
-      id: r.id,
-      name: r.name,
-      type: r.type,
-      x: r.x,
-      y: r.y,
-      width: r.width,
-      height: r.height,
-      features: r.features,
-      guidance: r.guidance,
-    })),
+    rooms: planRooms,
     totalArea: currentPlan.totalArea,
     builtUpArea: currentPlan.builtUpArea,
     plotCoverageRatio: currentPlan.plotCoverageRatio,
@@ -197,6 +251,8 @@ export async function orchestrate(
     },
     bom: costResult.data.bom,
     totalCostRange: costResult.data.totalCostRange,
+    furniture: allFurniture.length > 0 ? allFurniture : undefined,
+    floors,
   };
 
   const result: OrchestrationResult = {

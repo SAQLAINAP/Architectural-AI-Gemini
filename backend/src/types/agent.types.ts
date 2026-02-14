@@ -29,6 +29,7 @@ export interface RoomWithDirection extends Room {
   centerY: number;
   area: number;
   classification: RoomClassification;
+  floor?: number;
 }
 
 export interface PlotGeometry {
@@ -189,7 +190,7 @@ export interface AgentResult<T> {
   };
 }
 
-export type AgentRole = 'input' | 'spatial' | 'critic' | 'refinement' | 'cost';
+export type AgentRole = 'input' | 'spatial' | 'critic' | 'refinement' | 'cost' | 'furniture';
 
 export interface ModelRouterConfig {
   model: string;
