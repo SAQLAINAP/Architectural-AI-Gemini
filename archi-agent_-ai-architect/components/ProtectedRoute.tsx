@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { supabase } from '../lib/supabaseClient';
 
 interface Props {
   children: React.ReactNode;
@@ -8,6 +9,11 @@ interface Props {
 
 const ProtectedRoute: React.FC<Props> = ({ children }) => {
   const { user, loading } = useAuth();
+
+  // If Supabase is not configured, allow guest access
+  if (!supabase) {
+    return <>{children}</>;
+  }
 
   if (loading) {
     return (

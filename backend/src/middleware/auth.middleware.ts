@@ -7,9 +7,19 @@ const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 let supabase: ReturnType<typeof createClient> | null = null;
 
+function isValidUrl(s: string | undefined): boolean {
+  if (!s) return false;
+  try {
+    const url = new URL(s);
+    return url.protocol === 'http:' || url.protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
+
 function getSupabase() {
-  if (!supabase && supabaseUrl && supabaseServiceKey) {
-    supabase = createClient(supabaseUrl, supabaseServiceKey);
+  if (!supabase && isValidUrl(supabaseUrl) && supabaseServiceKey && !supabaseServiceKey.startsWith('your_')) {
+    supabase = createClient(supabaseUrl!, supabaseServiceKey);
   }
   return supabase;
 }

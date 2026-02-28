@@ -15,6 +15,28 @@ function getClient(): GoogleGenAI {
   return clientInstance;
 }
 
+function sanitizeJsonString(raw: string): string {
+  let s = raw.trim();
+  // Strip markdown fences
+  if (s.startsWith('```json')) s = s.slice(7);
+  else if (s.startsWith('```')) s = s.slice(3);
+  if (s.endsWith('```')) s = s.slice(0, -3);
+  s = s.trim();
+  // Remove trailing commas before } or ]
+  s = s.replace(/,\s*([\]}])/g, '$1');
+  return s;
+}
+
+function parseJson<T>(text: string): T {
+  try {
+    return JSON.parse(text) as T;
+  } catch {
+    // Try sanitized version
+    const sanitized = sanitizeJsonString(text);
+    return JSON.parse(sanitized) as T;
+  }
+}
+
 export interface GeminiGenerateOptions {
   prompt: string;
   modelConfig: ModelRouterConfig;
@@ -61,33 +83,46 @@ export async function generateStructuredContent<T>(
       throw new Error('No response text from Gemini');
     }
 
-    const data = JSON.parse(text) as T;
+    const data = parseJson<T>(text);
     const tokenCount = response.usageMetadata?.totalTokenCount;
 
     return { data, tokenCount };
   } catch (error: any) {
-    // Fallback to flash model if pro fails
-    if (modelConfig.model.includes('pro')) {
-      logger.warn(
-        { model: modelConfig.model, error: error.message },
-        'Pro model failed, falling back to flash'
-      );
+    // Fallback chain: gemini-3-*-preview → gemini-2.5-*
+    const fallbackMap: Record<string, string[]> = {
+      'gemini-3-pro-preview': ['gemini-2.5-pro', 'gemini-2.5-flash'],
+      'gemini-3-flash-preview': ['gemini-2.5-flash'],
+      'gemini-2.5-pro': ['gemini-2.5-flash'],
+    };
 
-      const fallbackConfig = { ...modelConfig, model: 'gemini-2.5-flash' };
-      const response = await ai.models.generateContent({
-        model: fallbackConfig.model,
-        contents,
-        config,
-      });
+    const fallbacks = fallbackMap[modelConfig.model];
+    if (fallbacks && fallbacks.length > 0) {
+      for (const fallbackModel of fallbacks) {
+        try {
+          logger.warn(
+            { primary: modelConfig.model, fallback: fallbackModel, error: error.message },
+            'Primary model failed, trying fallback'
+          );
 
-      const text = response.text;
-      if (!text) {
-        throw new Error('No response text from Gemini (fallback)');
+          const response = await ai.models.generateContent({
+            model: fallbackModel,
+            contents,
+            config,
+          });
+
+          const text = response.text;
+          if (!text) continue;
+
+          const data = parseJson<T>(text);
+          const tokenCount = response.usageMetadata?.totalTokenCount;
+          return { data, tokenCount };
+        } catch (fallbackError: any) {
+          logger.warn(
+            { fallback: fallbackModel, error: fallbackError.message },
+            'Fallback model also failed'
+          );
+        }
       }
-
-      const data = JSON.parse(text) as T;
-      const tokenCount = response.usageMetadata?.totalTokenCount;
-      return { data, tokenCount };
     }
     throw error;
   }

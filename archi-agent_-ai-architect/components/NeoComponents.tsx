@@ -48,13 +48,16 @@ export const NeoInput = ({ label, ...props }: React.InputHTMLAttributes<HTMLInpu
   </div>
 );
 
-export const NeoSelect = ({ label, options, ...props }: React.SelectHTMLAttributes<HTMLSelectElement> & { label: string, options: string[] }) => (
+export const NeoSelect = ({ label, options, placeholder, ...props }: React.SelectHTMLAttributes<HTMLSelectElement> & { label: string, options: string[], placeholder?: string }) => (
   <div className="flex flex-col gap-1">
     <label className="font-bold text-sm dark:text-slate-200">{label}</label>
     <select
       className="bg-white dark:bg-slate-700 dark:text-white border-2 border-black dark:border-white p-3 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]"
       {...props}
     >
+      {(!props.value || props.value === '') && (
+        <option value="" disabled>{placeholder || `Select ${label}...`}</option>
+      )}
       {options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
     </select>
   </div>
