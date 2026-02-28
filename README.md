@@ -13,7 +13,8 @@ AI-powered architectural design platform that generates floor plans, validates c
 - **Multi-Floor Generation** — Per-floor layouts with staircase alignment validation and floor-tab navigation
 - **Alternative Designs** — Generate 3 distinct layouts in parallel with different strategies (natural light, privacy, open-plan)
 - **Material & Cost Estimation** — Detailed BOM with multi-tier quotations and cost distribution charts
-- **Cloud Storage** — Save/load projects via Supabase authentication
+- **Cloud Storage** — Save/load projects via Supabase authentication (optional — works without Supabase in guest mode)
+- **Model Resilience** — Multi-level fallback chain (Gemini 3 Preview → 2.5 Pro → Flash) with JSON response sanitization
 
 ## Architecture
 
@@ -65,8 +66,8 @@ backend/                            # Express server (TypeScript, NodeNext)
 
 - **Frontend**: React 19, TypeScript, Vite, Tailwind CSS, Recharts, jsPDF
 - **Backend**: Express 5, TypeScript (NodeNext), multi-agent orchestration
-- **AI**: Google Gemini (Pro for spatial/critic/refinement, Flash for input/cost/furniture)
-- **Auth & Storage**: Supabase
+- **AI**: Google Gemini with multi-level fallback (Gemini 3 Preview → 2.5 Pro → 2.5 Flash)
+- **Auth & Storage**: Supabase (optional — guest mode available without credentials)
 - **Icons**: Lucide React
 
 ## Getting Started
@@ -75,7 +76,7 @@ backend/                            # Express server (TypeScript, NodeNext)
 
 - Node.js v18+
 - Google Gemini API key
-- Supabase project (URL + Anon Key)
+- Supabase project (optional — the app works in guest mode without it)
 
 ### Installation
 
@@ -135,6 +136,48 @@ Open `http://localhost:5173` in your browser.
 | POST | `/api/generate-alternatives` | Generate 3 alternative designs (SSE) |
 | POST | `/api/analyze-image` | Analyze uploaded floor plan image |
 | POST | `/api/estimate` | Material cost estimation |
+| GET | `/api/health` | Server health check |
+
+## Multi-Agent Orchestration Flow
+
+```
+User Config
+    │
+    ▼
+┌─────────────┐
+│ Input Agent  │  (Flash) — Normalizes config into NormalizedSpec
+└──────┬──────┘
+       ▼
+┌─────────────┐
+│Spatial Agent │  (Pro) — Generates initial FloorPlanGraph
+└──────┬──────┘
+       ▼
+┌──────────────────── Iterative Loop (max 3 iterations) ────────────────────┐
+│                                                                           │
+│  ┌──────────────┐  ┌───────────────────┐  ┌──────────────┐              │
+│  │Vastu Validator│  │Regulatory Validator│  │ Critic Agent │  (Pro)      │
+│  │  (14 rules)   │  │  (6 categories)    │  │ (6 metrics)  │             │
+│  └──────┬───────┘  └────────┬──────────┘  └──────┬───────┘              │
+│         └──────────┬────────┘                     │                      │
+│                    ▼                              ▼                      │
+│         ┌──────────────────┐                                            │
+│         │   Plan Scorer    │  0.4×reg + 0.3×vastu + 0.2×spatial + 0.1×critic │
+│         └────────┬─────────┘                                            │
+│                  ▼                                                       │
+│         score ≥ 0.70? ── Yes ──▶ EXIT LOOP                              │
+│              │ No                                                        │
+│              ▼                                                           │
+│     ┌──────────────────┐                                                │
+│     │Refinement Agent  │  (Pro) — Fixes violations                      │
+│     └──────────────────┘                                                │
+└───────────────────────────────────────────────────────────────────────────┘
+       ▼
+┌─────────────┐  ┌─────────────────┐
+│ Cost Agent  │  │ Furniture Agent  │  (Flash) — BOM + furniture placement
+└─────────────┘  └─────────────────┘
+       ▼
+  Final GeneratedPlan (compliance, BOM, furniture, multi-floor data)
+```
 
 ## License
 
