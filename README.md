@@ -1,83 +1,184 @@
-## 🚀 Overview
+# Architectural AI Agent
 
-The **Architectural AI Agent** is a cutting-edge web application designed to assist architects, home builders, and enthusiasts in the initial stages of building design. By leveraging Google's **Gemini AI**, the application generates detailed floor plans, provides comprehensive material and cost estimates, and checks for compliance with local building codes and cultural design principles (like Vastu Shastra).
+AI-powered architectural design platform that generates floor plans, validates compliance, estimates costs, and provides interactive plan modification — all orchestrated by a multi-agent Gemini backend.
 
-## ✨ Key Features
+## Key Features
 
--   **AI-Powered Floor Plan Generation**: Generate optimized floor plans based on plot dimensions, requirements, and family size.
--   **Intelligent Material & Cost Estimation**: Get detailed cost breakdowns with multi-tier quotations (Basic, Premium, Luxury) and visual cost distribution charts.
--   **Regulatory & Cultural Compliance**: Automatically checks designs against local building codes (e.g., NBC, BBMP) and cultural guidelines (Vastu, Islamic beliefs).
--   **Interactive Stepper Interface**: User-friendly, step-by-step configuration for accurate project inputs.
--   **History & Cloud Storage**: Save and retrieve your estimates and projects securely using Supabase authentication and storage.
--   **Visualizations**: Interactive charts and detailed tables for financial planning.
+- **Multi-Agent Floor Plan Generation** — 6 specialized AI agents (Input, Spatial, Critic, Refinement, Cost, Furniture) with iterative scoring and convergence
+- **Regulatory & Cultural Compliance** — Deterministic validators for municipal building codes (NBC, BBMP, BMC, MCD) and Vastu Shastra (14 rules)
+- **PNG/PDF Export** — Download floor plans as high-resolution PNG or multi-page PDF reports (room schedule, compliance summary, BOM, design log)
+- **Natural Language Chat Modification** — Conversational UI to analyze and apply changes with feasibility assessment, Vastu/regulatory impact analysis
+- **Version Diff View** — Side-by-side comparison of plan versions with color-coded added/removed/modified rooms
+- **Furniture Placement** — AI auto-places furniture with clearance rules, door avoidance, and standard sizing per room type
+- **Multi-Floor Generation** — Per-floor layouts with staircase alignment validation and floor-tab navigation
+- **Alternative Designs** — Generate 3 distinct layouts in parallel with different strategies (natural light, privacy, open-plan)
+- **Material & Cost Estimation** — Detailed BOM with multi-tier quotations and cost distribution charts
+- **Cloud Storage** — Save/load projects via Supabase authentication (optional — works without Supabase in guest mode)
+- **Model Resilience** — Multi-level fallback chain (Gemini 3 Preview → 2.5 Pro → Flash) with JSON response sanitization
 
-## 🛠️ Tech Stack
+## Architecture
 
--   **Frontend**: React, TypeScript, Vite, Tailwind CSS
--   **AI Integration**: Google Gemini Pro (via `@google/genai`)
--   **Backend/Storage**: Supabase (Auth & Database)
--   **Routing**: React Router DOM
--   **Visualization**: Recharts
--   **Icons**: Lucide React
+```
+archi-agent_-ai-architect/          # React frontend (Vite + Tailwind)
+├── components/
+│   ├── FloorPlanSvg.tsx            # Reusable SVG floor plan renderer
+│   ├── ChatPanel.tsx               # Chat modification UI
+│   ├── VersionDiffView.tsx         # Side-by-side plan diff modal
+│   ├── AlternativesGallery.tsx     # 3-design comparison gallery
+│   ├── GenerationProgressOverlay   # Real-time agent progress
+│   └── NeoComponents.tsx           # Shared UI primitives
+├── utils/
+│   ├── exportUtils.ts              # PNG/PDF export
+│   └── planDiff.ts                 # Room-level diff algorithm
+├── services/
+│   └── apiService.ts               # Backend API client + SSE streaming
+├── views/
+│   ├── Dashboard.tsx               # Main plan viewer + controls
+│   ├── Configuration.tsx           # Project config stepper
+│   └── ...
+├── types.ts                        # Shared TypeScript types
+└── App.tsx                         # Routing + state management
 
-## 🏁 Getting Started
+backend/                            # Express server (TypeScript, NodeNext)
+├── src/
+│   ├── agents/
+│   │   ├── input.agent.ts          # Normalizes user config (Flash)
+│   │   ├── spatial.agent.ts        # Generates floor plan layout (Pro)
+│   │   ├── critic.agent.ts         # Evaluates plan quality (Pro)
+│   │   ├── refinement.agent.ts     # Fixes violations iteratively (Pro)
+│   │   ├── cost.agent.ts           # BOM & cost estimation (Flash)
+│   │   └── furniture.agent.ts      # Auto-places furniture (Flash)
+│   ├── orchestrator/
+│   │   └── design.orchestrator.ts  # Multi-agent loop (max 3 iterations, 0.70 threshold)
+│   ├── validators/
+│   │   ├── vastu.validator.ts      # 14-rule Vastu checker
+│   │   └── regulatory.validator.ts # Municipal code validator
+│   ├── scoring/
+│   │   └── plan.scorer.ts          # Weighted scoring (0.4 reg + 0.3 vastu + 0.2 spatial + 0.1 critic)
+│   ├── routes/
+│   │   └── api.routes.ts           # REST + SSE endpoints
+│   └── models/
+│       ├── gemini.client.ts        # Gemini SDK wrapper
+│       └── model.router.ts         # Per-agent model config
+```
 
-Follow these steps to set up the project locally.
+## Tech Stack
+
+- **Frontend**: React 19, TypeScript, Vite, Tailwind CSS, Recharts, jsPDF
+- **Backend**: Express 5, TypeScript (NodeNext), multi-agent orchestration
+- **AI**: Google Gemini with multi-level fallback (Gemini 3 Preview → 2.5 Pro → 2.5 Flash)
+- **Auth & Storage**: Supabase (optional — guest mode available without credentials)
+- **Icons**: Lucide React
+
+## Getting Started
 
 ### Prerequisites
 
--   **Node.js** (v18 or higher)
--   **npm** or **yarn**
--   A **Google Gemini API Key**
--   A **Supabase** Project (URL and Anon Key)
+- Node.js v18+
+- Google Gemini API key
+- Supabase project (optional — the app works in guest mode without it)
 
 ### Installation
 
-1.  **Clone the repository**:
-    ```bash
-    git clone https://github.com/SAQLAINAP/Architectural_Gemini.git
-    cd Architectural_Gemini
-    ```
-
-2.  **Install dependencies**:
-    ```bash
-    npm install
-    ```
-
-3.  **Configure Environment Variables**:
-    Create a `.env.local` file in the root directory and add your keys:
-    ```env
-    VITE_GEMINI_API_KEY=your_gemini_api_key_here
-    VITE_SUPABASE_URL=your_supabase_project_url
-    VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-    ```
-
-4.  **Run the development server**:
-    ```bash
-    npm run dev
-    ```
-
-5.  **Open the app**:
-    Visit `http://localhost:5173` in your browser.
-
-## 📂 Project Structure
-
-```
-src/
-├── components/     # Reusable UI components (NeoComponents, etc.)
-├── contexts/       # React Contexts (AuthContext)
-├── lib/            # Library configurations (Supabase client)
-├── services/       # API services (Gemini AI, Storage)
-├── views/          # Page components (Home, Configuration, MaterialCostEstimation)
-├── types.ts        # TypeScript interfaces and types
-├── App.tsx         # Main application component with routing
-└── main.tsx        # Entry point
+```bash
+git clone https://github.com/SAQLAINAP/Architectural-AI-Gemini.git
+cd Architectural-AI-Gemini
 ```
 
-## 🤝 Contributing
+**Frontend:**
+```bash
+cd archi-agent_-ai-architect
+npm install
+```
 
-Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+**Backend:**
+```bash
+cd backend
+npm install
+```
 
-## 📄 License
+### Environment Variables
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+**Frontend** (`archi-agent_-ai-architect/.env.local`):
+```env
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+VITE_API_URL=http://localhost:3001/api
+```
+
+**Backend** (`backend/.env`):
+```env
+GEMINI_API_KEY=your_gemini_api_key
+PORT=3001
+```
+
+### Run
+
+```bash
+# Terminal 1 — Backend
+cd backend && npm run dev
+
+# Terminal 2 — Frontend
+cd archi-agent_-ai-architect && npm run dev
+```
+
+Open `http://localhost:5173` in your browser.
+
+## API Endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| POST | `/api/generate` | Start async floor plan generation |
+| GET | `/api/generate/:jobId/stream` | SSE stream for generation progress |
+| POST | `/api/modify/analyze` | Analyze modification feasibility |
+| POST | `/api/modify/apply` | Apply modification to plan |
+| POST | `/api/furniture` | Generate furniture for existing plan |
+| POST | `/api/generate-alternatives` | Generate 3 alternative designs (SSE) |
+| POST | `/api/analyze-image` | Analyze uploaded floor plan image |
+| POST | `/api/estimate` | Material cost estimation |
+| GET | `/api/health` | Server health check |
+
+## Multi-Agent Orchestration Flow
+
+```
+User Config
+    │
+    ▼
+┌─────────────┐
+│ Input Agent  │  (Flash) — Normalizes config into NormalizedSpec
+└──────┬──────┘
+       ▼
+┌─────────────┐
+│Spatial Agent │  (Pro) — Generates initial FloorPlanGraph
+└──────┬──────┘
+       ▼
+┌──────────────────── Iterative Loop (max 3 iterations) ────────────────────┐
+│                                                                           │
+│  ┌──────────────┐  ┌───────────────────┐  ┌──────────────┐              │
+│  │Vastu Validator│  │Regulatory Validator│  │ Critic Agent │  (Pro)      │
+│  │  (14 rules)   │  │  (6 categories)    │  │ (6 metrics)  │             │
+│  └──────┬───────┘  └────────┬──────────┘  └──────┬───────┘              │
+│         └──────────┬────────┘                     │                      │
+│                    ▼                              ▼                      │
+│         ┌──────────────────┐                                            │
+│         │   Plan Scorer    │  0.4×reg + 0.3×vastu + 0.2×spatial + 0.1×critic │
+│         └────────┬─────────┘                                            │
+│                  ▼                                                       │
+│         score ≥ 0.70? ── Yes ──▶ EXIT LOOP                              │
+│              │ No                                                        │
+│              ▼                                                           │
+│     ┌──────────────────┐                                                │
+│     │Refinement Agent  │  (Pro) — Fixes violations                      │
+│     └──────────────────┘                                                │
+└───────────────────────────────────────────────────────────────────────────┘
+       ▼
+┌─────────────┐  ┌─────────────────┐
+│ Cost Agent  │  │ Furniture Agent  │  (Flash) — BOM + furniture placement
+└─────────────┘  └─────────────────┘
+       ▼
+  Final GeneratedPlan (compliance, BOM, furniture, multi-floor data)
+```
+
+## License
+
+MIT

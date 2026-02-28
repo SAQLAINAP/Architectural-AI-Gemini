@@ -18,26 +18,26 @@ const Configuration: React.FC<ConfigurationProps> = ({ onGenerate, isGenerating 
 
   // Form State
   const [projectType, setProjectType] = useState<BuildingType>(BuildingType.RESIDENTIAL);
-  const [width, setWidth] = useState(12); // meters
-  const [depth, setDepth] = useState(18); // meters
-  const [requirements, setRequirements] = useState<string[]>(["Master Bedroom", "Kitchen", "Living Room", "Dining Area", "Common Bathroom"]);
+  const [width, setWidth] = useState<number | ''>('');
+  const [depth, setDepth] = useState<number | ''>('');
+  const [requirements, setRequirements] = useState<string[]>([]);
   const [newReq, setNewReq] = useState("");
-  const [adjacency, setAdjacency] = useState("Kitchen near Dining. Living facing North.");
-  const [culturalSystem, setCulturalSystem] = useState<CulturalSystem>(CulturalSystem.VASTU_GENERAL);
-  const [vastuLevel, setVastuLevel] = useState<'None' | 'Slightly' | 'Moderately' | 'Strictly'>('Moderately');
-  const [facingDirection, setFacingDirection] = useState('North');
+  const [adjacency, setAdjacency] = useState("");
+  const [culturalSystem, setCulturalSystem] = useState<CulturalSystem>('' as CulturalSystem);
+  const [vastuLevel, setVastuLevel] = useState<'None' | 'Slightly' | 'Moderately' | 'Strictly' | ''>('');
+  const [facingDirection, setFacingDirection] = useState('');
   const [surroundingContext, setSurroundingContext] = useState('');
 
   // Advanced Params
-  const [floors, setFloors] = useState(1);
-  const [floorPlanStyle, setFloorPlanStyle] = useState<'Simplex' | 'Duplex' | 'Triplex'>('Simplex');
-  const [bathrooms, setBathrooms] = useState(2);
-  const [bathroomType, setBathroomType] = useState<'Western' | 'Indian' | 'Mixed'>('Western');
-  const [parking, setParking] = useState<'None' | 'Bike Only' | '1 Car' | '2+ Cars'>('1 Car');
-  const [kitchenType, setKitchenType] = useState<'Open' | 'Closed'>('Closed');
-  const [familyMembers, setFamilyMembers] = useState(4);
+  const [floors, setFloors] = useState<number | ''>('');
+  const [floorPlanStyle, setFloorPlanStyle] = useState<'Simplex' | 'Duplex' | 'Triplex' | ''>('');
+  const [bathrooms, setBathrooms] = useState<number | ''>('');
+  const [bathroomType, setBathroomType] = useState<'Western' | 'Indian' | 'Mixed' | ''>('');
+  const [parking, setParking] = useState<'None' | 'Bike Only' | '1 Car' | '2+ Cars' | ''>('');
+  const [kitchenType, setKitchenType] = useState<'Open' | 'Closed' | ''>('');
+  const [familyMembers, setFamilyMembers] = useState<number | ''>('');
 
-  const [municipalCode, setMunicipalCode] = useState<MunicipalCode>(MunicipalCode.BBMP);
+  const [municipalCode, setMunicipalCode] = useState<MunicipalCode>('' as MunicipalCode);
 
   const handleAddReq = () => {
     if (newReq.trim()) {
@@ -123,7 +123,8 @@ w - 10 h - 10 rounded - full flex items - center justify - center font - bold bo
                     label="Plot Width (m)"
                     type="number"
                     value={width}
-                    onChange={(e) => setWidth(Number(e.target.value))}
+                    placeholder="e.g. 12"
+                    onChange={(e) => setWidth(e.target.value === '' ? '' : Number(e.target.value))}
                   />
                   <div className="flex gap-2 mt-2 flex-wrap">
                     {[12, 15, 18, 20].map(w => (
@@ -136,7 +137,8 @@ w - 10 h - 10 rounded - full flex items - center justify - center font - bold bo
                     label="Plot Depth (m)"
                     type="number"
                     value={depth}
-                    onChange={(e) => setDepth(Number(e.target.value))}
+                    placeholder="e.g. 18"
+                    onChange={(e) => setDepth(e.target.value === '' ? '' : Number(e.target.value))}
                   />
                   <div className="flex gap-2 mt-2 flex-wrap">
                     {[15, 18, 24, 30].map(d => (
@@ -153,7 +155,8 @@ w - 10 h - 10 rounded - full flex items - center justify - center font - bold bo
                   min={1}
                   max={5}
                   value={floors}
-                  onChange={(e) => setFloors(Number(e.target.value))}
+                  placeholder="e.g. 1"
+                  onChange={(e) => setFloors(e.target.value === '' ? '' : Number(e.target.value))}
                 />
                 <NeoSelect
                   label="Style"
@@ -171,7 +174,8 @@ w - 10 h - 10 rounded - full flex items - center justify - center font - bold bo
                   label="Family Members"
                   type="number"
                   value={familyMembers}
-                  onChange={(e) => setFamilyMembers(Number(e.target.value))}
+                  placeholder="e.g. 4"
+                  onChange={(e) => setFamilyMembers(e.target.value === '' ? '' : Number(e.target.value))}
                 />
               </div>
 
@@ -210,7 +214,8 @@ w - 10 h - 10 rounded - full flex items - center justify - center font - bold bo
                     label="Bathrooms"
                     type="number"
                     value={bathrooms}
-                    onChange={(e) => setBathrooms(Number(e.target.value))}
+                    placeholder="e.g. 2"
+                    onChange={(e) => setBathrooms(e.target.value === '' ? '' : Number(e.target.value))}
                     className="w-20"
                   />
                   <NeoSelect
@@ -235,6 +240,7 @@ w - 10 h - 10 rounded - full flex items - center justify - center font - bold bo
                   className="w-full h-24 bg-white border-2 border-black p-3 focus:outline-none shadow-inner resize-none"
                   value={adjacency}
                   onChange={(e) => setAdjacency(e.target.value)}
+                  placeholder="e.g. Kitchen near Dining. Living facing North."
                 />
                 <div className="flex flex-wrap gap-2 mt-2">
                   {[

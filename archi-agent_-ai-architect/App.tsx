@@ -1,11 +1,12 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-import { ProjectConfig, GeneratedPlan, SavedProject, ModificationAnalysis } from './types';
+import { ProjectConfig, GeneratedPlan, SavedProject, ModificationAnalysis, GenerationProgress } from './types';
 import { AuthProvider } from './contexts/AuthContext';
-import { generateFloorPlan, analyzePlanFromImage, analyzePlanModification, applyPlanModification } from './services/geminiService';
+import { generateFloorPlanWithProgress, analyzePlanFromImage, analyzePlanModification, applyPlanModification, generateAlternatives } from './services/apiService';
 import { saveProject, saveFloorPlan, FloorPlanData } from './services/storageService';
 import { Navbar } from './components/NeoComponents';
 import ProtectedRoute from './components/ProtectedRoute';
+import GenerationProgressOverlay from './components/GenerationProgressOverlay';
 
 // Lazy load views for code splitting
 const Login = lazy(() => import('./views/Login'));
@@ -27,6 +28,8 @@ function App() {
   const [currentProjectId, setCurrentProjectId] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [generationProgress, setGenerationProgress] = useState<GenerationProgress | null>(null);
+  const [alternatives, setAlternatives] = useState<GeneratedPlan[]>([]);
   const [isDark, setIsDark] = useState(false);
   const [showResumeModal, setShowResumeModal] = useState(false);
   const [lastSessionTime, setLastSessionTime] = useState<string>("");
@@ -116,7 +119,7 @@ function App() {
     setError(null);
     setCurrentProjectId(null); // Reset current ID for new generation
     try {
-      const plan = await generateFloorPlan(newConfig);
+      const plan = await generateFloorPlanWithProgress(newConfig, false, setGenerationProgress);
       plan.version = "1.0";
       plan.timestamp = Date.now();
 
@@ -126,17 +129,17 @@ function App() {
             // Save floor plan to Supabase
             try {
               const savedFloorPlan = await saveFloorPlan({
-                name: `${newConfig.buildingType} - ${new Date().toLocaleDateString()}`,
+                name: `${newConfig.projectType} - ${new Date().toLocaleDateString()}`,
                 version: 1,
                 config: newConfig,
                 planData: plan,
                 sourceType: 'generated',
-                generationModel: 'gemini-2.0-flash-exp',
+                generationModel: 'gemini-3-pro-preview',
                 generationParams: {
-                  buildingType: newConfig.buildingType,
-                  sqft: newConfig.sqft,
+                  projectType: newConfig.projectType,
+                  width: newConfig.width,
+                  depth: newConfig.depth,
                   floors: newConfig.floors,
-                  bedrooms: newConfig.bedrooms,
                   bathrooms: newConfig.bathrooms
                 },
                 status: 'completed'
@@ -153,6 +156,7 @@ function App() {
       setError(err.message || "Failed to generate plan. Please check API key or try again.");
     } finally {
       setIsProcessing(false);
+      setGenerationProgress(null);
     }
   };
 
@@ -176,7 +180,7 @@ function App() {
                     planData: plan,
                     sourceType: 'analyzed_image',
                     sourceImageUrl: base64, // Store the image data URL
-                    generationModel: 'gemini-2.0-flash-exp',
+                    generationModel: 'gemini-3-flash-preview',
                     status: 'completed'
                   });
                   setCurrentProjectId(savedFloorPlan.id);
@@ -243,7 +247,7 @@ function App() {
         const major = parseInt(currentVersion.split('.')[0]) + 1;
         const newVersion = `${major}.0`;
 
-        const plan = await generateFloorPlan(config, true); // Pass true for regeneration optimization
+        const plan = await generateFloorPlanWithProgress(config, true, setGenerationProgress);
         plan.version = newVersion;
         plan.timestamp = Date.now();
 
@@ -253,18 +257,18 @@ function App() {
               // Save regenerated floor plan
               try {
                 const savedFloorPlan = await saveFloorPlan({
-                  name: `${config.buildingType} - Regenerated v${major}`,
+                  name: `${config.projectType} - Regenerated v${major}`,
                   version: major,
                   config: config,
                   planData: plan,
                   sourceType: 'generated',
                   parentPlanId: currentProjectId || undefined,
-                  generationModel: 'gemini-2.0-flash-exp',
+                  generationModel: 'gemini-3-pro-preview',
                   generationParams: {
-                    buildingType: config.buildingType,
-                    sqft: config.sqft,
+                    projectType: config.projectType,
+                    width: config.width,
+                    depth: config.depth,
                     floors: config.floors,
-                    bedrooms: config.bedrooms,
                     bathrooms: config.bathrooms,
                     isRegeneration: true
                   },
@@ -280,6 +284,7 @@ function App() {
         setError(err.message || "Failed to regenerate.");
       } finally {
         setIsProcessing(false);
+        setGenerationProgress(null);
       }
     }
   };
@@ -314,7 +319,7 @@ function App() {
                 planData: newPlan,
                 sourceType: 'modified',
                 parentPlanId: currentProjectId || undefined,
-                generationModel: 'gemini-2.0-flash-exp',
+                generationModel: 'gemini-3-flash-preview',
                 generationParams: {
                   modificationType: 'user_modification',
                   modificationRequest: request
@@ -339,6 +344,31 @@ function App() {
     setCurrentPlanIndex(index);
   };
 
+  const handleGenerateAlternatives = async () => {
+    if (!config) return;
+    setIsProcessing(true);
+    setAlternatives([]);
+    try {
+      const alts = await generateAlternatives(config);
+      setAlternatives(alts);
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message || 'Failed to generate alternatives.');
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handleSelectAlternative = (index: number) => {
+    const selected = alternatives[index];
+    if (!selected) return;
+    selected.version = `alt-${index + 1}`;
+    selected.timestamp = Date.now();
+    setPlanHistory(prev => [...prev, selected]);
+    setCurrentPlanIndex(planHistory.length); // point to newly appended plan
+    setAlternatives([]);
+  };
+
   return (
     <AuthProvider>
       <div className={`min-h-screen bg-neo-bg dark:bg-slate-900 transition-colors font-sans text-black dark:text-white ${isDark ? 'dark' : ''}`}>
@@ -359,6 +389,9 @@ function App() {
             lastSaved={lastSessionTime}
           />
         </Suspense>
+
+        {/* Generation Progress Overlay */}
+        <GenerationProgressOverlay progress={generationProgress} />
 
         {/* Error Toast */}
         {error && (
@@ -407,6 +440,7 @@ function App() {
               <ProtectedRoute>
                 <Dashboard
                   plan={generatedPlan}
+                  config={config}
                   onSave={handleSaveProject}
                   onRegenerate={handleRegenerate}
                   onAnalyzeModification={handleAnalyzeModification}
@@ -415,6 +449,9 @@ function App() {
                   planHistory={planHistory}
                   currentPlanIndex={currentPlanIndex}
                   onVersionChange={handleVersionChange}
+                  alternatives={alternatives}
+                  onGenerateAlternatives={handleGenerateAlternatives}
+                  onSelectAlternative={handleSelectAlternative}
                 />
               </ProtectedRoute>
             } />
