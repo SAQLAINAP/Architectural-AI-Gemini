@@ -1,0 +1,125 @@
+%%{init: {
+  'theme': 'dark',
+  'themeVariables': {
+    'fontSize': '13px'
+  },
+  'flowchart': {
+    'nodeSpacing': 20,
+    'rankSpacing': 40,
+    'curve': 'basis',
+    'padding': 12
+  }
+}}%%
+
+graph TB
+
+  %% ═══ LAYER 1: FRONTEND ═══
+  subgraph FE["FRONTEND  ·  React 19 + Vite + Tailwind CSS"]
+    direction LR
+    FE_PAGES["Pages<br/><i>Home · Config · Dashboard<br/>Projects · Materials · Docs</i>"]
+    FE_COMP["Components<br/><i>FloorPlanSvg · ChatPanel<br/>DiffView · AlternativesGallery<br/>ProgressOverlay</i>"]
+    FE_STATE["App State<br/><i>config · planHistory<br/>currentPlan · progress<br/>alternatives · theme</i>"]
+    FE_AUTH["Auth Context<br/><i>Supabase Session<br/>Guest Mode Fallback</i>"]
+  end
+
+  %% ═══ LAYER 2: TRANSPORT ═══
+  subgraph TR["TRANSPORT"]
+    direction LR
+    TR_REST["REST API<br/><i>JSON + Bearer Token</i>"]
+    TR_SSE["SSE Streaming<br/><i>Real-Time Progress</i>"]
+    TR_PROXY["Vite Proxy<br/><i>/api → :3001</i>"]
+  end
+
+  %% ═══ LAYER 3: BACKEND SERVER ═══
+  subgraph BE["BACKEND  ·  Express 5 + TypeScript"]
+    direction LR
+    BE_MW["Middleware Stack<br/><i>Helmet · CORS · Rate Limit<br/>Auth · Error Handler</i>"]
+    BE_API["API Routes<br/><i>/generate · /stream<br/>/modify · /estimate<br/>/furniture · /alternatives<br/>/analyze-image</i>"]
+    BE_JOBS["Job Store<br/><i>In-Memory Map<br/>TTL 30m · Max 1K</i>"]
+  end
+
+  %% ═══ LAYER 4: ORCHESTRATION ═══
+  subgraph OR["MULTI-AGENT ORCHESTRATION ENGINE"]
+    direction TB
+
+    subgraph OR_INIT["Phase 1: Initialize"]
+      direction LR
+      O_INPUT["INPUT AGENT<br/><i>Flash · temp 0.2</i><br/>Config → NormalizedSpec"]
+      O_SPATIAL["SPATIAL AGENT<br/><i>Pro · temp 0.7</i><br/>Layout Generation"]
+    end
+
+    subgraph OR_LOOP["Phase 2: Refinement Loop  ·  Max 3 Iterations  ·  Score ≥ 0.70 to Converge"]
+      direction LR
+      O_VASTU["VASTU VALIDATOR<br/><i>14 Rules · Deterministic</i><br/>9-Zone Grid"]
+      O_REG["REGULATORY VALIDATOR<br/><i>6 Categories · Deterministic</i><br/>NBC · BBMP · BMC · MCD"]
+      O_CRITIC["CRITIC AGENT<br/><i>Pro · temp 0.3</i><br/>6-D Evaluation"]
+      O_SCORER["PLAN SCORER<br/><i>40% Regulatory</i><br/><i>30% Vastu</i><br/><i>20% Spatial</i><br/><i>10% Critic</i>"]
+      O_REFINE["REFINEMENT AGENT<br/><i>Pro · temp 0.5</i><br/>Violation Fixer"]
+    end
+
+    subgraph OR_FINAL["Phase 3: Finalize"]
+      direction LR
+      O_COST["COST AGENT<br/><i>Flash · temp 0.2</i><br/>BOM + Pricing"]
+      O_FURN["FURNITURE AGENT<br/><i>Flash · temp 0.4</i><br/>Placement Rules"]
+    end
+  end
+
+  %% ═══ LAYER 5: MODEL LAYER ═══
+  subgraph ML["GEMINI MODEL LAYER  ·  @google/genai SDK"]
+    direction LR
+    ML_ROUTER["Model Router<br/><i>Per-Agent Config<br/>temp · maxTokens</i>"]
+    ML_CLIENT["Gemini Client<br/><i>JSON Mode<br/>Response Schema<br/>Image Support</i>"]
+    ML_FALLBACK["Fallback Chain<br/><i>3-pro-preview → 2.5-pro<br/>→ 2.5-flash<br/>3-flash-preview → 2.5-flash</i>"]
+  end
+
+  %% ═══ LAYER 6: EXTERNAL ═══
+  subgraph EX["EXTERNAL SERVICES"]
+    direction LR
+    EX_GEMINI["Google Gemini API<br/><i>Structured Output<br/>Vision Analysis</i>"]
+    EX_SUPA["Supabase<br/><i>Auth · PostgreSQL<br/>Object Storage</i>"]
+    EX_LOCAL["localStorage<br/><i>Session Recovery<br/>Fallback Storage</i>"]
+  end
+
+  %% ═══ CONNECTIONS (layer-to-layer only) ═══
+  FE --> TR
+  TR --> BE
+  BE_API --> OR
+  OR --> ML
+  ML --> EX_GEMINI
+
+  %% Internal orchestration flow
+  O_INPUT --> O_SPATIAL
+  O_SPATIAL --> O_VASTU
+  O_SPATIAL --> O_REG
+  O_VASTU --> O_CRITIC
+  O_REG --> O_CRITIC
+  O_CRITIC --> O_SCORER
+  O_SCORER -->|"< 0.70"| O_REFINE
+  O_REFINE -.->|"re-validate"| O_VASTU
+  O_SCORER -->|"converged"| O_COST
+  O_COST --> O_FURN
+
+  %% Storage connections
+  FE_AUTH --> EX_SUPA
+  FE_STATE --> EX_LOCAL
+  BE_MW --> EX_SUPA
+  BE_API --> BE_JOBS
+
+  %% ═══ STYLES ═══
+  classDef feStyle fill:#1e40af,stroke:#60a5fa,stroke-width:2px,color:#dbeafe
+  classDef trStyle fill:#065f46,stroke:#34d399,stroke-width:2px,color:#d1fae5
+  classDef beStyle fill:#0e7490,stroke:#22d3ee,stroke-width:2px,color:#cffafe
+  classDef agentStyle fill:#92400e,stroke:#fbbf24,stroke-width:2px,color:#fef3c7
+  classDef validStyle fill:#166534,stroke:#4ade80,stroke-width:2px,color:#dcfce7
+  classDef scorerStyle fill:#7e22ce,stroke:#c084fc,stroke-width:2px,color:#f3e8ff
+  classDef modelStyle fill:#991b1b,stroke:#f87171,stroke-width:2px,color:#fee2e2
+  classDef extStyle fill:#475569,stroke:#94a3b8,stroke-width:2px,color:#f1f5f9
+
+  class FE_PAGES,FE_COMP,FE_STATE,FE_AUTH feStyle
+  class TR_REST,TR_SSE,TR_PROXY trStyle
+  class BE_MW,BE_API,BE_JOBS beStyle
+  class O_INPUT,O_SPATIAL,O_CRITIC,O_REFINE,O_COST,O_FURN agentStyle
+  class O_VASTU,O_REG validStyle
+  class O_SCORER scorerStyle
+  class ML_ROUTER,ML_CLIENT,ML_FALLBACK modelStyle
+  class EX_GEMINI,EX_SUPA,EX_LOCAL extStyle

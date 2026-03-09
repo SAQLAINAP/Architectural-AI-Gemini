@@ -6,6 +6,8 @@
 !archi-agent_-ai-architect/**
 !backend/
 !backend/**
+!misc/
+!misc/**
 !.gitignore
 
 # Always ignore node_modules and build artifacts
