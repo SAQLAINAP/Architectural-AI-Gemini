@@ -8,6 +8,14 @@
 !backend/**
 !misc/
 !misc/**
+!benchmarks/
+!benchmarks/**
+!Paper.tex
+!benchmarks.md
+!results.md
+!README.md
+!diagrams/
+!diagrams/**
 !.gitignore
 
 # Always ignore node_modules and build artifacts

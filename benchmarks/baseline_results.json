@@ -1,0 +1,4130 @@
+{
+  "baseline_1": [
+    {
+      "id": "P001",
+      "category": "residential_single",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 7,
+      "csr": 83.57,
+      "se": 100.0,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast"
+      ],
+      "gt_seconds": 4.49,
+      "tokens_in": 178,
+      "tokens_out": 371
+    },
+    {
+      "id": "P002",
+      "category": "residential_single",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 83.33,
+      "se": 100.0,
+      "vc": 1,
+      "violations": [
+        "regulatory:total_area_within_plot:NBC"
+      ],
+      "gt_seconds": 6.78,
+      "tokens_in": 174,
+      "tokens_out": 426
+    },
+    {
+      "id": "P003",
+      "category": "residential_single",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 7,
+      "csr": 83.57,
+      "se": 100.0,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast"
+      ],
+      "gt_seconds": 6.51,
+      "tokens_in": 177,
+      "tokens_out": 422
+    },
+    {
+      "id": "P004",
+      "category": "residential_single",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 77.65,
+      "se": 38.25,
+      "vc": 0,
+      "violations": [],
+      "gt_seconds": 5.56,
+      "tokens_in": 175,
+      "tokens_out": 428
+    },
+    {
+      "id": "P005",
+      "category": "residential_single",
+      "jurisdiction": "MCD",
+      "vaastu_required": false,
+      "room_count": 8,
+      "csr": 83.33,
+      "se": 100.0,
+      "vc": 1,
+      "violations": [
+        "regulatory:total_area_within_plot:MCD"
+      ],
+      "gt_seconds": 21.92,
+      "tokens_in": 175,
+      "tokens_out": 418
+    },
+    {
+      "id": "P006",
+      "category": "residential_single",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 7,
+      "csr": 78.79,
+      "se": 76.11,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast"
+      ],
+      "gt_seconds": 5.88,
+      "tokens_in": 178,
+      "tokens_out": 369
+    },
+    {
+      "id": "P007",
+      "category": "residential_single",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 7,
+      "csr": 76.9,
+      "se": 100.0,
+      "vc": 4,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast",
+        "regulatory:total_area_within_plot:BMC"
+      ],
+      "gt_seconds": 4.76,
+      "tokens_in": 178,
+      "tokens_out": 439
+    },
+    {
+      "id": "P008",
+      "category": "residential_single",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 9,
+      "csr": 83.33,
+      "se": 100.0,
+      "vc": 1,
+      "violations": [
+        "regulatory:total_area_within_plot:BMC"
+      ],
+      "gt_seconds": 7.77,
+      "tokens_in": 175,
+      "tokens_out": 515
+    },
+    {
+      "id": "P009",
+      "category": "residential_single",
+      "jurisdiction": "MCD",
+      "vaastu_required": false,
+      "room_count": 8,
+      "csr": 83.33,
+      "se": 100.0,
+      "vc": 1,
+      "violations": [
+        "regulatory:total_area_within_plot:MCD"
+      ],
+      "gt_seconds": 7.4,
+      "tokens_in": 175,
+      "tokens_out": 487
+    },
+    {
+      "id": "P010",
+      "category": "residential_single",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 8,
+      "csr": 83.33,
+      "se": 100.0,
+      "vc": 1,
+      "violations": [
+        "regulatory:total_area_within_plot:BMC"
+      ],
+      "gt_seconds": 8.5,
+      "tokens_in": 175,
+      "tokens_out": 499
+    },
+    {
+      "id": "P011",
+      "category": "residential_single",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 9,
+      "csr": 79.6,
+      "se": 48.0,
+      "vc": 0,
+      "violations": [],
+      "gt_seconds": 8.19,
+      "tokens_in": 175,
+      "tokens_out": 520
+    },
+    {
+      "id": "P012",
+      "category": "residential_single",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 88.4,
+      "se": 92.0,
+      "vc": 0,
+      "violations": [],
+      "gt_seconds": 5.88,
+      "tokens_in": 175,
+      "tokens_out": 413
+    },
+    {
+      "id": "P013",
+      "category": "residential_single",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 7,
+      "csr": 76.9,
+      "se": 100.0,
+      "vc": 4,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast",
+        "regulatory:total_area_within_plot:MCD"
+      ],
+      "gt_seconds": 17.05,
+      "tokens_in": 178,
+      "tokens_out": 425
+    },
+    {
+      "id": "P014",
+      "category": "residential_single",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 74.76,
+      "se": 100.0,
+      "vc": 5,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast",
+        "vaastu:dining_west",
+        "regulatory:total_area_within_plot:BMC"
+      ],
+      "gt_seconds": 7.31,
+      "tokens_in": 178,
+      "tokens_out": 500
+    },
+    {
+      "id": "P015",
+      "category": "residential_single",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 8,
+      "csr": 83.33,
+      "se": 100.0,
+      "vc": 1,
+      "violations": [
+        "regulatory:total_area_within_plot:BBMP"
+      ],
+      "gt_seconds": 5.32,
+      "tokens_in": 175,
+      "tokens_out": 477
+    },
+    {
+      "id": "P016",
+      "category": "residential_single",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 7,
+      "csr": 80.17,
+      "se": 93.71,
+      "vc": 4,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast",
+        "vaastu:garage_southeast_northwest"
+      ],
+      "gt_seconds": 5.46,
+      "tokens_in": 178,
+      "tokens_out": 359
+    },
+    {
+      "id": "P017",
+      "category": "residential_single",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 7,
+      "csr": 75.57,
+      "se": 60.0,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast"
+      ],
+      "gt_seconds": 4.83,
+      "tokens_in": 177,
+      "tokens_out": 433
+    },
+    {
+      "id": "P018",
+      "category": "residential_single",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 7,
+      "csr": 77.22,
+      "se": 68.25,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast"
+      ],
+      "gt_seconds": 7.59,
+      "tokens_in": 178,
+      "tokens_out": 431
+    },
+    {
+      "id": "P019",
+      "category": "residential_single",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 7,
+      "csr": 70.77,
+      "se": 36.0,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast"
+      ],
+      "gt_seconds": 6.67,
+      "tokens_in": 178,
+      "tokens_out": 467
+    },
+    {
+      "id": "P020",
+      "category": "residential_single",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 77.35,
+      "se": 68.91,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast"
+      ],
+      "gt_seconds": 9.09,
+      "tokens_in": 178,
+      "tokens_out": 545
+    },
+    {
+      "id": "P021",
+      "category": "residential_single",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 90.0,
+      "se": 100.0,
+      "vc": 0,
+      "violations": [],
+      "gt_seconds": 6.66,
+      "tokens_in": 175,
+      "tokens_out": 439
+    },
+    {
+      "id": "P022",
+      "category": "residential_single",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 74.37,
+      "se": 54.0,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast"
+      ],
+      "gt_seconds": 8.12,
+      "tokens_in": 178,
+      "tokens_out": 530
+    },
+    {
+      "id": "P023",
+      "category": "residential_single",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 7,
+      "csr": 71.22,
+      "se": 38.25,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast"
+      ],
+      "gt_seconds": 7.81,
+      "tokens_in": 178,
+      "tokens_out": 427
+    },
+    {
+      "id": "P024",
+      "category": "residential_single",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 90.0,
+      "se": 100.0,
+      "vc": 0,
+      "violations": [],
+      "gt_seconds": 7.58,
+      "tokens_in": 175,
+      "tokens_out": 417
+    },
+    {
+      "id": "P025",
+      "category": "residential_single",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 73.62,
+      "se": 50.25,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast"
+      ],
+      "gt_seconds": 8.18,
+      "tokens_in": 177,
+      "tokens_out": 565
+    },
+    {
+      "id": "P026",
+      "category": "residential_single",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 9,
+      "csr": 80.05,
+      "se": 50.25,
+      "vc": 0,
+      "violations": [],
+      "gt_seconds": 6.79,
+      "tokens_in": 175,
+      "tokens_out": 523
+    },
+    {
+      "id": "P027",
+      "category": "residential_single",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 83.33,
+      "se": 100.0,
+      "vc": 1,
+      "violations": [
+        "regulatory:total_area_within_plot:BMC"
+      ],
+      "gt_seconds": 5.68,
+      "tokens_in": 175,
+      "tokens_out": 440
+    },
+    {
+      "id": "P028",
+      "category": "residential_single",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 76.9,
+      "se": 100.0,
+      "vc": 4,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast",
+        "regulatory:total_area_within_plot:BMC"
+      ],
+      "gt_seconds": 16.67,
+      "tokens_in": 178,
+      "tokens_out": 535
+    },
+    {
+      "id": "P029",
+      "category": "residential_single",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 8,
+      "csr": 83.33,
+      "se": 100.0,
+      "vc": 1,
+      "violations": [
+        "regulatory:total_area_within_plot:BMC"
+      ],
+      "gt_seconds": 4.49,
+      "tokens_in": 175,
+      "tokens_out": 398
+    },
+    {
+      "id": "P030",
+      "category": "residential_single",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 77.65,
+      "se": 38.25,
+      "vc": 0,
+      "violations": [],
+      "gt_seconds": 6.17,
+      "tokens_in": 174,
+      "tokens_out": 434
+    },
+    {
+      "id": "P031",
+      "category": "residential_multi",
+      "jurisdiction": "BBMP",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 67.52,
+      "se": 42.38,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 6.22,
+      "tokens_in": 181,
+      "tokens_out": 486
+    },
+    {
+      "id": "P032",
+      "category": "residential_multi",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 9,
+      "csr": 69.52,
+      "se": 30.94,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 4.98,
+      "tokens_in": 177,
+      "tokens_out": 466
+    },
+    {
+      "id": "P033",
+      "category": "residential_multi",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 10,
+      "csr": 74.21,
+      "se": 54.37,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 5.81,
+      "tokens_in": 177,
+      "tokens_out": 509
+    },
+    {
+      "id": "P034",
+      "category": "residential_multi",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 69.26,
+      "se": 51.08,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 5.85,
+      "tokens_in": 180,
+      "tokens_out": 489
+    },
+    {
+      "id": "P035",
+      "category": "residential_multi",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 14,
+      "csr": 82.58,
+      "se": 96.25,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 6.63,
+      "tokens_in": 177,
+      "tokens_out": 644
+    },
+    {
+      "id": "P036",
+      "category": "residential_multi",
+      "jurisdiction": "BBMP",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 65.95,
+      "se": 23.81,
+      "vc": 2,
+      "violations": [
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 12.76,
+      "tokens_in": 181,
+      "tokens_out": 541
+    },
+    {
+      "id": "P037",
+      "category": "residential_multi",
+      "jurisdiction": "BBMP",
+      "vaastu_required": true,
+      "room_count": 12,
+      "csr": 65.8,
+      "se": 33.75,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 7.05,
+      "tokens_in": 181,
+      "tokens_out": 621
+    },
+    {
+      "id": "P038",
+      "category": "residential_multi",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 11,
+      "csr": 70.75,
+      "se": 37.09,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 7.12,
+      "tokens_in": 178,
+      "tokens_out": 509
+    },
+    {
+      "id": "P039",
+      "category": "residential_multi",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 11,
+      "csr": 68.59,
+      "se": 47.69,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 9.9,
+      "tokens_in": 181,
+      "tokens_out": 578
+    },
+    {
+      "id": "P040",
+      "category": "residential_multi",
+      "jurisdiction": "MCD",
+      "vaastu_required": false,
+      "room_count": 11,
+      "csr": 74.54,
+      "se": 56.06,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 9.16,
+      "tokens_in": 178,
+      "tokens_out": 542
+    },
+    {
+      "id": "P041",
+      "category": "residential_multi",
+      "jurisdiction": "BBMP",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 71.87,
+      "se": 64.12,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 7.81,
+      "tokens_in": 181,
+      "tokens_out": 499
+    },
+    {
+      "id": "P042",
+      "category": "residential_multi",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 17,
+      "csr": 78.48,
+      "se": 75.75,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 12.29,
+      "tokens_in": 178,
+      "tokens_out": 774
+    },
+    {
+      "id": "P043",
+      "category": "residential_multi",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 71.42,
+      "se": 61.88,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 14.75,
+      "tokens_in": 180,
+      "tokens_out": 484
+    },
+    {
+      "id": "P044",
+      "category": "residential_multi",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 9,
+      "csr": 71.25,
+      "se": 39.6,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 6.56,
+      "tokens_in": 177,
+      "tokens_out": 441
+    },
+    {
+      "id": "P045",
+      "category": "residential_multi",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 10,
+      "csr": 71.19,
+      "se": 39.27,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 6.47,
+      "tokens_in": 178,
+      "tokens_out": 500
+    },
+    {
+      "id": "P046",
+      "category": "residential_multi",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 12,
+      "csr": 65.99,
+      "se": 34.69,
+      "vc": 3,
+      "violations": [
+        "vaastu:entrance_east_north",
+        "vaastu:dining_west",
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 9.03,
+      "tokens_in": 181,
+      "tokens_out": 560
+    },
+    {
+      "id": "P047",
+      "category": "residential_multi",
+      "jurisdiction": "BBMP",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 67.12,
+      "se": 40.36,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 9.62,
+      "tokens_in": 181,
+      "tokens_out": 525
+    },
+    {
+      "id": "P048",
+      "category": "residential_multi",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 11,
+      "csr": 66.73,
+      "se": 38.4,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 8.47,
+      "tokens_in": 181,
+      "tokens_out": 554
+    },
+    {
+      "id": "P049",
+      "category": "residential_multi",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 70.67,
+      "se": 58.13,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 17.41,
+      "tokens_in": 180,
+      "tokens_out": 505
+    },
+    {
+      "id": "P050",
+      "category": "residential_multi",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 12,
+      "csr": 71.08,
+      "se": 60.17,
+      "vc": 3,
+      "violations": [
+        "vaastu:entrance_east_north",
+        "vaastu:dining_west",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 10.98,
+      "tokens_in": 180,
+      "tokens_out": 564
+    },
+    {
+      "id": "P051",
+      "category": "residential_multi",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 66.06,
+      "se": 35.06,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 7.77,
+      "tokens_in": 181,
+      "tokens_out": 477
+    },
+    {
+      "id": "P052",
+      "category": "residential_multi",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 68.13,
+      "se": 34.71,
+      "vc": 2,
+      "violations": [
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 6.29,
+      "tokens_in": 181,
+      "tokens_out": 429
+    },
+    {
+      "id": "P053",
+      "category": "residential_multi",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 65.94,
+      "se": 34.47,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 10.39,
+      "tokens_in": 180,
+      "tokens_out": 471
+    },
+    {
+      "id": "P054",
+      "category": "residential_multi",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 13,
+      "csr": 76.67,
+      "se": 100.0,
+      "vc": 2,
+      "violations": [
+        "regulatory:parking_present:NBC",
+        "regulatory:total_area_within_plot:NBC"
+      ],
+      "gt_seconds": 8.48,
+      "tokens_in": 177,
+      "tokens_out": 626
+    },
+    {
+      "id": "P055",
+      "category": "residential_multi",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 71.16,
+      "se": 49.85,
+      "vc": 2,
+      "violations": [
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 7.55,
+      "tokens_in": 181,
+      "tokens_out": 448
+    },
+    {
+      "id": "P056",
+      "category": "residential_multi",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 65.85,
+      "se": 34.04,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 7.9,
+      "tokens_in": 180,
+      "tokens_out": 540
+    },
+    {
+      "id": "P057",
+      "category": "residential_multi",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 9,
+      "csr": 70.1,
+      "se": 33.82,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 9.15,
+      "tokens_in": 178,
+      "tokens_out": 444
+    },
+    {
+      "id": "P058",
+      "category": "residential_multi",
+      "jurisdiction": "MCD",
+      "vaastu_required": false,
+      "room_count": 10,
+      "csr": 71.3,
+      "se": 39.86,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 6.99,
+      "tokens_in": 178,
+      "tokens_out": 537
+    },
+    {
+      "id": "P059",
+      "category": "residential_multi",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 12,
+      "csr": 67.6,
+      "se": 42.75,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 7.5,
+      "tokens_in": 181,
+      "tokens_out": 593
+    },
+    {
+      "id": "P060",
+      "category": "residential_multi",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 10,
+      "csr": 74.29,
+      "se": 54.77,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 6.5,
+      "tokens_in": 177,
+      "tokens_out": 494
+    },
+    {
+      "id": "P061",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 8,
+      "csr": 73.1,
+      "se": 48.86,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 7.48,
+      "tokens_in": 180,
+      "tokens_out": 513
+    },
+    {
+      "id": "P062",
+      "category": "commercial_office",
+      "jurisdiction": "MCD",
+      "vaastu_required": false,
+      "room_count": 8,
+      "csr": 72.33,
+      "se": 45.0,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 6.47,
+      "tokens_in": 181,
+      "tokens_out": 494
+    },
+    {
+      "id": "P063",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 77.28,
+      "se": 69.75,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 6.69,
+      "tokens_in": 180,
+      "tokens_out": 363
+    },
+    {
+      "id": "P064",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 76.67,
+      "se": 100.0,
+      "vc": 2,
+      "violations": [
+        "regulatory:parking_present:NBC",
+        "regulatory:total_area_within_plot:NBC"
+      ],
+      "gt_seconds": 3.36,
+      "tokens_in": 180,
+      "tokens_out": 370
+    },
+    {
+      "id": "P065",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 71.52,
+      "se": 40.91,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 5.82,
+      "tokens_in": 180,
+      "tokens_out": 419
+    },
+    {
+      "id": "P066",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 73.23,
+      "se": 49.5,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 4.91,
+      "tokens_in": 180,
+      "tokens_out": 465
+    },
+    {
+      "id": "P067",
+      "category": "commercial_office",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 73.15,
+      "se": 49.09,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 5.55,
+      "tokens_in": 181,
+      "tokens_out": 425
+    },
+    {
+      "id": "P068",
+      "category": "commercial_office",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 12,
+      "csr": 83.33,
+      "se": 100.0,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 4.1,
+      "tokens_in": 181,
+      "tokens_out": 543
+    },
+    {
+      "id": "P069",
+      "category": "commercial_office",
+      "jurisdiction": "MCD",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 71.43,
+      "se": 40.5,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 4.25,
+      "tokens_in": 181,
+      "tokens_out": 361
+    },
+    {
+      "id": "P070",
+      "category": "commercial_office",
+      "jurisdiction": "MCD",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 75.29,
+      "se": 59.79,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 6.99,
+      "tokens_in": 181,
+      "tokens_out": 460
+    },
+    {
+      "id": "P071",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 13,
+      "csr": 83.33,
+      "se": 100.0,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 8.68,
+      "tokens_in": 180,
+      "tokens_out": 635
+    },
+    {
+      "id": "P072",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 74.73,
+      "se": 57.0,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 5.79,
+      "tokens_in": 180,
+      "tokens_out": 392
+    },
+    {
+      "id": "P073",
+      "category": "commercial_office",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 70.76,
+      "se": 37.12,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 6.11,
+      "tokens_in": 181,
+      "tokens_out": 435
+    },
+    {
+      "id": "P074",
+      "category": "commercial_office",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 83.33,
+      "se": 100.0,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 4.13,
+      "tokens_in": 181,
+      "tokens_out": 376
+    },
+    {
+      "id": "P075",
+      "category": "commercial_office",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 8,
+      "csr": 76.67,
+      "se": 66.67,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 5.8,
+      "tokens_in": 181,
+      "tokens_out": 509
+    },
+    {
+      "id": "P076",
+      "category": "commercial_office",
+      "jurisdiction": "MCD",
+      "vaastu_required": false,
+      "room_count": 12,
+      "csr": 77.33,
+      "se": 70.0,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 7.11,
+      "tokens_in": 181,
+      "tokens_out": 572
+    },
+    {
+      "id": "P077",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 9,
+      "csr": 70.16,
+      "se": 34.12,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 6.34,
+      "tokens_in": 180,
+      "tokens_out": 537
+    },
+    {
+      "id": "P078",
+      "category": "commercial_office",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 76.67,
+      "se": 100.0,
+      "vc": 2,
+      "violations": [
+        "regulatory:parking_present:BBMP",
+        "regulatory:total_area_within_plot:BBMP"
+      ],
+      "gt_seconds": 7.22,
+      "tokens_in": 181,
+      "tokens_out": 392
+    },
+    {
+      "id": "P079",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 83.33,
+      "se": 100.0,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 7.47,
+      "tokens_in": 180,
+      "tokens_out": 367
+    },
+    {
+      "id": "P080",
+      "category": "commercial_office",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 10,
+      "csr": 77.22,
+      "se": 69.43,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 5.77,
+      "tokens_in": 181,
+      "tokens_out": 471
+    },
+    {
+      "id": "P081",
+      "category": "commercial_office",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 11,
+      "csr": 72.33,
+      "se": 45.0,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 5.61,
+      "tokens_in": 181,
+      "tokens_out": 529
+    },
+    {
+      "id": "P082",
+      "category": "commercial_office",
+      "jurisdiction": "MCD",
+      "vaastu_required": false,
+      "room_count": 12,
+      "csr": 73.23,
+      "se": 49.5,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 7.84,
+      "tokens_in": 181,
+      "tokens_out": 646
+    },
+    {
+      "id": "P083",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 83.33,
+      "se": 100.0,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 5.98,
+      "tokens_in": 180,
+      "tokens_out": 445
+    },
+    {
+      "id": "P084",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 75.93,
+      "se": 63.0,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 5.8,
+      "tokens_in": 180,
+      "tokens_out": 390
+    },
+    {
+      "id": "P085",
+      "category": "commercial_office",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 8,
+      "csr": 77.48,
+      "se": 70.71,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 5.99,
+      "tokens_in": 181,
+      "tokens_out": 442
+    },
+    {
+      "id": "P086",
+      "category": "commercial_office",
+      "jurisdiction": "MCD",
+      "vaastu_required": false,
+      "room_count": 12,
+      "csr": 83.33,
+      "se": 100.0,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 6.36,
+      "tokens_in": 181,
+      "tokens_out": 589
+    },
+    {
+      "id": "P087",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 14,
+      "csr": 83.33,
+      "se": 100.0,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 5.86,
+      "tokens_in": 180,
+      "tokens_out": 634
+    },
+    {
+      "id": "P088",
+      "category": "commercial_office",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 82.83,
+      "se": 97.5,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 5.4,
+      "tokens_in": 181,
+      "tokens_out": 453
+    },
+    {
+      "id": "P089",
+      "category": "commercial_office",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 8,
+      "csr": 72.85,
+      "se": 47.57,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 6.74,
+      "tokens_in": 181,
+      "tokens_out": 408
+    },
+    {
+      "id": "P090",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 14,
+      "csr": 74.67,
+      "se": 56.67,
+      "vc": 1,
+      "violations": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 9.84,
+      "tokens_in": 180,
+      "tokens_out": 711
+    },
+    {
+      "id": "P091",
+      "category": "culturally_constrained",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 8,
+      "csr": 65.54,
+      "se": 43.2,
+      "vc": 4,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:dining_west",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 6.55,
+      "tokens_in": 182,
+      "tokens_out": 467
+    },
+    {
+      "id": "P092",
+      "category": "culturally_constrained",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 8,
+      "csr": 70.82,
+      "se": 58.86,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 7.54,
+      "tokens_in": 182,
+      "tokens_out": 479
+    },
+    {
+      "id": "P093",
+      "category": "culturally_constrained",
+      "jurisdiction": "BBMP",
+      "vaastu_required": true,
+      "room_count": 14,
+      "csr": 70.11,
+      "se": 44.61,
+      "vc": 2,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 6.25,
+      "tokens_in": 183,
+      "tokens_out": 755
+    },
+    {
+      "id": "P094",
+      "category": "culturally_constrained",
+      "jurisdiction": "BBMP",
+      "vaastu_required": true,
+      "room_count": 8,
+      "csr": 67.1,
+      "se": 61.71,
+      "vc": 5,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:bathroom_not_northeast",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 5.52,
+      "tokens_in": 183,
+      "tokens_out": 476
+    },
+    {
+      "id": "P095",
+      "category": "culturally_constrained",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 8,
+      "csr": 69.36,
+      "se": 62.29,
+      "vc": 4,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 6.99,
+      "tokens_in": 183,
+      "tokens_out": 494
+    },
+    {
+      "id": "P096",
+      "category": "culturally_constrained",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 74.25,
+      "se": 76.0,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 7.63,
+      "tokens_in": 192,
+      "tokens_out": 487
+    },
+    {
+      "id": "P097",
+      "category": "culturally_constrained",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 11,
+      "csr": 69.98,
+      "se": 54.67,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:dining_west",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 9.09,
+      "tokens_in": 182,
+      "tokens_out": 602
+    },
+    {
+      "id": "P098",
+      "category": "culturally_constrained",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 8,
+      "csr": 66.73,
+      "se": 49.14,
+      "vc": 4,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:living_north_east",
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 8.5,
+      "tokens_in": 192,
+      "tokens_out": 505
+    },
+    {
+      "id": "P099",
+      "category": "culturally_constrained",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 69.93,
+      "se": 65.14,
+      "vc": 4,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:dining_west",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 5.36,
+      "tokens_in": 182,
+      "tokens_out": 553
+    },
+    {
+      "id": "P100",
+      "category": "culturally_constrained",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 68.6,
+      "se": 58.5,
+      "vc": 4,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 12.35,
+      "tokens_in": 183,
+      "tokens_out": 536
+    },
+    {
+      "id": "P101",
+      "category": "culturally_constrained",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 67.32,
+      "se": 62.78,
+      "vc": 5,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:living_north_east",
+        "vaastu:dining_west",
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 6.43,
+      "tokens_in": 183,
+      "tokens_out": 532
+    },
+    {
+      "id": "P102",
+      "category": "culturally_constrained",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 74.76,
+      "se": 100.0,
+      "vc": 5,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:bathroom_not_northeast",
+        "vaastu:dining_west",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 11.53,
+      "tokens_in": 182,
+      "tokens_out": 570
+    },
+    {
+      "id": "P103",
+      "category": "culturally_constrained",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 13,
+      "csr": 74.05,
+      "se": 85.71,
+      "vc": 4,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:bathroom_not_northeast",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 7.44,
+      "tokens_in": 192,
+      "tokens_out": 651
+    },
+    {
+      "id": "P104",
+      "category": "culturally_constrained",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 13,
+      "csr": 70.03,
+      "se": 54.9,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 7.99,
+      "tokens_in": 183,
+      "tokens_out": 594
+    },
+    {
+      "id": "P105",
+      "category": "culturally_constrained",
+      "jurisdiction": "BBMP",
+      "vaastu_required": true,
+      "room_count": 13,
+      "csr": 66.44,
+      "se": 47.67,
+      "vc": 4,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:bathroom_not_northeast",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 7.0,
+      "tokens_in": 192,
+      "tokens_out": 707
+    },
+    {
+      "id": "P106",
+      "category": "culturally_constrained",
+      "jurisdiction": "BBMP",
+      "vaastu_required": true,
+      "room_count": 12,
+      "csr": 72.38,
+      "se": 100.0,
+      "vc": 4,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BBMP",
+        "regulatory:total_area_within_plot:BBMP"
+      ],
+      "gt_seconds": 9.13,
+      "tokens_in": 183,
+      "tokens_out": 655
+    },
+    {
+      "id": "P107",
+      "category": "culturally_constrained",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 11,
+      "csr": 81.19,
+      "se": 100.0,
+      "vc": 2,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 6.71,
+      "tokens_in": 183,
+      "tokens_out": 616
+    },
+    {
+      "id": "P108",
+      "category": "culturally_constrained",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 71.29,
+      "se": 61.2,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 5.53,
+      "tokens_in": 183,
+      "tokens_out": 561
+    },
+    {
+      "id": "P109",
+      "category": "culturally_constrained",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 7,
+      "csr": 66.25,
+      "se": 36.0,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 5.65,
+      "tokens_in": 183,
+      "tokens_out": 451
+    },
+    {
+      "id": "P110",
+      "category": "culturally_constrained",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 66.85,
+      "se": 39.0,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:dining_west",
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 11.47,
+      "tokens_in": 183,
+      "tokens_out": 578
+    },
+    {
+      "id": "P111",
+      "category": "culturally_constrained",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 11,
+      "csr": 64.88,
+      "se": 39.86,
+      "vc": 4,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:bathroom_not_northeast",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 6.8,
+      "tokens_in": 183,
+      "tokens_out": 643
+    },
+    {
+      "id": "P112",
+      "category": "culturally_constrained",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 11,
+      "csr": 69.5,
+      "se": 63.0,
+      "vc": 4,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 8.0,
+      "tokens_in": 192,
+      "tokens_out": 617
+    },
+    {
+      "id": "P113",
+      "category": "culturally_constrained",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 13,
+      "csr": 72.91,
+      "se": 69.33,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:dining_west",
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 7.13,
+      "tokens_in": 183,
+      "tokens_out": 705
+    },
+    {
+      "id": "P114",
+      "category": "culturally_constrained",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 11,
+      "csr": 63.64,
+      "se": 33.69,
+      "vc": 4,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:living_north_east",
+        "vaastu:dining_west",
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 6.04,
+      "tokens_in": 183,
+      "tokens_out": 632
+    },
+    {
+      "id": "P115",
+      "category": "culturally_constrained",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 11,
+      "csr": 73.52,
+      "se": 72.38,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 5.96,
+      "tokens_in": 183,
+      "tokens_out": 599
+    },
+    {
+      "id": "P116",
+      "category": "culturally_constrained",
+      "jurisdiction": "BBMP",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 76.05,
+      "se": 85.0,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 6.9,
+      "tokens_in": 183,
+      "tokens_out": 540
+    },
+    {
+      "id": "P117",
+      "category": "culturally_constrained",
+      "jurisdiction": "BBMP",
+      "vaastu_required": true,
+      "room_count": 11,
+      "csr": 77.71,
+      "se": 93.33,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 5.73,
+      "tokens_in": 192,
+      "tokens_out": 538
+    },
+    {
+      "id": "P118",
+      "category": "culturally_constrained",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 71.78,
+      "se": 63.67,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:dining_west",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 5.05,
+      "tokens_in": 182,
+      "tokens_out": 540
+    },
+    {
+      "id": "P119",
+      "category": "culturally_constrained",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 68.77,
+      "se": 59.33,
+      "vc": 4,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:dining_west",
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 8.29,
+      "tokens_in": 183,
+      "tokens_out": 534
+    },
+    {
+      "id": "P120",
+      "category": "culturally_constrained",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 68.65,
+      "se": 48.0,
+      "vc": 3,
+      "violations": [
+        "vaastu:master_bed_southwest",
+        "vaastu:dining_west",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 9.12,
+      "tokens_in": 182,
+      "tokens_out": 436
+    }
+  ],
+  "baseline_2": [
+    {
+      "id": "P001",
+      "category": "residential_single",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 7,
+      "csr": 76.9,
+      "se": 100.0,
+      "vc": 4,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast",
+        "regulatory:total_area_within_plot:BMC"
+      ],
+      "gt_seconds": 9.54,
+      "tokens_in": 178,
+      "tokens_out": 433
+    },
+    {
+      "id": "P002",
+      "category": "residential_single",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 90.0,
+      "se": 100.0,
+      "vc": 0,
+      "violations_flagged": [],
+      "gt_seconds": 7.22,
+      "tokens_in": 174,
+      "tokens_out": 425
+    },
+    {
+      "id": "P003",
+      "category": "residential_single",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 7,
+      "csr": 76.9,
+      "se": 100.0,
+      "vc": 4,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast",
+        "regulatory:total_area_within_plot:NBC"
+      ],
+      "gt_seconds": 5.83,
+      "tokens_in": 177,
+      "tokens_out": 429
+    },
+    {
+      "id": "P004",
+      "category": "residential_single",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 82.0,
+      "se": 60.0,
+      "vc": 0,
+      "violations_flagged": [],
+      "gt_seconds": 5.13,
+      "tokens_in": 175,
+      "tokens_out": 415
+    },
+    {
+      "id": "P005",
+      "category": "residential_single",
+      "jurisdiction": "MCD",
+      "vaastu_required": false,
+      "room_count": 8,
+      "csr": 83.33,
+      "se": 100.0,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:total_area_within_plot:MCD"
+      ],
+      "gt_seconds": 6.44,
+      "tokens_in": 175,
+      "tokens_out": 474
+    },
+    {
+      "id": "P006",
+      "category": "residential_single",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 7,
+      "csr": 81.4,
+      "se": 89.14,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast"
+      ],
+      "gt_seconds": 5.52,
+      "tokens_in": 178,
+      "tokens_out": 438
+    },
+    {
+      "id": "P007",
+      "category": "residential_single",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 7,
+      "csr": 76.9,
+      "se": 100.0,
+      "vc": 4,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast",
+        "regulatory:total_area_within_plot:BMC"
+      ],
+      "gt_seconds": 4.81,
+      "tokens_in": 178,
+      "tokens_out": 426
+    },
+    {
+      "id": "P008",
+      "category": "residential_single",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 8,
+      "csr": 83.33,
+      "se": 100.0,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:total_area_within_plot:BMC"
+      ],
+      "gt_seconds": 6.45,
+      "tokens_in": 175,
+      "tokens_out": 463
+    },
+    {
+      "id": "P009",
+      "category": "residential_single",
+      "jurisdiction": "MCD",
+      "vaastu_required": false,
+      "room_count": 9,
+      "csr": 83.33,
+      "se": 100.0,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:total_area_within_plot:MCD"
+      ],
+      "gt_seconds": 7.06,
+      "tokens_in": 175,
+      "tokens_out": 440
+    },
+    {
+      "id": "P010",
+      "category": "residential_single",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 8,
+      "csr": 83.33,
+      "se": 100.0,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:total_area_within_plot:BMC"
+      ],
+      "gt_seconds": 7.06,
+      "tokens_in": 175,
+      "tokens_out": 420
+    },
+    {
+      "id": "P011",
+      "category": "residential_single",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 10,
+      "csr": 79.11,
+      "se": 45.56,
+      "vc": 0,
+      "violations_flagged": [],
+      "gt_seconds": 5.54,
+      "tokens_in": 175,
+      "tokens_out": 500
+    },
+    {
+      "id": "P012",
+      "category": "residential_single",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 85.02,
+      "se": 75.09,
+      "vc": 0,
+      "violations_flagged": [],
+      "gt_seconds": 5.69,
+      "tokens_in": 175,
+      "tokens_out": 424
+    },
+    {
+      "id": "P013",
+      "category": "residential_single",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 7,
+      "csr": 83.57,
+      "se": 100.0,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast"
+      ],
+      "gt_seconds": 5.19,
+      "tokens_in": 178,
+      "tokens_out": 416
+    },
+    {
+      "id": "P014",
+      "category": "residential_single",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 76.9,
+      "se": 100.0,
+      "vc": 4,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast",
+        "regulatory:total_area_within_plot:BMC"
+      ],
+      "gt_seconds": 7.42,
+      "tokens_in": 178,
+      "tokens_out": 550
+    },
+    {
+      "id": "P015",
+      "category": "residential_single",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 8,
+      "csr": 83.33,
+      "se": 100.0,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:total_area_within_plot:BBMP"
+      ],
+      "gt_seconds": 5.48,
+      "tokens_in": 175,
+      "tokens_out": 399
+    },
+    {
+      "id": "P016",
+      "category": "residential_single",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 7,
+      "csr": 77.66,
+      "se": 70.46,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast"
+      ],
+      "gt_seconds": 5.56,
+      "tokens_in": 178,
+      "tokens_out": 428
+    },
+    {
+      "id": "P017",
+      "category": "residential_single",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 7,
+      "csr": 76.47,
+      "se": 64.5,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast"
+      ],
+      "gt_seconds": 6.91,
+      "tokens_in": 177,
+      "tokens_out": 455
+    },
+    {
+      "id": "P018",
+      "category": "residential_single",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 7,
+      "csr": 76.62,
+      "se": 65.25,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast"
+      ],
+      "gt_seconds": 4.79,
+      "tokens_in": 178,
+      "tokens_out": 421
+    },
+    {
+      "id": "P019",
+      "category": "residential_single",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 7,
+      "csr": 71.67,
+      "se": 40.5,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast"
+      ],
+      "gt_seconds": 8.64,
+      "tokens_in": 178,
+      "tokens_out": 436
+    },
+    {
+      "id": "P020",
+      "category": "residential_single",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 8,
+      "csr": 74.37,
+      "se": 54.0,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast"
+      ],
+      "gt_seconds": 8.32,
+      "tokens_in": 178,
+      "tokens_out": 503
+    },
+    {
+      "id": "P021",
+      "category": "residential_single",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 88.86,
+      "se": 94.29,
+      "vc": 0,
+      "violations_flagged": [],
+      "gt_seconds": 5.88,
+      "tokens_in": 175,
+      "tokens_out": 430
+    },
+    {
+      "id": "P022",
+      "category": "residential_single",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 72.72,
+      "se": 45.75,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast"
+      ],
+      "gt_seconds": 7.7,
+      "tokens_in": 178,
+      "tokens_out": 526
+    },
+    {
+      "id": "P023",
+      "category": "residential_single",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 8,
+      "csr": 71.82,
+      "se": 41.25,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast"
+      ],
+      "gt_seconds": 8.45,
+      "tokens_in": 178,
+      "tokens_out": 498
+    },
+    {
+      "id": "P024",
+      "category": "residential_single",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 90.0,
+      "se": 100.0,
+      "vc": 0,
+      "violations_flagged": [],
+      "gt_seconds": 6.15,
+      "tokens_in": 175,
+      "tokens_out": 349
+    },
+    {
+      "id": "P025",
+      "category": "residential_single",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 8,
+      "csr": 74.82,
+      "se": 56.25,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast"
+      ],
+      "gt_seconds": 6.06,
+      "tokens_in": 177,
+      "tokens_out": 469
+    },
+    {
+      "id": "P026",
+      "category": "residential_single",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 10,
+      "csr": 81.17,
+      "se": 55.88,
+      "vc": 0,
+      "violations_flagged": [],
+      "gt_seconds": 10.38,
+      "tokens_in": 175,
+      "tokens_out": 582
+    },
+    {
+      "id": "P027",
+      "category": "residential_single",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 90.0,
+      "se": 100.0,
+      "vc": 0,
+      "violations_flagged": [],
+      "gt_seconds": 6.72,
+      "tokens_in": 175,
+      "tokens_out": 420
+    },
+    {
+      "id": "P028",
+      "category": "residential_single",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 8,
+      "csr": 68.33,
+      "se": 100.0,
+      "vc": 8,
+      "violations_flagged": [
+        "vaastu:kitchen_southeast",
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast",
+        "vaastu:living_north_east",
+        "vaastu:bedroom_south_west",
+        "vaastu:garage_southeast_northwest",
+        "regulatory:total_area_within_plot:BMC"
+      ],
+      "gt_seconds": 6.64,
+      "tokens_in": 178,
+      "tokens_out": 474
+    },
+    {
+      "id": "P029",
+      "category": "residential_single",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 8,
+      "csr": 83.33,
+      "se": 100.0,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:total_area_within_plot:BMC"
+      ],
+      "gt_seconds": 10.7,
+      "tokens_in": 175,
+      "tokens_out": 485
+    },
+    {
+      "id": "P030",
+      "category": "residential_single",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 77.8,
+      "se": 39.0,
+      "vc": 0,
+      "violations_flagged": [],
+      "gt_seconds": 4.63,
+      "tokens_in": 174,
+      "tokens_out": 361
+    },
+    {
+      "id": "P031",
+      "category": "residential_multi",
+      "jurisdiction": "BBMP",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 63.39,
+      "se": 32.44,
+      "vc": 4,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast",
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 7.17,
+      "tokens_in": 181,
+      "tokens_out": 530
+    },
+    {
+      "id": "P032",
+      "category": "residential_multi",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 9,
+      "csr": 69.6,
+      "se": 31.31,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 6.88,
+      "tokens_in": 177,
+      "tokens_out": 457
+    },
+    {
+      "id": "P033",
+      "category": "residential_multi",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 10,
+      "csr": 74.96,
+      "se": 58.13,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 9.34,
+      "tokens_in": 177,
+      "tokens_out": 582
+    },
+    {
+      "id": "P034",
+      "category": "residential_multi",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 69.82,
+      "se": 53.85,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 6.49,
+      "tokens_in": 180,
+      "tokens_out": 534
+    },
+    {
+      "id": "P035",
+      "category": "residential_multi",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 11,
+      "csr": 77.73,
+      "se": 72.0,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 8.21,
+      "tokens_in": 177,
+      "tokens_out": 554
+    },
+    {
+      "id": "P036",
+      "category": "residential_multi",
+      "jurisdiction": "BBMP",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 56.33,
+      "se": 29.25,
+      "vc": 7,
+      "violations_flagged": [
+        "vaastu:kitchen_southeast",
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast",
+        "vaastu:living_north_east",
+        "vaastu:bedroom_south_west",
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 7.37,
+      "tokens_in": 181,
+      "tokens_out": 443
+    },
+    {
+      "id": "P037",
+      "category": "residential_multi",
+      "jurisdiction": "BBMP",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 67.26,
+      "se": 41.06,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 9.23,
+      "tokens_in": 181,
+      "tokens_out": 515
+    },
+    {
+      "id": "P038",
+      "category": "residential_multi",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 19,
+      "csr": 74.5,
+      "se": 55.85,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 9.1,
+      "tokens_in": 178,
+      "tokens_out": 834
+    },
+    {
+      "id": "P039",
+      "category": "residential_multi",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 11,
+      "csr": 70.12,
+      "se": 55.38,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 6.0,
+      "tokens_in": 181,
+      "tokens_out": 553
+    },
+    {
+      "id": "P040",
+      "category": "residential_multi",
+      "jurisdiction": "MCD",
+      "vaastu_required": false,
+      "room_count": 18,
+      "csr": 76.14,
+      "se": 64.03,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 12.37,
+      "tokens_in": 178,
+      "tokens_out": 835
+    },
+    {
+      "id": "P041",
+      "category": "residential_multi",
+      "jurisdiction": "BBMP",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 71.57,
+      "se": 62.62,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 5.91,
+      "tokens_in": 181,
+      "tokens_out": 515
+    },
+    {
+      "id": "P042",
+      "category": "residential_multi",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 10,
+      "csr": 76.53,
+      "se": 66.0,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 8.8,
+      "tokens_in": 178,
+      "tokens_out": 500
+    },
+    {
+      "id": "P043",
+      "category": "residential_multi",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 70.6,
+      "se": 57.75,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 5.44,
+      "tokens_in": 180,
+      "tokens_out": 434
+    },
+    {
+      "id": "P044",
+      "category": "residential_multi",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 9,
+      "csr": 70.69,
+      "se": 36.77,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 5.01,
+      "tokens_in": 177,
+      "tokens_out": 433
+    },
+    {
+      "id": "P045",
+      "category": "residential_multi",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 11,
+      "csr": 71.28,
+      "se": 39.71,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 7.45,
+      "tokens_in": 178,
+      "tokens_out": 548
+    },
+    {
+      "id": "P046",
+      "category": "residential_multi",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 12,
+      "csr": 68.87,
+      "se": 59.81,
+      "vc": 4,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:dining_west",
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 7.66,
+      "tokens_in": 181,
+      "tokens_out": 615
+    },
+    {
+      "id": "P047",
+      "category": "residential_multi",
+      "jurisdiction": "BBMP",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 65.42,
+      "se": 31.85,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 7.21,
+      "tokens_in": 181,
+      "tokens_out": 593
+    },
+    {
+      "id": "P048",
+      "category": "residential_multi",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 11,
+      "csr": 67.21,
+      "se": 40.8,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 10.63,
+      "tokens_in": 181,
+      "tokens_out": 563
+    },
+    {
+      "id": "P049",
+      "category": "residential_multi",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 72.85,
+      "se": 69.0,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 7.67,
+      "tokens_in": 180,
+      "tokens_out": 517
+    },
+    {
+      "id": "P050",
+      "category": "residential_multi",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 12,
+      "csr": 70.1,
+      "se": 55.29,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 12.08,
+      "tokens_in": 180,
+      "tokens_out": 571
+    },
+    {
+      "id": "P051",
+      "category": "residential_multi",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 11,
+      "csr": 67.34,
+      "se": 41.44,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 10.19,
+      "tokens_in": 181,
+      "tokens_out": 536
+    },
+    {
+      "id": "P052",
+      "category": "residential_multi",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 65.68,
+      "se": 33.17,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 6.93,
+      "tokens_in": 181,
+      "tokens_out": 472
+    },
+    {
+      "id": "P053",
+      "category": "residential_multi",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 65.05,
+      "se": 30.0,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 7.47,
+      "tokens_in": 180,
+      "tokens_out": 455
+    },
+    {
+      "id": "P054",
+      "category": "residential_multi",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 11,
+      "csr": 75.71,
+      "se": 61.88,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 9.06,
+      "tokens_in": 177,
+      "tokens_out": 561
+    },
+    {
+      "id": "P055",
+      "category": "residential_multi",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 59.71,
+      "se": 46.15,
+      "vc": 7,
+      "violations_flagged": [
+        "vaastu:kitchen_southeast",
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:pooja_northeast",
+        "vaastu:living_north_east",
+        "vaastu:bedroom_south_west",
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 11.65,
+      "tokens_in": 181,
+      "tokens_out": 492
+    },
+    {
+      "id": "P056",
+      "category": "residential_multi",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 65.77,
+      "se": 33.6,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 6.92,
+      "tokens_in": 180,
+      "tokens_out": 466
+    },
+    {
+      "id": "P057",
+      "category": "residential_multi",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 14,
+      "csr": 72.72,
+      "se": 46.91,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 8.31,
+      "tokens_in": 178,
+      "tokens_out": 673
+    },
+    {
+      "id": "P058",
+      "category": "residential_multi",
+      "jurisdiction": "MCD",
+      "vaastu_required": false,
+      "room_count": 10,
+      "csr": 72.74,
+      "se": 47.06,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 7.89,
+      "tokens_in": 178,
+      "tokens_out": 510
+    },
+    {
+      "id": "P059",
+      "category": "residential_multi",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 12,
+      "csr": 65.9,
+      "se": 45.0,
+      "vc": 4,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:dining_west",
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 8.72,
+      "tokens_in": 181,
+      "tokens_out": 579
+    },
+    {
+      "id": "P060",
+      "category": "residential_multi",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 10,
+      "csr": 73.73,
+      "se": 52.0,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 6.81,
+      "tokens_in": 177,
+      "tokens_out": 508
+    },
+    {
+      "id": "P061",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 71.43,
+      "se": 40.5,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 5.89,
+      "tokens_in": 180,
+      "tokens_out": 406
+    },
+    {
+      "id": "P062",
+      "category": "commercial_office",
+      "jurisdiction": "MCD",
+      "vaastu_required": false,
+      "room_count": 8,
+      "csr": 75.33,
+      "se": 60.0,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 5.99,
+      "tokens_in": 181,
+      "tokens_out": 421
+    },
+    {
+      "id": "P063",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 83.33,
+      "se": 100.0,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 7.28,
+      "tokens_in": 180,
+      "tokens_out": 449
+    },
+    {
+      "id": "P064",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 10,
+      "csr": 76.67,
+      "se": 100.0,
+      "vc": 2,
+      "violations_flagged": [
+        "regulatory:parking_present:NBC",
+        "regulatory:total_area_within_plot:NBC"
+      ],
+      "gt_seconds": 5.4,
+      "tokens_in": 180,
+      "tokens_out": 513
+    },
+    {
+      "id": "P065",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 76.02,
+      "se": 63.41,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 4.94,
+      "tokens_in": 180,
+      "tokens_out": 359
+    },
+    {
+      "id": "P066",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 72.56,
+      "se": 46.12,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 6.08,
+      "tokens_in": 180,
+      "tokens_out": 452
+    },
+    {
+      "id": "P067",
+      "category": "commercial_office",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 73.56,
+      "se": 51.14,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 7.24,
+      "tokens_in": 181,
+      "tokens_out": 461
+    },
+    {
+      "id": "P068",
+      "category": "commercial_office",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 9,
+      "csr": 71.67,
+      "se": 41.67,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 6.35,
+      "tokens_in": 181,
+      "tokens_out": 543
+    },
+    {
+      "id": "P069",
+      "category": "commercial_office",
+      "jurisdiction": "MCD",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 75.03,
+      "se": 58.5,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 4.59,
+      "tokens_in": 181,
+      "tokens_out": 390
+    },
+    {
+      "id": "P070",
+      "category": "commercial_office",
+      "jurisdiction": "MCD",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 72.08,
+      "se": 43.71,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 6.34,
+      "tokens_in": 181,
+      "tokens_out": 443
+    },
+    {
+      "id": "P071",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 13,
+      "csr": 82.18,
+      "se": 94.25,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 11.23,
+      "tokens_in": 180,
+      "tokens_out": 723
+    },
+    {
+      "id": "P072",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 15,
+      "csr": 72.63,
+      "se": 46.5,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 7.05,
+      "tokens_in": 180,
+      "tokens_out": 696
+    },
+    {
+      "id": "P073",
+      "category": "commercial_office",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 9,
+      "csr": 75.33,
+      "se": 60.0,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 4.81,
+      "tokens_in": 181,
+      "tokens_out": 457
+    },
+    {
+      "id": "P074",
+      "category": "commercial_office",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 77.17,
+      "se": 69.17,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 6.08,
+      "tokens_in": 181,
+      "tokens_out": 456
+    },
+    {
+      "id": "P075",
+      "category": "commercial_office",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 75.17,
+      "se": 59.17,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 5.08,
+      "tokens_in": 181,
+      "tokens_out": 396
+    },
+    {
+      "id": "P076",
+      "category": "commercial_office",
+      "jurisdiction": "MCD",
+      "vaastu_required": false,
+      "room_count": 12,
+      "csr": 76.67,
+      "se": 100.0,
+      "vc": 2,
+      "violations_flagged": [
+        "regulatory:parking_present:MCD",
+        "regulatory:total_area_within_plot:MCD"
+      ],
+      "gt_seconds": 6.44,
+      "tokens_in": 181,
+      "tokens_out": 671
+    },
+    {
+      "id": "P077",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 71.73,
+      "se": 42.0,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 3.91,
+      "tokens_in": 180,
+      "tokens_out": 450
+    },
+    {
+      "id": "P078",
+      "category": "commercial_office",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 83.33,
+      "se": 100.0,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 4.17,
+      "tokens_in": 181,
+      "tokens_out": 370
+    },
+    {
+      "id": "P079",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 75.62,
+      "se": 61.42,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 5.22,
+      "tokens_in": 180,
+      "tokens_out": 437
+    },
+    {
+      "id": "P080",
+      "category": "commercial_office",
+      "jurisdiction": "BMC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 76.06,
+      "se": 63.64,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 7.25,
+      "tokens_in": 181,
+      "tokens_out": 430
+    },
+    {
+      "id": "P081",
+      "category": "commercial_office",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 11,
+      "csr": 74.26,
+      "se": 54.64,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 6.25,
+      "tokens_in": 181,
+      "tokens_out": 518
+    },
+    {
+      "id": "P082",
+      "category": "commercial_office",
+      "jurisdiction": "MCD",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 72.26,
+      "se": 44.62,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 7.57,
+      "tokens_in": 181,
+      "tokens_out": 440
+    },
+    {
+      "id": "P083",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 12,
+      "csr": 76.38,
+      "se": 65.25,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 5.4,
+      "tokens_in": 180,
+      "tokens_out": 580
+    },
+    {
+      "id": "P084",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 14,
+      "csr": 74.13,
+      "se": 54.0,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 6.28,
+      "tokens_in": 180,
+      "tokens_out": 664
+    },
+    {
+      "id": "P085",
+      "category": "commercial_office",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 75.55,
+      "se": 61.07,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 4.37,
+      "tokens_in": 181,
+      "tokens_out": 385
+    },
+    {
+      "id": "P086",
+      "category": "commercial_office",
+      "jurisdiction": "MCD",
+      "vaastu_required": false,
+      "room_count": 12,
+      "csr": 76.4,
+      "se": 65.33,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 6.73,
+      "tokens_in": 181,
+      "tokens_out": 600
+    },
+    {
+      "id": "P087",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 75.03,
+      "se": 58.5,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 5.14,
+      "tokens_in": 180,
+      "tokens_out": 394
+    },
+    {
+      "id": "P088",
+      "category": "commercial_office",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 76.67,
+      "se": 100.0,
+      "vc": 2,
+      "violations_flagged": [
+        "regulatory:parking_present:BBMP",
+        "regulatory:total_area_within_plot:BBMP"
+      ],
+      "gt_seconds": 6.47,
+      "tokens_in": 181,
+      "tokens_out": 441
+    },
+    {
+      "id": "P089",
+      "category": "commercial_office",
+      "jurisdiction": "BBMP",
+      "vaastu_required": false,
+      "room_count": 7,
+      "csr": 76.19,
+      "se": 64.29,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 6.34,
+      "tokens_in": 181,
+      "tokens_out": 446
+    },
+    {
+      "id": "P090",
+      "category": "commercial_office",
+      "jurisdiction": "NBC",
+      "vaastu_required": false,
+      "room_count": 10,
+      "csr": 75.43,
+      "se": 60.5,
+      "vc": 1,
+      "violations_flagged": [
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 5.7,
+      "tokens_in": 180,
+      "tokens_out": 500
+    },
+    {
+      "id": "P091",
+      "category": "culturally_constrained",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 76.9,
+      "se": 100.0,
+      "vc": 4,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:dining_west",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 7.8,
+      "tokens_in": 182,
+      "tokens_out": 589
+    },
+    {
+      "id": "P092",
+      "category": "culturally_constrained",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 11,
+      "csr": 78.1,
+      "se": 95.24,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:dining_west",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 6.77,
+      "tokens_in": 182,
+      "tokens_out": 605
+    },
+    {
+      "id": "P093",
+      "category": "culturally_constrained",
+      "jurisdiction": "BBMP",
+      "vaastu_required": true,
+      "room_count": 13,
+      "csr": 66.37,
+      "se": 47.31,
+      "vc": 4,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:living_north_east",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 10.16,
+      "tokens_in": 183,
+      "tokens_out": 721
+    },
+    {
+      "id": "P094",
+      "category": "culturally_constrained",
+      "jurisdiction": "BBMP",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 70.16,
+      "se": 66.29,
+      "vc": 4,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 6.77,
+      "tokens_in": 183,
+      "tokens_out": 523
+    },
+    {
+      "id": "P095",
+      "category": "culturally_constrained",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 11,
+      "csr": 75.25,
+      "se": 70.29,
+      "vc": 2,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 8.12,
+      "tokens_in": 183,
+      "tokens_out": 612
+    },
+    {
+      "id": "P096",
+      "category": "culturally_constrained",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 72.65,
+      "se": 68.0,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 10.18,
+      "tokens_in": 192,
+      "tokens_out": 611
+    },
+    {
+      "id": "P097",
+      "category": "culturally_constrained",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 11,
+      "csr": 77.37,
+      "se": 91.63,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:dining_west",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 8.29,
+      "tokens_in": 182,
+      "tokens_out": 526
+    },
+    {
+      "id": "P098",
+      "category": "culturally_constrained",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 11,
+      "csr": 72.65,
+      "se": 68.0,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:dining_west",
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 11.61,
+      "tokens_in": 192,
+      "tokens_out": 521
+    },
+    {
+      "id": "P099",
+      "category": "culturally_constrained",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 8,
+      "csr": 68.22,
+      "se": 56.57,
+      "vc": 4,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:dining_west",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 5.93,
+      "tokens_in": 182,
+      "tokens_out": 487
+    },
+    {
+      "id": "P100",
+      "category": "culturally_constrained",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 68.24,
+      "se": 56.7,
+      "vc": 4,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:bathroom_not_northeast",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 6.15,
+      "tokens_in": 183,
+      "tokens_out": 546
+    },
+    {
+      "id": "P101",
+      "category": "culturally_constrained",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 11,
+      "csr": 69.77,
+      "se": 64.35,
+      "vc": 4,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:dining_west",
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 5.97,
+      "tokens_in": 183,
+      "tokens_out": 522
+    },
+    {
+      "id": "P102",
+      "category": "culturally_constrained",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 77.21,
+      "se": 90.83,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 7.75,
+      "tokens_in": 182,
+      "tokens_out": 507
+    },
+    {
+      "id": "P103",
+      "category": "culturally_constrained",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 13,
+      "csr": 73.68,
+      "se": 73.14,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 7.88,
+      "tokens_in": 192,
+      "tokens_out": 696
+    },
+    {
+      "id": "P104",
+      "category": "culturally_constrained",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 72.91,
+      "se": 69.3,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 7.69,
+      "tokens_in": 183,
+      "tokens_out": 569
+    },
+    {
+      "id": "P105",
+      "category": "culturally_constrained",
+      "jurisdiction": "BBMP",
+      "vaastu_required": true,
+      "room_count": 11,
+      "csr": 62.9,
+      "se": 40.67,
+      "vc": 5,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:bathroom_not_northeast",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 9.99,
+      "tokens_in": 192,
+      "tokens_out": 616
+    },
+    {
+      "id": "P106",
+      "category": "culturally_constrained",
+      "jurisdiction": "BBMP",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 77.55,
+      "se": 92.5,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 7.17,
+      "tokens_in": 183,
+      "tokens_out": 562
+    },
+    {
+      "id": "P107",
+      "category": "culturally_constrained",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 8,
+      "csr": 68.69,
+      "se": 58.95,
+      "vc": 4,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 6.21,
+      "tokens_in": 183,
+      "tokens_out": 485
+    },
+    {
+      "id": "P108",
+      "category": "culturally_constrained",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 67.88,
+      "se": 54.9,
+      "vc": 4,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 6.33,
+      "tokens_in": 183,
+      "tokens_out": 594
+    },
+    {
+      "id": "P109",
+      "category": "culturally_constrained",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 8,
+      "csr": 66.63,
+      "se": 59.33,
+      "vc": 5,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:living_north_east",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 7.65,
+      "tokens_in": 183,
+      "tokens_out": 441
+    },
+    {
+      "id": "P110",
+      "category": "culturally_constrained",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 11,
+      "csr": 69.3,
+      "se": 62.0,
+      "vc": 4,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:living_north_east",
+        "vaastu:dining_west",
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 9.89,
+      "tokens_in": 183,
+      "tokens_out": 608
+    },
+    {
+      "id": "P111",
+      "category": "culturally_constrained",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 11,
+      "csr": 67.94,
+      "se": 44.49,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 6.6,
+      "tokens_in": 183,
+      "tokens_out": 523
+    },
+    {
+      "id": "P112",
+      "category": "culturally_constrained",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 69.41,
+      "se": 62.55,
+      "vc": 4,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 9.3,
+      "tokens_in": 192,
+      "tokens_out": 581
+    },
+    {
+      "id": "P113",
+      "category": "culturally_constrained",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 65.7,
+      "se": 44.0,
+      "vc": 4,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:dining_west",
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 6.96,
+      "tokens_in": 183,
+      "tokens_out": 585
+    },
+    {
+      "id": "P114",
+      "category": "culturally_constrained",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 12,
+      "csr": 67.58,
+      "se": 42.69,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:dining_west",
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 5.75,
+      "tokens_in": 183,
+      "tokens_out": 667
+    },
+    {
+      "id": "P115",
+      "category": "culturally_constrained",
+      "jurisdiction": "BMC",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 72.55,
+      "se": 67.5,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "regulatory:parking_present:BMC"
+      ],
+      "gt_seconds": 6.0,
+      "tokens_in": 183,
+      "tokens_out": 543
+    },
+    {
+      "id": "P116",
+      "category": "culturally_constrained",
+      "jurisdiction": "BBMP",
+      "vaastu_required": true,
+      "room_count": 12,
+      "csr": 72.38,
+      "se": 100.0,
+      "vc": 4,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BBMP",
+        "regulatory:total_area_within_plot:BBMP"
+      ],
+      "gt_seconds": 6.82,
+      "tokens_in": 183,
+      "tokens_out": 568
+    },
+    {
+      "id": "P117",
+      "category": "culturally_constrained",
+      "jurisdiction": "BBMP",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 69.96,
+      "se": 76.0,
+      "vc": 5,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:living_north_east",
+        "vaastu:dining_west",
+        "regulatory:parking_present:BBMP"
+      ],
+      "gt_seconds": 6.53,
+      "tokens_in": 192,
+      "tokens_out": 546
+    },
+    {
+      "id": "P118",
+      "category": "culturally_constrained",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 9,
+      "csr": 68.1,
+      "se": 56.0,
+      "vc": 4,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:dining_west",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 6.36,
+      "tokens_in": 182,
+      "tokens_out": 540
+    },
+    {
+      "id": "P119",
+      "category": "culturally_constrained",
+      "jurisdiction": "MCD",
+      "vaastu_required": true,
+      "room_count": 10,
+      "csr": 76.46,
+      "se": 87.04,
+      "vc": 3,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:dining_west",
+        "regulatory:parking_present:MCD"
+      ],
+      "gt_seconds": 17.42,
+      "tokens_in": 183,
+      "tokens_out": 570
+    },
+    {
+      "id": "P120",
+      "category": "culturally_constrained",
+      "jurisdiction": "NBC",
+      "vaastu_required": true,
+      "room_count": 8,
+      "csr": 74.07,
+      "se": 85.83,
+      "vc": 4,
+      "violations_flagged": [
+        "vaastu:master_bed_southwest",
+        "vaastu:entrance_east_north",
+        "vaastu:dining_west",
+        "regulatory:parking_present:NBC"
+      ],
+      "gt_seconds": 7.25,
+      "tokens_in": 182,
+      "tokens_out": 480
+    }
+  ]
+}

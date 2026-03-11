@@ -1,0 +1,2462 @@
+[
+  {
+    "category": "residential_single",
+    "bhk": "2BHK",
+    "plot_ft": [
+      20,
+      30
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 2BHK single-floor house on a 20x30ft plot. Include living room, kitchen, 2 bedroom(s), bathrooms, and parking. Jurisdiction: BMC. Apply strict Vaastu Shastra compliance.",
+    "id": "P001"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "2BHK",
+    "plot_ft": [
+      20,
+      30
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 2BHK single-floor house on a 20x30ft plot. Include living room, kitchen, 2 bedroom(s), bathrooms, and parking. Jurisdiction: NBC. No Vaastu required.",
+    "id": "P002"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "2BHK",
+    "plot_ft": [
+      20,
+      30
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 2BHK single-floor house on a 20x30ft plot. Include living room, kitchen, 2 bedroom(s), bathrooms, and parking. Jurisdiction: NBC. Apply strict Vaastu Shastra compliance.",
+    "id": "P003"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "2BHK",
+    "plot_ft": [
+      40,
+      60
+    ],
+    "jurisdiction": "BBMP",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 2BHK single-floor house on a 40x60ft plot. Include living room, kitchen, 2 bedroom(s), bathrooms, and parking. Jurisdiction: BBMP. No Vaastu required.",
+    "id": "P004"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "3BHK",
+    "plot_ft": [
+      25,
+      35
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 3BHK single-floor house on a 25x35ft plot. Include living room, kitchen, 3 bedroom(s), bathrooms, and parking. Jurisdiction: MCD. No Vaastu required.",
+    "id": "P005"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "2BHK",
+    "plot_ft": [
+      25,
+      35
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 2BHK single-floor house on a 25x35ft plot. Include living room, kitchen, 2 bedroom(s), bathrooms, and parking. Jurisdiction: MCD. Apply strict Vaastu Shastra compliance.",
+    "id": "P006"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "2BHK",
+    "plot_ft": [
+      25,
+      35
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 2BHK single-floor house on a 25x35ft plot. Include living room, kitchen, 2 bedroom(s), bathrooms, and parking. Jurisdiction: BMC. Apply strict Vaastu Shastra compliance.",
+    "id": "P007"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "3BHK",
+    "plot_ft": [
+      20,
+      30
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 3BHK single-floor house on a 20x30ft plot. Include living room, kitchen, 3 bedroom(s), bathrooms, and parking. Jurisdiction: BMC. No Vaastu required.",
+    "id": "P008"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "3BHK",
+    "plot_ft": [
+      20,
+      30
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 3BHK single-floor house on a 20x30ft plot. Include living room, kitchen, 3 bedroom(s), bathrooms, and parking. Jurisdiction: MCD. No Vaastu required.",
+    "id": "P009"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "3BHK",
+    "plot_ft": [
+      20,
+      30
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 3BHK single-floor house on a 20x30ft plot. Include living room, kitchen, 3 bedroom(s), bathrooms, and parking. Jurisdiction: BMC. No Vaastu required.",
+    "id": "P010"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "3BHK",
+    "plot_ft": [
+      40,
+      60
+    ],
+    "jurisdiction": "BBMP",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 3BHK single-floor house on a 40x60ft plot. Include living room, kitchen, 3 bedroom(s), bathrooms, and parking. Jurisdiction: BBMP. No Vaastu required.",
+    "id": "P011"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "2BHK",
+    "plot_ft": [
+      25,
+      35
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 2BHK single-floor house on a 25x35ft plot. Include living room, kitchen, 2 bedroom(s), bathrooms, and parking. Jurisdiction: BMC. No Vaastu required.",
+    "id": "P012"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "2BHK",
+    "plot_ft": [
+      20,
+      30
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 2BHK single-floor house on a 20x30ft plot. Include living room, kitchen, 2 bedroom(s), bathrooms, and parking. Jurisdiction: MCD. Apply strict Vaastu Shastra compliance.",
+    "id": "P013"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "3BHK",
+    "plot_ft": [
+      25,
+      35
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 3BHK single-floor house on a 25x35ft plot. Include living room, kitchen, 3 bedroom(s), bathrooms, and parking. Jurisdiction: BMC. Apply strict Vaastu Shastra compliance.",
+    "id": "P014"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "3BHK",
+    "plot_ft": [
+      20,
+      30
+    ],
+    "jurisdiction": "BBMP",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 3BHK single-floor house on a 20x30ft plot. Include living room, kitchen, 3 bedroom(s), bathrooms, and parking. Jurisdiction: BBMP. No Vaastu required.",
+    "id": "P015"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "2BHK",
+    "plot_ft": [
+      25,
+      35
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 2BHK single-floor house on a 25x35ft plot. Include living room, kitchen, 2 bedroom(s), bathrooms, and parking. Jurisdiction: MCD. Apply strict Vaastu Shastra compliance.",
+    "id": "P016"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "2BHK",
+    "plot_ft": [
+      30,
+      40
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 2BHK single-floor house on a 30x40ft plot. Include living room, kitchen, 2 bedroom(s), bathrooms, and parking. Jurisdiction: NBC. Apply strict Vaastu Shastra compliance.",
+    "id": "P017"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "2BHK",
+    "plot_ft": [
+      30,
+      40
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 2BHK single-floor house on a 30x40ft plot. Include living room, kitchen, 2 bedroom(s), bathrooms, and parking. Jurisdiction: MCD. Apply strict Vaastu Shastra compliance.",
+    "id": "P018"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "2BHK",
+    "plot_ft": [
+      40,
+      60
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 2BHK single-floor house on a 40x60ft plot. Include living room, kitchen, 2 bedroom(s), bathrooms, and parking. Jurisdiction: BMC. Apply strict Vaastu Shastra compliance.",
+    "id": "P019"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "3BHK",
+    "plot_ft": [
+      35,
+      50
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 3BHK single-floor house on a 35x50ft plot. Include living room, kitchen, 3 bedroom(s), bathrooms, and parking. Jurisdiction: MCD. Apply strict Vaastu Shastra compliance.",
+    "id": "P020"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "2BHK",
+    "plot_ft": [
+      25,
+      35
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 2BHK single-floor house on a 25x35ft plot. Include living room, kitchen, 2 bedroom(s), bathrooms, and parking. Jurisdiction: BMC. No Vaastu required.",
+    "id": "P021"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "3BHK",
+    "plot_ft": [
+      40,
+      60
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 3BHK single-floor house on a 40x60ft plot. Include living room, kitchen, 3 bedroom(s), bathrooms, and parking. Jurisdiction: MCD. Apply strict Vaastu Shastra compliance.",
+    "id": "P022"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "2BHK",
+    "plot_ft": [
+      40,
+      60
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 2BHK single-floor house on a 40x60ft plot. Include living room, kitchen, 2 bedroom(s), bathrooms, and parking. Jurisdiction: MCD. Apply strict Vaastu Shastra compliance.",
+    "id": "P023"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "2BHK",
+    "plot_ft": [
+      20,
+      30
+    ],
+    "jurisdiction": "BBMP",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 2BHK single-floor house on a 20x30ft plot. Include living room, kitchen, 2 bedroom(s), bathrooms, and parking. Jurisdiction: BBMP. No Vaastu required.",
+    "id": "P024"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "3BHK",
+    "plot_ft": [
+      40,
+      60
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 3BHK single-floor house on a 40x60ft plot. Include living room, kitchen, 3 bedroom(s), bathrooms, and parking. Jurisdiction: NBC. Apply strict Vaastu Shastra compliance.",
+    "id": "P025"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "3BHK",
+    "plot_ft": [
+      40,
+      60
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 3BHK single-floor house on a 40x60ft plot. Include living room, kitchen, 3 bedroom(s), bathrooms, and parking. Jurisdiction: BMC. No Vaastu required.",
+    "id": "P026"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "2BHK",
+    "plot_ft": [
+      20,
+      30
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 2BHK single-floor house on a 20x30ft plot. Include living room, kitchen, 2 bedroom(s), bathrooms, and parking. Jurisdiction: BMC. No Vaastu required.",
+    "id": "P027"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "3BHK",
+    "plot_ft": [
+      20,
+      30
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 3BHK single-floor house on a 20x30ft plot. Include living room, kitchen, 3 bedroom(s), bathrooms, and parking. Jurisdiction: BMC. Apply strict Vaastu Shastra compliance.",
+    "id": "P028"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "3BHK",
+    "plot_ft": [
+      20,
+      30
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 3BHK single-floor house on a 20x30ft plot. Include living room, kitchen, 3 bedroom(s), bathrooms, and parking. Jurisdiction: BMC. No Vaastu required.",
+    "id": "P029"
+  },
+  {
+    "category": "residential_single",
+    "bhk": "2BHK",
+    "plot_ft": [
+      40,
+      60
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "parking"
+    ],
+    "prompt": "Design a 2BHK single-floor house on a 40x60ft plot. Include living room, kitchen, 2 bedroom(s), bathrooms, and parking. Jurisdiction: NBC. No Vaastu required.",
+    "id": "P030"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "5BHK",
+    "plot_ft": [
+      60,
+      80
+    ],
+    "jurisdiction": "BBMP",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 5BHK multi-room house on a 60x80ft plot. Include living, kitchen, 5 bedrooms, pooja room, study, and servant quarters. Jurisdiction: BBMP. Apply strict Vaastu Shastra compliance.",
+    "id": "P031"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "4BHK",
+    "plot_ft": [
+      60,
+      80
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 4BHK multi-room house on a 60x80ft plot. Include living, kitchen, 4 bedrooms, pooja room, study, and servant quarters. Jurisdiction: NBC. No Vaastu required.",
+    "id": "P032"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "5BHK",
+    "plot_ft": [
+      40,
+      60
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 5BHK multi-room house on a 40x60ft plot. Include living, kitchen, 5 bedrooms, pooja room, study, and servant quarters. Jurisdiction: NBC. No Vaastu required.",
+    "id": "P033"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "5BHK",
+    "plot_ft": [
+      45,
+      65
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 5BHK multi-room house on a 45x65ft plot. Include living, kitchen, 5 bedrooms, pooja room, study, and servant quarters. Jurisdiction: NBC. Apply strict Vaastu Shastra compliance.",
+    "id": "P034"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "6BHK",
+    "plot_ft": [
+      40,
+      60
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 6BHK multi-room house on a 40x60ft plot. Include living, kitchen, 6 bedrooms, pooja room, study, and servant quarters. Jurisdiction: NBC. No Vaastu required.",
+    "id": "P035"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "4BHK",
+    "plot_ft": [
+      60,
+      80
+    ],
+    "jurisdiction": "BBMP",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 4BHK multi-room house on a 60x80ft plot. Include living, kitchen, 4 bedrooms, pooja room, study, and servant quarters. Jurisdiction: BBMP. Apply strict Vaastu Shastra compliance.",
+    "id": "P036"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "5BHK",
+    "plot_ft": [
+      60,
+      80
+    ],
+    "jurisdiction": "BBMP",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 5BHK multi-room house on a 60x80ft plot. Include living, kitchen, 5 bedrooms, pooja room, study, and servant quarters. Jurisdiction: BBMP. Apply strict Vaastu Shastra compliance.",
+    "id": "P037"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "6BHK",
+    "plot_ft": [
+      55,
+      75
+    ],
+    "jurisdiction": "BBMP",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 6BHK multi-room house on a 55x75ft plot. Include living, kitchen, 6 bedrooms, pooja room, study, and servant quarters. Jurisdiction: BBMP. No Vaastu required.",
+    "id": "P038"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "6BHK",
+    "plot_ft": [
+      45,
+      65
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 6BHK multi-room house on a 45x65ft plot. Include living, kitchen, 6 bedrooms, pooja room, study, and servant quarters. Jurisdiction: BMC. Apply strict Vaastu Shastra compliance.",
+    "id": "P039"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "6BHK",
+    "plot_ft": [
+      50,
+      70
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 6BHK multi-room house on a 50x70ft plot. Include living, kitchen, 6 bedrooms, pooja room, study, and servant quarters. Jurisdiction: MCD. No Vaastu required.",
+    "id": "P040"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "5BHK",
+    "plot_ft": [
+      40,
+      60
+    ],
+    "jurisdiction": "BBMP",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 5BHK multi-room house on a 40x60ft plot. Include living, kitchen, 5 bedrooms, pooja room, study, and servant quarters. Jurisdiction: BBMP. Apply strict Vaastu Shastra compliance.",
+    "id": "P041"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "5BHK",
+    "plot_ft": [
+      40,
+      60
+    ],
+    "jurisdiction": "BBMP",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 5BHK multi-room house on a 40x60ft plot. Include living, kitchen, 5 bedrooms, pooja room, study, and servant quarters. Jurisdiction: BBMP. No Vaastu required.",
+    "id": "P042"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "4BHK",
+    "plot_ft": [
+      40,
+      60
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 4BHK multi-room house on a 40x60ft plot. Include living, kitchen, 4 bedrooms, pooja room, study, and servant quarters. Jurisdiction: NBC. Apply strict Vaastu Shastra compliance.",
+    "id": "P043"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "4BHK",
+    "plot_ft": [
+      50,
+      70
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 4BHK multi-room house on a 50x70ft plot. Include living, kitchen, 4 bedrooms, pooja room, study, and servant quarters. Jurisdiction: NBC. No Vaastu required.",
+    "id": "P044"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "5BHK",
+    "plot_ft": [
+      55,
+      75
+    ],
+    "jurisdiction": "BBMP",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 5BHK multi-room house on a 55x75ft plot. Include living, kitchen, 5 bedrooms, pooja room, study, and servant quarters. Jurisdiction: BBMP. No Vaastu required.",
+    "id": "P045"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "6BHK",
+    "plot_ft": [
+      60,
+      80
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 6BHK multi-room house on a 60x80ft plot. Include living, kitchen, 6 bedrooms, pooja room, study, and servant quarters. Jurisdiction: MCD. Apply strict Vaastu Shastra compliance.",
+    "id": "P046"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "5BHK",
+    "plot_ft": [
+      55,
+      75
+    ],
+    "jurisdiction": "BBMP",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 5BHK multi-room house on a 55x75ft plot. Include living, kitchen, 5 bedrooms, pooja room, study, and servant quarters. Jurisdiction: BBMP. Apply strict Vaastu Shastra compliance.",
+    "id": "P047"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "6BHK",
+    "plot_ft": [
+      55,
+      75
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 6BHK multi-room house on a 55x75ft plot. Include living, kitchen, 6 bedrooms, pooja room, study, and servant quarters. Jurisdiction: BMC. Apply strict Vaastu Shastra compliance.",
+    "id": "P048"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "5BHK",
+    "plot_ft": [
+      40,
+      60
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 5BHK multi-room house on a 40x60ft plot. Include living, kitchen, 5 bedrooms, pooja room, study, and servant quarters. Jurisdiction: NBC. Apply strict Vaastu Shastra compliance.",
+    "id": "P049"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "6BHK",
+    "plot_ft": [
+      50,
+      70
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 6BHK multi-room house on a 50x70ft plot. Include living, kitchen, 6 bedrooms, pooja room, study, and servant quarters. Jurisdiction: NBC. Apply strict Vaastu Shastra compliance.",
+    "id": "P050"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "4BHK",
+    "plot_ft": [
+      60,
+      80
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 4BHK multi-room house on a 60x80ft plot. Include living, kitchen, 4 bedrooms, pooja room, study, and servant quarters. Jurisdiction: MCD. Apply strict Vaastu Shastra compliance.",
+    "id": "P051"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "4BHK",
+    "plot_ft": [
+      50,
+      70
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 4BHK multi-room house on a 50x70ft plot. Include living, kitchen, 4 bedrooms, pooja room, study, and servant quarters. Jurisdiction: MCD. Apply strict Vaastu Shastra compliance.",
+    "id": "P052"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "4BHK",
+    "plot_ft": [
+      55,
+      75
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 4BHK multi-room house on a 55x75ft plot. Include living, kitchen, 4 bedrooms, pooja room, study, and servant quarters. Jurisdiction: NBC. Apply strict Vaastu Shastra compliance.",
+    "id": "P053"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "6BHK",
+    "plot_ft": [
+      40,
+      60
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 6BHK multi-room house on a 40x60ft plot. Include living, kitchen, 6 bedrooms, pooja room, study, and servant quarters. Jurisdiction: NBC. No Vaastu required.",
+    "id": "P054"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "4BHK",
+    "plot_ft": [
+      45,
+      65
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 4BHK multi-room house on a 45x65ft plot. Include living, kitchen, 4 bedrooms, pooja room, study, and servant quarters. Jurisdiction: MCD. Apply strict Vaastu Shastra compliance.",
+    "id": "P055"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "4BHK",
+    "plot_ft": [
+      55,
+      75
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 4BHK multi-room house on a 55x75ft plot. Include living, kitchen, 4 bedrooms, pooja room, study, and servant quarters. Jurisdiction: NBC. Apply strict Vaastu Shastra compliance.",
+    "id": "P056"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "4BHK",
+    "plot_ft": [
+      55,
+      75
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 4BHK multi-room house on a 55x75ft plot. Include living, kitchen, 4 bedrooms, pooja room, study, and servant quarters. Jurisdiction: BMC. No Vaastu required.",
+    "id": "P057"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "5BHK",
+    "plot_ft": [
+      50,
+      70
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 5BHK multi-room house on a 50x70ft plot. Include living, kitchen, 5 bedrooms, pooja room, study, and servant quarters. Jurisdiction: MCD. No Vaastu required.",
+    "id": "P058"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "6BHK",
+    "plot_ft": [
+      60,
+      80
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 6BHK multi-room house on a 60x80ft plot. Include living, kitchen, 6 bedrooms, pooja room, study, and servant quarters. Jurisdiction: MCD. Apply strict Vaastu Shastra compliance.",
+    "id": "P059"
+  },
+  {
+    "category": "residential_multi",
+    "bhk": "5BHK",
+    "plot_ft": [
+      45,
+      65
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja",
+      "study",
+      "servant"
+    ],
+    "prompt": "Design a 5BHK multi-room house on a 45x65ft plot. Include living, kitchen, 5 bedrooms, pooja room, study, and servant quarters. Jurisdiction: NBC. No Vaastu required.",
+    "id": "P060"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 8,
+    "plot_ft": [
+      70,
+      100
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 70x100ft plot with 8 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: NBC.",
+    "id": "P061"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 8,
+    "plot_ft": [
+      100,
+      120
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 100x120ft plot with 8 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: MCD.",
+    "id": "P062"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 10,
+    "plot_ft": [
+      50,
+      80
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 50x80ft plot with 10 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: NBC.",
+    "id": "P063"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 10,
+    "plot_ft": [
+      50,
+      80
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 50x80ft plot with 10 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: NBC.",
+    "id": "P064"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 11,
+    "plot_ft": [
+      80,
+      110
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 80x110ft plot with 11 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: NBC.",
+    "id": "P065"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 11,
+    "plot_ft": [
+      100,
+      120
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 100x120ft plot with 11 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: NBC.",
+    "id": "P066"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 9,
+    "plot_ft": [
+      80,
+      110
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 80x110ft plot with 9 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: BMC.",
+    "id": "P067"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 12,
+    "plot_ft": [
+      60,
+      90
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 60x90ft plot with 12 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: BMC.",
+    "id": "P068"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 11,
+    "plot_ft": [
+      70,
+      100
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 70x100ft plot with 11 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: MCD.",
+    "id": "P069"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 10,
+    "plot_ft": [
+      70,
+      100
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 70x100ft plot with 10 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: MCD.",
+    "id": "P070"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 13,
+    "plot_ft": [
+      50,
+      80
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 50x80ft plot with 13 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: NBC.",
+    "id": "P071"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 15,
+    "plot_ft": [
+      100,
+      120
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 100x120ft plot with 15 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: NBC.",
+    "id": "P072"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 9,
+    "plot_ft": [
+      100,
+      120
+    ],
+    "jurisdiction": "BBMP",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 100x120ft plot with 9 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: BBMP.",
+    "id": "P073"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 12,
+    "plot_ft": [
+      60,
+      90
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 60x90ft plot with 12 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: BMC.",
+    "id": "P074"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 9,
+    "plot_ft": [
+      60,
+      90
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 60x90ft plot with 9 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: BMC.",
+    "id": "P075"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 12,
+    "plot_ft": [
+      60,
+      90
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 60x90ft plot with 12 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: MCD.",
+    "id": "P076"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 12,
+    "plot_ft": [
+      100,
+      120
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 100x120ft plot with 12 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: NBC.",
+    "id": "P077"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 12,
+    "plot_ft": [
+      50,
+      80
+    ],
+    "jurisdiction": "BBMP",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 50x80ft plot with 12 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: BBMP.",
+    "id": "P078"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 12,
+    "plot_ft": [
+      50,
+      80
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 50x80ft plot with 12 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: NBC.",
+    "id": "P079"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 10,
+    "plot_ft": [
+      70,
+      100
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 70x100ft plot with 10 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: BMC.",
+    "id": "P080"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 11,
+    "plot_ft": [
+      70,
+      100
+    ],
+    "jurisdiction": "BBMP",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 70x100ft plot with 11 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: BBMP.",
+    "id": "P081"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 12,
+    "plot_ft": [
+      100,
+      120
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 100x120ft plot with 12 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: MCD.",
+    "id": "P082"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 12,
+    "plot_ft": [
+      50,
+      80
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 50x80ft plot with 12 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: NBC.",
+    "id": "P083"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 14,
+    "plot_ft": [
+      70,
+      100
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 70x100ft plot with 14 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: NBC.",
+    "id": "P084"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 8,
+    "plot_ft": [
+      70,
+      100
+    ],
+    "jurisdiction": "BBMP",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 70x100ft plot with 8 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: BBMP.",
+    "id": "P085"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 12,
+    "plot_ft": [
+      60,
+      90
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 60x90ft plot with 12 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: MCD.",
+    "id": "P086"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 14,
+    "plot_ft": [
+      100,
+      120
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 100x120ft plot with 14 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: NBC.",
+    "id": "P087"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 9,
+    "plot_ft": [
+      50,
+      80
+    ],
+    "jurisdiction": "BBMP",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 50x80ft plot with 9 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: BBMP.",
+    "id": "P088"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 8,
+    "plot_ft": [
+      70,
+      100
+    ],
+    "jurisdiction": "BBMP",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 70x100ft plot with 8 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: BBMP.",
+    "id": "P089"
+  },
+  {
+    "category": "commercial_office",
+    "room_count": 14,
+    "plot_ft": [
+      60,
+      90
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": false,
+    "fire_egress": true,
+    "rooms": [
+      "reception",
+      "open_office",
+      "cabins",
+      "conference",
+      "pantry",
+      "restrooms",
+      "server"
+    ],
+    "prompt": "Design a commercial office layout on a 60x90ft plot with 14 zones. Include reception, open office, private cabins, conference room, pantry, restrooms, and server room. Mandatory fire egress compliance. Jurisdiction: NBC.",
+    "id": "P090"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "4BHK",
+    "plot_ft": [
+      40,
+      50
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": true,
+    "constraint_conflict": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 4BHK house on a 40x50ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: NBC. ",
+    "id": "P091"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "3BHK",
+    "plot_ft": [
+      35,
+      45
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": true,
+    "constraint_conflict": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 3BHK house on a 35x45ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: NBC. ",
+    "id": "P092"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "4BHK",
+    "plot_ft": [
+      50,
+      70
+    ],
+    "jurisdiction": "BBMP",
+    "vaastu_required": true,
+    "constraint_conflict": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 4BHK house on a 50x70ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: BBMP. ",
+    "id": "P093"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "3BHK",
+    "plot_ft": [
+      35,
+      45
+    ],
+    "jurisdiction": "BBMP",
+    "vaastu_required": true,
+    "constraint_conflict": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 3BHK house on a 35x45ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: BBMP. ",
+    "id": "P094"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "3BHK",
+    "plot_ft": [
+      35,
+      45
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": true,
+    "constraint_conflict": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 3BHK house on a 35x45ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: BMC. ",
+    "id": "P095"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "4BHK",
+    "plot_ft": [
+      35,
+      45
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": true,
+    "constraint_conflict": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 4BHK house on a 35x45ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: BMC. Dense layout \u2014 minimize corridors and maximize room count.",
+    "id": "P096"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "3BHK",
+    "plot_ft": [
+      45,
+      60
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": true,
+    "constraint_conflict": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 3BHK house on a 45x60ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: NBC. ",
+    "id": "P097"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "3BHK",
+    "plot_ft": [
+      35,
+      45
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": true,
+    "constraint_conflict": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 3BHK house on a 35x45ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: MCD. Dense layout \u2014 minimize corridors and maximize room count.",
+    "id": "P098"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "3BHK",
+    "plot_ft": [
+      35,
+      45
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": true,
+    "constraint_conflict": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 3BHK house on a 35x45ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: NBC. ",
+    "id": "P099"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "4BHK",
+    "plot_ft": [
+      40,
+      50
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": true,
+    "constraint_conflict": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 4BHK house on a 40x50ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: BMC. ",
+    "id": "P100"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "4BHK",
+    "plot_ft": [
+      40,
+      50
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": true,
+    "constraint_conflict": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 4BHK house on a 40x50ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: MCD. ",
+    "id": "P101"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "4BHK",
+    "plot_ft": [
+      30,
+      40
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": true,
+    "constraint_conflict": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 4BHK house on a 30x40ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: NBC. ",
+    "id": "P102"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "4BHK",
+    "plot_ft": [
+      35,
+      45
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": true,
+    "constraint_conflict": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 4BHK house on a 35x45ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: BMC. Dense layout \u2014 minimize corridors and maximize room count.",
+    "id": "P103"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "4BHK",
+    "plot_ft": [
+      40,
+      50
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": true,
+    "constraint_conflict": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 4BHK house on a 40x50ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: BMC. ",
+    "id": "P104"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "3BHK",
+    "plot_ft": [
+      45,
+      60
+    ],
+    "jurisdiction": "BBMP",
+    "vaastu_required": true,
+    "constraint_conflict": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 3BHK house on a 45x60ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: BBMP. Dense layout \u2014 minimize corridors and maximize room count.",
+    "id": "P105"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "4BHK",
+    "plot_ft": [
+      30,
+      40
+    ],
+    "jurisdiction": "BBMP",
+    "vaastu_required": true,
+    "constraint_conflict": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 4BHK house on a 30x40ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: BBMP. ",
+    "id": "P106"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "3BHK",
+    "plot_ft": [
+      40,
+      50
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": true,
+    "constraint_conflict": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 3BHK house on a 40x50ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: BMC. ",
+    "id": "P107"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "3BHK",
+    "plot_ft": [
+      40,
+      50
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": true,
+    "constraint_conflict": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 3BHK house on a 40x50ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: BMC. ",
+    "id": "P108"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "4BHK",
+    "plot_ft": [
+      45,
+      60
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": true,
+    "constraint_conflict": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 4BHK house on a 45x60ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: BMC. ",
+    "id": "P109"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "3BHK",
+    "plot_ft": [
+      45,
+      60
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": true,
+    "constraint_conflict": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 3BHK house on a 45x60ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: MCD. ",
+    "id": "P110"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "3BHK",
+    "plot_ft": [
+      50,
+      70
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": true,
+    "constraint_conflict": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 3BHK house on a 50x70ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: BMC. ",
+    "id": "P111"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "3BHK",
+    "plot_ft": [
+      40,
+      50
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": true,
+    "constraint_conflict": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 3BHK house on a 40x50ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: BMC. Dense layout \u2014 minimize corridors and maximize room count.",
+    "id": "P112"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "4BHK",
+    "plot_ft": [
+      45,
+      60
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": true,
+    "constraint_conflict": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 4BHK house on a 45x60ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: MCD. ",
+    "id": "P113"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "3BHK",
+    "plot_ft": [
+      50,
+      70
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": true,
+    "constraint_conflict": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 3BHK house on a 50x70ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: MCD. ",
+    "id": "P114"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "3BHK",
+    "plot_ft": [
+      30,
+      40
+    ],
+    "jurisdiction": "BMC",
+    "vaastu_required": true,
+    "constraint_conflict": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 3BHK house on a 30x40ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: BMC. ",
+    "id": "P115"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "4BHK",
+    "plot_ft": [
+      30,
+      40
+    ],
+    "jurisdiction": "BBMP",
+    "vaastu_required": true,
+    "constraint_conflict": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 4BHK house on a 30x40ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: BBMP. ",
+    "id": "P116"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "3BHK",
+    "plot_ft": [
+      35,
+      45
+    ],
+    "jurisdiction": "BBMP",
+    "vaastu_required": true,
+    "constraint_conflict": true,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 3BHK house on a 35x45ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: BBMP. Dense layout \u2014 minimize corridors and maximize room count.",
+    "id": "P117"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "3BHK",
+    "plot_ft": [
+      45,
+      60
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": true,
+    "constraint_conflict": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 3BHK house on a 45x60ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: NBC. ",
+    "id": "P118"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "3BHK",
+    "plot_ft": [
+      45,
+      60
+    ],
+    "jurisdiction": "MCD",
+    "vaastu_required": true,
+    "constraint_conflict": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 3BHK house on a 45x60ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: MCD. ",
+    "id": "P119"
+  },
+  {
+    "category": "culturally_constrained",
+    "bhk": "3BHK",
+    "plot_ft": [
+      30,
+      40
+    ],
+    "jurisdiction": "NBC",
+    "vaastu_required": true,
+    "constraint_conflict": false,
+    "rooms": [
+      "living",
+      "kitchen",
+      "bedroom",
+      "bathroom",
+      "pooja"
+    ],
+    "prompt": "Design a strict Vaastu-compliant 3BHK house on a 30x40ft plot. Kitchen must be south-east. Master bedroom north-east. Pooja room north-east corner. Main entrance east or north. Jurisdiction: NBC. ",
+    "id": "P120"
+  }
+]

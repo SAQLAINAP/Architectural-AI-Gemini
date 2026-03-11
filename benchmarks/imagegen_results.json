@@ -1,0 +1,227 @@
+[
+  {
+    "model": "gpt-4o",
+    "image_backend": "dall-e-3",
+    "layout_id": "L1",
+    "category": "residential_single",
+    "latency_s": 25.49,
+    "file": "benchmark_images/gpt-4o_L1.png",
+    "url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-kfKWz6n3ktZBM6ej0KRQhU7Y/user-ZomVT66yLE4eJsL0xbdcwoA0/img-QarXXIf69cWIEPgoWyEnMlxD.png?st=2026-03-10T16%3A59%3A48Z&se=2026-03-10T18%3A59%3A48Z&sp=r&sv=2026-02-06&sr=b&rscd=inline&rsct=image/png&skoid=8eb2c87c-0531-4dab-acb3-b5e2adddce6c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-03-10T16%3A25%3A14Z&ske=2026-03-11T16%3A25%3A14Z&sks=b&skv=2026-02-06&sig=T5VfHEOmxn7nDcCQnDJZknHtFRI0xyxXS6le/ReA7Y0%3D",
+    "error": null
+  },
+  {
+    "model": "gpt-4o",
+    "image_backend": "dall-e-3",
+    "layout_id": "L2",
+    "category": "commercial_office",
+    "latency_s": 19.22,
+    "file": "benchmark_images/gpt-4o_L2.png",
+    "url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-kfKWz6n3ktZBM6ej0KRQhU7Y/user-ZomVT66yLE4eJsL0xbdcwoA0/img-48UByqhB04lYNGWdGkwVjopg.png?st=2026-03-10T17%3A00%3A06Z&se=2026-03-10T19%3A00%3A06Z&sp=r&sv=2026-02-06&sr=b&rscd=inline&rsct=image/png&skoid=ae240de5-197c-4e03-af8e-c66aed9a4539&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-03-10T09%3A47%3A37Z&ske=2026-03-11T09%3A47%3A37Z&sks=b&skv=2026-02-06&sig=oyMc1FpSlYdxft64tQWqk4yAKjtBNRTHDL7ezO15oxE%3D",
+    "error": null
+  },
+  {
+    "model": "gpt-4o",
+    "image_backend": "dall-e-3",
+    "layout_id": "L3",
+    "category": "culturally_constrained",
+    "latency_s": 31.18,
+    "file": "benchmark_images/gpt-4o_L3.png",
+    "url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-kfKWz6n3ktZBM6ej0KRQhU7Y/user-ZomVT66yLE4eJsL0xbdcwoA0/img-ZoCm90n4Nfep6pkNcuoNrgDZ.png?st=2026-03-10T17%3A00%3A33Z&se=2026-03-10T19%3A00%3A33Z&sp=r&sv=2026-02-06&sr=b&rscd=inline&rsct=image/png&skoid=b2c0e1c0-cf97-4e19-8986-8073905d5723&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-03-10T11%3A41%3A56Z&ske=2026-03-11T11%3A41%3A56Z&sks=b&skv=2026-02-06&sig=TeCuZmuEPowaZg16sNVbYskkIpDTEwa15A7KNUk/gu8%3D",
+    "error": null
+  },
+  {
+    "model": "gpt-4o-mini",
+    "image_backend": "dall-e-3",
+    "layout_id": "L1",
+    "category": "residential_single",
+    "latency_s": 26.19,
+    "file": "benchmark_images/gpt-4o-mini_L1.png",
+    "url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-kfKWz6n3ktZBM6ej0KRQhU7Y/user-ZomVT66yLE4eJsL0xbdcwoA0/img-HKlv3yd4YHb9TgQObnPnM3yJ.png?st=2026-03-10T17%3A01%3A04Z&se=2026-03-10T19%3A01%3A04Z&sp=r&sv=2026-02-06&sr=b&rscd=inline&rsct=image/png&skoid=b2c0e1c0-cf97-4e19-8986-8073905d5723&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-03-10T01%3A25%3A01Z&ske=2026-03-11T01%3A25%3A01Z&sks=b&skv=2026-02-06&sig=ZHePOl2ixrqmt7JNpu/k4qlyd74mBT4bzAoUhDib71k%3D",
+    "error": null
+  },
+  {
+    "model": "gpt-4o-mini",
+    "image_backend": "dall-e-3",
+    "layout_id": "L2",
+    "category": "commercial_office",
+    "latency_s": 33.31,
+    "file": "benchmark_images/gpt-4o-mini_L2.png",
+    "url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-kfKWz6n3ktZBM6ej0KRQhU7Y/user-ZomVT66yLE4eJsL0xbdcwoA0/img-l9mNVYnoTjVDOEq9glNACiNL.png?st=2026-03-10T17%3A01%3A30Z&se=2026-03-10T19%3A01%3A30Z&sp=r&sv=2026-02-06&sr=b&rscd=inline&rsct=image/png&skoid=32836cae-d25f-4fe9-827b-1c8c59c442cc&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-03-10T04%3A23%3A16Z&ske=2026-03-11T04%3A23%3A16Z&sks=b&skv=2026-02-06&sig=uSSPPY0gH1oK0kmmxUNxdIb3BO9YY1ilRov8fWp%2BLBw%3D",
+    "error": null
+  },
+  {
+    "model": "gpt-4o-mini",
+    "image_backend": "dall-e-3",
+    "layout_id": "L3",
+    "category": "culturally_constrained",
+    "latency_s": 26.73,
+    "file": "benchmark_images/gpt-4o-mini_L3.png",
+    "url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-kfKWz6n3ktZBM6ej0KRQhU7Y/user-ZomVT66yLE4eJsL0xbdcwoA0/img-2CuHjDeN5J31031eQwkYGv1a.png?st=2026-03-10T17%3A02%3A04Z&se=2026-03-10T19%3A02%3A04Z&sp=r&sv=2026-02-06&sr=b&rscd=inline&rsct=image/png&skoid=0e2a3d55-e963-40c9-9c89-2a1aa28cb3ac&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-03-10T08%3A29%3A51Z&ske=2026-03-11T08%3A29%3A51Z&sks=b&skv=2026-02-06&sig=c9HtuWJIPZYAjLY1DQnqIyE8xCm4YVYoPy4r0tb6j4c%3D",
+    "error": null
+  },
+  {
+    "model": "gpt-4.1",
+    "image_backend": "dall-e-3",
+    "layout_id": "L1",
+    "category": "residential_single",
+    "latency_s": 29.62,
+    "file": "benchmark_images/gpt-4.1_L1.png",
+    "url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-kfKWz6n3ktZBM6ej0KRQhU7Y/user-ZomVT66yLE4eJsL0xbdcwoA0/img-rkkvPYyIAMckDUBBusRFjfZb.png?st=2026-03-10T17%3A02%3A31Z&se=2026-03-10T19%3A02%3A31Z&sp=r&sv=2026-02-06&sr=b&rscd=inline&rsct=image/png&skoid=8eb2c87c-0531-4dab-acb3-b5e2adddce6c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-03-10T06%3A29%3A41Z&ske=2026-03-11T06%3A29%3A41Z&sks=b&skv=2026-02-06&sig=b5Jbz5WSyFugZRV%2BmeVH4t%2Br/dD%2BcH6H0VM/nJ9EG7Q%3D",
+    "error": null
+  },
+  {
+    "model": "gpt-4.1",
+    "image_backend": "dall-e-3",
+    "layout_id": "L2",
+    "category": "commercial_office",
+    "latency_s": 23.13,
+    "file": "benchmark_images/gpt-4.1_L2.png",
+    "url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-kfKWz6n3ktZBM6ej0KRQhU7Y/user-ZomVT66yLE4eJsL0xbdcwoA0/img-IwwklLPDeEJme4iB6RCE2K4S.png?st=2026-03-10T17%3A02%3A57Z&se=2026-03-10T19%3A02%3A57Z&sp=r&sv=2026-02-06&sr=b&rscd=inline&rsct=image/png&skoid=b2c0e1c0-cf97-4e19-8986-8073905d5723&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-03-10T15%3A24%3A53Z&ske=2026-03-11T15%3A24%3A53Z&sks=b&skv=2026-02-06&sig=9EwI6MRBkGMETE5TX9GUlG8q05UYAw5q7kaadjNXiXc%3D",
+    "error": null
+  },
+  {
+    "model": "gpt-4.1",
+    "image_backend": "dall-e-3",
+    "layout_id": "L3",
+    "category": "culturally_constrained",
+    "latency_s": 25.35,
+    "file": "benchmark_images/gpt-4.1_L3.png",
+    "url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-kfKWz6n3ktZBM6ej0KRQhU7Y/user-ZomVT66yLE4eJsL0xbdcwoA0/img-fZe6Kvheh4XSHCHtc9kJnWYv.png?st=2026-03-10T17%3A03%3A22Z&se=2026-03-10T19%3A03%3A22Z&sp=r&sv=2026-02-06&sr=b&rscd=inline&rsct=image/png&skoid=38e27a3b-6174-4d3e-90ac-d7d9ad49543f&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-03-10T06%3A19%3A07Z&ske=2026-03-11T06%3A19%3A07Z&sks=b&skv=2026-02-06&sig=GNQFz95BaUDFWOEZznHd7zXCc50%2BmCcmuyrLAvKTBzM%3D",
+    "error": null
+  },
+  {
+    "model": "gemini-2.5-pro",
+    "image_backend": "renderer_fallback",
+    "layout_id": "L1",
+    "category": "residential_single",
+    "latency_s": 0,
+    "file": null,
+    "error": "Imagen 3 requires Vertex AI with GCP project (not configured)"
+  },
+  {
+    "model": "gemini-2.5-pro",
+    "image_backend": "renderer_fallback",
+    "layout_id": "L2",
+    "category": "commercial_office",
+    "latency_s": 0,
+    "file": null,
+    "error": "Imagen 3 requires Vertex AI with GCP project (not configured)"
+  },
+  {
+    "model": "gemini-2.5-pro",
+    "image_backend": "renderer_fallback",
+    "layout_id": "L3",
+    "category": "culturally_constrained",
+    "latency_s": 0,
+    "file": null,
+    "error": "Imagen 3 requires Vertex AI with GCP project (not configured)"
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "image_backend": "renderer_fallback",
+    "layout_id": "L1",
+    "category": "residential_single",
+    "latency_s": 0,
+    "file": null,
+    "error": "Imagen 3 requires Vertex AI with GCP project (not configured)"
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "image_backend": "renderer_fallback",
+    "layout_id": "L2",
+    "category": "commercial_office",
+    "latency_s": 0,
+    "file": null,
+    "error": "Imagen 3 requires Vertex AI with GCP project (not configured)"
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "image_backend": "renderer_fallback",
+    "layout_id": "L3",
+    "category": "culturally_constrained",
+    "latency_s": 0,
+    "file": null,
+    "error": "Imagen 3 requires Vertex AI with GCP project (not configured)"
+  },
+  {
+    "model": "llama-3.3-70b",
+    "image_backend": "renderer_fallback",
+    "layout_id": "L1",
+    "category": "residential_single",
+    "latency_s": 0,
+    "file": null,
+    "error": "No native image generation"
+  },
+  {
+    "model": "llama-3.3-70b",
+    "image_backend": "renderer_fallback",
+    "layout_id": "L2",
+    "category": "commercial_office",
+    "latency_s": 0,
+    "file": null,
+    "error": "No native image generation"
+  },
+  {
+    "model": "llama-3.3-70b",
+    "image_backend": "renderer_fallback",
+    "layout_id": "L3",
+    "category": "culturally_constrained",
+    "latency_s": 0,
+    "file": null,
+    "error": "No native image generation"
+  },
+  {
+    "model": "gemini-2.5-flash-image",
+    "image_backend": "gemini_native",
+    "layout_id": "L1",
+    "category": "residential_single",
+    "latency_s": 0,
+    "file": null,
+    "error": "429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.5-flash-preview-image\\n* Quota exceeded for metric: generativelanguage.g"
+  },
+  {
+    "model": "gemini-2.5-flash-image",
+    "image_backend": "gemini_native",
+    "layout_id": "L2",
+    "category": "commercial_office",
+    "latency_s": 0,
+    "file": null,
+    "error": "429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.5-flash-preview-image\\n* Quota exceeded for metric: generativelanguage.g"
+  },
+  {
+    "model": "gemini-2.5-flash-image",
+    "image_backend": "gemini_native",
+    "layout_id": "L3",
+    "category": "culturally_constrained",
+    "latency_s": 0,
+    "file": null,
+    "error": "429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.5-flash-preview-image\\n* Quota exceeded for metric: generativelanguage.g"
+  },
+  {
+    "model": "gemini-3.1-flash-image-preview",
+    "image_backend": "gemini_native",
+    "layout_id": "L1",
+    "category": "residential_single",
+    "latency_s": 0,
+    "file": null,
+    "error": "429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3.1-flash-image\\n* Quota exceeded for metric: generativelanguage.googleapi"
+  },
+  {
+    "model": "gemini-3.1-flash-image-preview",
+    "image_backend": "gemini_native",
+    "layout_id": "L2",
+    "category": "commercial_office",
+    "latency_s": 0,
+    "file": null,
+    "error": "429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3.1-flash-image\\n* Quota exceeded for metric: generativelanguage.googleapi"
+  },
+  {
+    "model": "gemini-3.1-flash-image-preview",
+    "image_backend": "gemini_native",
+    "layout_id": "L3",
+    "category": "culturally_constrained",
+    "latency_s": 0,
+    "file": null,
+    "error": "429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3.1-flash-image\\n* Quota exceeded for metric: generativelanguage."
+  }
+]

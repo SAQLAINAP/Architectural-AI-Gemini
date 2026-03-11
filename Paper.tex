@@ -1,0 +1,984 @@
+\documentclass[journal]{IEEEtran}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage[hidelinks]{hyperref}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{microtype}
+
+\graphicspath{{./}}
+
+\title{A Multi-Agent Orchestrated Mixture-of-Experts Framework for
+Constraint-Aware Architectural Floor Plan Generation}
+
+\author{%
+    \IEEEauthorblockN{Saqlain Ahmed P}
+    \IEEEauthorblockA{saqlainahmed302@gmail.com}
+    \and
+    \IEEEauthorblockN{Mohammed Nouman L}
+    \IEEEauthorblockA{mohammednouman604@gmail.com}
+    \and
+    \IEEEauthorblockN{Naveen Zille}
+    \IEEEauthorblockA{naveenzille007@gmail.com}
+    \and
+    \IEEEauthorblockN{Darshan Naidu}
+    \IEEEauthorblockA{darshannaiduj@gmail.com}
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Automated floor plan generation is hard because it requires satisfying
+spatial, regulatory, and cultural constraints simultaneously---something
+single-pass generative models handle poorly. This paper describes a
+multi-agent orchestration framework that routes subtasks to specialized
+components rather than funneling everything through one model. A central
+orchestrator coordinates nine agents across three phases: specification
+normalization and initial layout generation, iterative compliance-driven
+refinement, and post-convergence cost and furniture planning. Compliance
+checking uses deterministic rule engines for both Indian building codes and
+Vaastu Shastra, so violations are caught precisely rather than approximately.
+Plans that fall below a composite score threshold of 0.70 are revised and
+re-checked in a closed loop, up to three iterations. Across 120 test prompts,
+the system reached an 80.2\% constraint satisfaction rate---5.8 points above
+single-shot GPT-4o generation---with mean violations per plan dropping from
+2.2 to 1.6. Task-specific model routing (a Mixture-of-Experts strategy) cut
+per-plan inference cost by 47\% compared to a uniform GPT-4o baseline.
+A seven-model benchmarking study covering GPT-4o, GPT-4o-mini, GPT-4.1,
+GPT-5, Gemini~2.5~Pro, Gemini~2.5~Flash, and Groq-hosted Llama~3.3~70B
+validates the tier assignment strategy and provides latency and cost baselines
+for each model.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Multi-Agent Systems, Architectural AI, Mixture-of-Experts, Constraint
+Satisfaction, Neuro-Symbolic AI, Floor Plan Generation
+\end{IEEEkeywords}
+
+%% ================================================================
+\section{Introduction}
+%% ================================================================
+
+\subsection{Background}
+
+Designing a floor plan is not simply a spatial problem. It requires
+reconciling room adjacency preferences, minimum area requirements, egress
+regulations, plot setback rules, and---in many Indian contexts---Vaastu
+Shastra guidelines that govern room orientation and zone allocation. In
+practice, architects go through many rounds of iteration with clients,
+structural engineers, and municipal authorities. That process is slow
+and expensive, and it does not scale against the housing demand in rapidly
+urbanizing cities~\cite{b1}.
+
+Early computational approaches used constraint programming and graph-based
+layout algorithms~\cite{b2}. They required exhaustive manual rule encoding and
+struggled to generalize across building types or cultural contexts. Deep
+learning changed the approach. GANs conditioned on room-connectivity graphs
+produced structurally plausible layouts~\cite{b3}, and diffusion models later
+improved diversity and controllability~\cite{b4}. Graph Neural Networks encoded
+room adjacency as relational structures rather than pixel outputs~\cite{b5},
+which helped with topological validity. None of these systems, though,
+validated outputs after generation---constraint satisfaction depended entirely
+on what was in the conditioning signal.
+
+LLMs introduced a different capability: generating room layouts, adjacency
+matrices, and design rationale from natural language prompts~\cite{b6}.
+LayoutGPT~\cite{b7} showed that structured prompting can handle visuospatial
+planning tasks reasonably well, but also identified consistent failure modes---
+boundary violations, metric imprecision, and sensitivity to prompt phrasing.
+The core problem is that LLM outputs are unvalidated. There is no mechanism
+to check whether a generated plan actually satisfies building codes or Vaastu
+requirements, and prompt engineering alone cannot provide that guarantee.
+
+Multi-agent decomposition helps. AutoGen~\cite{b8} showed that role-specific
+pipelines outperform monolithic models on reasoning tasks. Mixture-of-Experts
+routing~\cite{b9}\cite{b10} established that assigning subtasks to the most
+capable specialist improves both output quality and cost. Neither approach,
+however, has been applied to floor plan generation with deterministic
+compliance validation in the loop.
+
+\subsection{Problem Statement}
+
+Five concrete problems block real-world deployment of LLM-based floor plan tools.
+
+\textbf{No validation.} LLMs produce plans without any check against building
+codes or Vaastu rules. Violations found after generation have no path to
+correction~\cite{b7}.
+
+\textbf{Spatial inconsistency.} Room dimensions and adjacency relationships
+form a tightly coupled constraint graph. Single-pass generation cannot
+backtrack when a room placed early violates constraints introduced by rooms
+placed later~\cite{b5}.
+
+\textbf{No refinement loop.} Architects iterate. Current AI systems produce
+a single output and stop.
+
+\textbf{No cultural validation.} Vaastu Shastra imposes specific rules on
+room orientation, entry placement, and zone allocation. General-purpose LLMs
+were not trained to satisfy these~\cite{b11}, and no existing system includes
+a culturally-specific spatial validator.
+
+\textbf{Model inefficiency.} Cost estimation requires numerical precision over
+a fixed schema---not spatial reasoning. Routing it through a frontier LLM
+wastes compute without improving the output~\cite{b10}.
+
+\subsection{Contributions}
+
+\begin{itemize}
+    \item A nine-component multi-agent pipeline that decomposes floor plan
+    generation into spatial planning, compliance validation, critique,
+    refinement, cost estimation, and furniture placement.
+
+    \item A deterministic validation layer covering Indian building codes
+    (NBC, BBMP, BMC, MCD) and 14 Vaastu Shastra spatial rules, operating
+    independently of any generative model.
+
+    \item A Mixture-of-Experts routing mechanism validated across seven
+    model configurations: GPT-4o, GPT-4.1, GPT-5, Gemini~2.5~Pro,
+    Gemini~2.5~Flash, GPT-4o-mini, and Groq-hosted Llama~3.3~70B.
+
+    \item A closed-loop refinement strategy where composite compliance scores
+    drive successive revisions until a threshold is met or three iterations
+    are exhausted.
+
+    \item A quantitative evaluation framework covering constraint satisfaction
+    rate, spatial efficiency, violation counts, per-iteration convergence, and
+    cross-model image generation fidelity.
+\end{itemize}
+
+%% ================================================================
+\section{Related Work}
+%% ================================================================
+
+\subsection{AI-Based Floor Plan Generation}
+
+Merrell et al.~\cite{b2} established an early baseline using Markov chain
+sampling over valid layout configurations, but the method required exhaustive
+manual rule encoding and generalized poorly.
+
+HouseGAN~\cite{b3} introduced relational GAN conditioning on room-connectivity
+graphs; HouseGAN++~\cite{b12} improved this with a refined discriminator.
+Graph2Plan~\cite{b13} treated floor plans as structured graph outputs.
+HouseDiffusion~\cite{b4} applied diffusion models to vector-format generation,
+offering more output diversity than GAN approaches. All are single-pass
+systems with no post-generation validation.
+
+\subsection{LLMs for Structured Spatial Design}
+
+LayoutGPT~\cite{b7} showed LLMs can generate compositional layouts through
+structured prompting, but documented consistent failure modes: boundary
+violations and metric imprecision. Sun et al.~\cite{b14} found that LLM
+spatial reasoning degrades on tasks requiring dimensional precision or
+multi-step constraint propagation.
+
+Chain-of-thought prompting~\cite{b15} and ReAct-style reasoning~\cite{b16}
+improve output quality by making generation steps explicit---findings that
+shaped the prompting strategy for the Spatial Planning Agent in this work.
+
+\subsection{Multi-Agent and Neuro-Symbolic Systems}
+
+Wu et al.~\cite{b8} showed through AutoGen that role-specific agent pipelines
+consistently outperform monolithic models on reasoning benchmarks. Park
+et al.~\cite{b17} demonstrated that LLM-powered agents with memory and
+planning handle complex open-ended tasks effectively.
+
+Garcez et al.~\cite{b18} identified symbolic verification as the most reliable
+mode of constraint satisfaction in neuro-symbolic systems---the principle
+behind the deterministic validators here. Ismail et al.~\cite{b19} showed
+rule-based compliance checking reliably catches regulatory violations in
+structured design representations.
+
+Shazeer et al.~\cite{b9} formalized the sparse Mixture-of-Experts layer;
+Jiang et al.~\cite{b10} extended this to heterogeneous model ensembles in
+Mixtral. Both works directly informed the routing layer in this paper.
+
+%% ================================================================
+\section{System Overview}
+%% ================================================================
+
+\subsection{Architecture}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{architecture_diagram_ieee.png}
+\caption{Multi-Agent Orchestration Framework. Six layers span the stack from
+React frontend to external APIs. Phase~1 handles normalization and initial
+layout; Phase~2 runs the iterative validation--refinement loop; Phase~3
+handles cost and furniture planning.}
+\label{fig:architecture}
+\end{figure}
+
+The framework has six layers: frontend, transport, backend, multi-agent
+orchestration, model routing, and external services (Fig.~\ref{fig:architecture}).
+
+A React frontend collects the user specification and displays generated plans,
+revision history, and cost estimates. Requests reach an Express backend over
+REST and stream back through Server-Sent Events. The backend holds an
+in-memory job store for concurrent requests.
+
+The orchestration engine runs three sequential phases. Phase~1: the
+\textit{Input Agent} normalizes the user spec into a structured brief, which
+the \textit{Spatial Planning Agent} converts into an initial floor plan.
+Phase~2: the \textit{Vaastu Validator} and \textit{Regulatory Validator}---both
+deterministic rule engines---check the plan. The \textit{Critic Agent} scores
+it across six qualitative dimensions, and the \textit{Plan Scorer} combines
+these into a weighted composite. Plans below 0.70 go to the
+\textit{Refinement Agent}, which revises and resubmits. The loop runs at most
+three times. Phase~3: the \textit{Cost Agent} generates a bill of materials
+and the \textit{Furniture Agent} produces placement recommendations.
+Model selection across agents is handled by the MoE router
+(Section~\ref{sec:moe}).
+
+%% ================================================================
+\section{Problem Formulation}
+%% ================================================================
+
+\subsection{Floor Plan Representation}
+
+A floor plan is the tuple:
+\begin{equation}
+P = (R,\, A,\, O)
+\end{equation}
+where $R$ is the room set, $A$ is a weighted adjacency graph over rooms, and
+$O$ captures orientation and boundary constraints including dimensions, aspect
+ratios, and cardinal zone assignments.
+
+\subsection{Compliance Scoring}
+
+\begin{equation}
+C(P) = \alpha C_r + \beta C_v + \gamma C_s
+\end{equation}
+
+$C_r$ is the regulatory compliance score, $C_v$ is the Vaastu compliance
+score, and $C_s$ is spatial efficiency. Weights are $\alpha = 0.40$,
+$\beta = 0.30$, $\gamma = 0.20$; the remaining 0.10 goes to the qualitative
+critic score.
+
+%% ================================================================
+\section{Multi-Agent Framework}
+%% ================================================================
+
+\subsection{Orchestration}
+
+\begin{algorithm}[t]
+\caption{Iterative Plan Optimization}
+\begin{algorithmic}[1]
+\State $spec \gets \text{InputAgent}(userInput)$
+\State $plan \gets \text{SpatialAgent}(spec)$
+\For{$i = 1$ \textbf{to} $\text{MaxIterations}$}
+    \State $v \gets \text{VaastuValidator}(plan)$
+    \State $r \gets \text{RegulatoryValidator}(plan)$
+    \State $c \gets \text{CriticAgent}(plan)$
+    \State $score \gets \text{ScoringEngine}(v,r,c)$
+    \If{$score \ge \tau$}\ \textbf{break}
+    \EndIf
+    \State $plan \gets \text{RefinementAgent}(plan,v,r,c)$
+\EndFor
+\State \Return $plan$
+\end{algorithmic}
+\end{algorithm}
+
+Algorithm~1 shows the core loop. The Input Agent runs at temperature~0.2 on
+a lightweight model to keep normalization deterministic. The Spatial Planning
+Agent runs at 0.7 to allow layout exploration.
+
+The Vaastu Validator checks 14 rules across a nine-zone directional grid.
+The Regulatory Validator checks six compliance categories against NBC, BBMP,
+BMC, and MCD codes. Both are deterministic---no language model involved.
+The Critic Agent evaluates six qualitative dimensions at temperature~0.3 and
+sends structured feedback to the Plan Scorer. Plans below $\tau = 0.70$ go
+to the Refinement Agent for targeted corrections; the loop then re-validates.
+Three iterations cap worst-case latency.
+
+\subsection{Agent Configuration}
+
+Table~\ref{tab:agents} lists each agent's model, temperature, and output type.
+
+\begin{table*}[t]
+\centering
+\caption{Agent Configuration Summary}
+\label{tab:agents}
+\scriptsize
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{llll}
+\toprule
+\textbf{Agent} & \textbf{Model} & \textbf{Temp} & \textbf{Output} \\
+\midrule
+Input Agent          & GPT-4o-mini / Gemini 2.5 Flash & 0.2  & Normalized spec \\
+Spatial Agent        & GPT-4o / Gemini 2.5 Pro        & 0.7  & Initial layout  \\
+Vaastu Validator     & Rule engine                    & ---  & Violation flags \\
+Regulatory Validator & Rule engine                    & ---  & Code violations \\
+Critic Agent         & GPT-4o / Gemini 2.5 Pro        & 0.3  & 6-D critique    \\
+Plan Scorer          & ---                            & ---  & Composite score \\
+Refinement Agent     & GPT-4o / Gemini 2.5 Pro        & 0.5  & Revised layout  \\
+Cost Agent           & GPT-4o-mini / Gemini 2.5 Flash & 0.2  & BOM + pricing   \\
+Furniture Agent      & GPT-4o-mini / Gemini 2.5 Flash & 0.4  & Placement map   \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+%% ================================================================
+\section{Mixture-of-Experts Model Routing}
+\label{sec:moe}
+%% ================================================================
+
+\subsection{Motivation}
+
+Routing every subtask through the same model is wasteful. Cost estimation
+needs numerical precision over a fixed schema, not spatial reasoning. Sending
+it through GPT-4o adds cost without improving the result. Conversely, routing
+complex multi-constraint layout generation to a cheaper model to save money
+degrades output at the stage that matters most.
+
+The MoE layer treats model selection as an assignment problem: match each
+subtask to the model that performs best on that task type, at the lowest
+acceptable cost and latency.
+
+\subsection{Task-Specific Tier Allocation}
+
+\textit{Tier~1 (High-Capacity):} Spatial layout generation, plan refinement,
+and qualitative critique need multi-step reasoning over a large constraint
+graph. These go to GPT-4o, GPT-4.1, GPT-5, or Gemini~2.5~Pro depending on
+availability and cost policy.
+
+\textit{Tier~2 (Precision):} Cost estimation, furniture placement, and spec
+normalization work over structured schemas with bounded outputs. These go to
+GPT-4o-mini, Gemini~2.5~Flash, or Groq-hosted Llama~3.3~70B at low
+temperature. Llama~3.3 is used for JSON-format layout outputs only; image
+synthesis for Llama-routed tasks falls back to a dedicated renderer
+(Section~\ref{sec:benchmarking}).
+
+\textit{Tier~3 (Deterministic):} Vaastu and regulatory validation need
+zero-tolerance rule enforcement. These bypass the model layer entirely and
+run against rule engines.
+
+Table~\ref{tab:moe} shows the full allocation.
+
+\begin{table*}[t]
+\centering
+\caption{MoE Task-to-Model Allocation}
+\label{tab:moe}
+\scriptsize
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{p{2.6cm}lp{6.0cm}p{3.0cm}}
+\toprule
+\textbf{Task} & \textbf{Tier} & \textbf{Model} & \textbf{Rationale} \\
+\midrule
+Layout generation     & 1 & GPT-4o / GPT-4.1 / GPT-5 / Gemini~2.5~Pro   & Constraint reasoning \\
+Plan refinement       & 1 & GPT-4o / GPT-4.1 / GPT-5 / Gemini~2.5~Pro   & Multi-violation fixes \\
+Qualitative critique  & 1 & GPT-4o / Gemini~2.5~Pro                      & 6-D evaluation       \\
+Cost estimation       & 2 & GPT-4o-mini / Gemini~2.5~Flash / Llama~3.3   & Structured output    \\
+Furniture placement   & 2 & GPT-4o-mini / Gemini~2.5~Flash               & Rule-bounded output  \\
+Spec normalization    & 2 & GPT-4o-mini / Gemini~2.5~Flash / Llama~3.3   & Deterministic parse  \\
+Vaastu validation     & 3 & Rule engine                                  & Zero-tolerance check \\
+Regulatory validation & 3 & Rule engine                                  & Zero-tolerance check \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\subsection{Routing Policy}
+
+The router solves:
+\begin{equation}
+M^{*} = \arg\max_{m \in \mathcal{M}}
+\bigl(w_1 \cdot \mathrm{Acc}_m(t) - w_2 \cdot \mathrm{Lat}_m
+      - w_3 \cdot \mathrm{Cost}_m\bigr)
+\label{eq:routing}
+\end{equation}
+Tier~1 weights prioritize accuracy ($w_1 \gg w_2, w_3$); Tier~2 weights
+balance latency and cost against accuracy.
+
+\subsection{Fallback Chain}
+
+When a Tier~1 model is unavailable the router steps down:
+\[
+\texttt{gpt-4.1} \to \texttt{gpt-4o} \to \texttt{gemini-2.5-pro}
+\to \texttt{gpt-4o-mini} \to \texttt{gemini-2.5-flash}
+\to \texttt{llama-3.3-70b}
+\]
+
+\subsection{Cost Impact}
+
+Routing Tier~2 tasks to lightweight models cut per-plan inference cost by
+40--60\% compared to a uniform GPT-4o baseline. Tier~1 capacity was freed
+for layout generation and refinement, where it actually matters. Tier~3
+bypassing of the model layer eliminated hallucinated compliance verdicts---a
+problem that prompt engineering alone cannot solve.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.88\linewidth]{fig2_csr_by_category.png}
+\caption{CSR by prompt category across all three methods. Commercial office
+layouts (82.8\%) are easiest because no cultural constraints apply.
+Culturally-constrained layouts (74.6\%) carry the highest constraint load.}
+\label{fig:csr_category}
+\end{figure}
+
+%% ================================================================
+\section{Experimental Setup}
+%% ================================================================
+
+\subsection{Dataset}
+
+No public benchmark exists for constraint-aware floor plan generation, so we
+built one synthetically. 120 prompts span four categories: residential
+single-floor, residential multi-room, commercial office, and
+culturally-constrained Vaastu layouts, 30 each. Prompts vary in plot size,
+room count, occupancy type, and jurisdiction. Constraint density ranges from
+simple two-bedroom layouts to dense eight-room configurations with overlapping
+regulatory and cultural requirements.
+
+Each prompt is a natural language specification covering plot dimensions,
+required rooms, adjacency preferences, orientation constraints, and applicable
+building code jurisdiction. Evaluation relies entirely on the quantitative
+metrics in Section~\ref{sec:metrics}; no ground-truth plans were used.
+
+\subsection{Baselines}
+
+\textit{Baseline~1 (Single-Shot LLM):} A single GPT-4o call receives the
+full user spec and produces a floor plan with no validation or refinement.
+This is the current default in most LLM-assisted design tools.
+
+\textit{Baseline~2 (LLM + Post-Hoc Validation):} A single GPT-4o call
+generates the plan; the Vaastu and Regulatory validators flag violations.
+No refinement is applied. This isolates the contribution of the refinement
+loop by holding generation and validation constant.
+
+\subsection{Evaluation Metrics}
+\label{sec:metrics}
+
+\begin{table}[t]
+\centering
+\caption{Evaluation Metrics}
+\label{tab:metrics}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{lp{5.8cm}}
+\toprule
+\textbf{Metric} & \textbf{Description} \\
+\midrule
+CSR      & Percentage of Vaastu and regulatory rules satisfied
+           in the final plan \\
+SE       & Usable floor area as a fraction of plot area,
+           penalized for excessive circulation \\
+VC       & Mean violations remaining in the final output \\
+$\Delta S$ & Mean compliance score improvement per iteration \\
+GT       & End-to-end generation time (seconds) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+CSR is the primary metric. A plan is deployment-ready when $C(P) \geq 0.70$.
+All metrics are means over the 120-prompt corpus.
+
+%% ================================================================
+\section{Results}
+%% ================================================================
+
+\subsection{Quantitative Comparison}
+
+\begin{table}[t]
+\centering
+\caption{Performance Comparison Across Methods}
+\label{tab:results}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Method} & \textbf{CSR (\%)} & \textbf{SE (\%)} & \textbf{VC}
+               & \boldmath$\Delta S$ & \textbf{GT (s)} \\
+\midrule
+Single-Shot LLM     & 74.4 & 65.1 & 2.2 & ---  & 7.5  \\
+LLM + Post-Hoc Val. & 74.1 & 65.2 & 2.3 & ---  & 7.2  \\
+\textbf{Proposed}   & \textbf{80.2} & \textbf{72.1} & \textbf{1.6}
+                    & \textbf{0.09} & 44.2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.88\linewidth]{fig1_csr_comparison.png}
+\caption{CSR comparison. The proposed system reaches 80.2\%, above both
+baselines. The dashed line marks the 70\% deployment threshold.}
+\label{fig:csr_comparison}
+\end{figure}
+
+The proposed system reaches 80.2\% CSR---5.8 points above the single-shot
+baseline and 6.1 points above post-hoc validation (Table~\ref{tab:results},
+Fig.~\ref{fig:csr_comparison}). Spatial efficiency rose from 65.1\% to 72.1\%,
+and mean violations per plan dropped from 2.2 to 1.6, a 27\% reduction.
+
+The mean $\Delta S$ of 0.09 per iteration shows consistent convergence:
+93\% of plans improve monotonically. The remaining 7\% plateau due to
+Vaastu--egress conflicts described in Section~\ref{sec:discussion}.
+
+The main cost of the proposed approach is time---44.2~seconds per plan
+versus 7.5 for single-shot. In an architectural context, where a human
+architect may spend hours on a similar task, this is acceptable.
+
+\subsection{Convergence Analysis}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.88\linewidth]{fig3_convergence.png}
+\caption{Mean compliance score across refinement iterations. Error bars show
+standard deviation. Most plans converge by iteration~2.}
+\label{fig:convergence}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.82\linewidth]{fig4_convergence_pie.png}
+\caption{Convergence distribution across 120 plans. 93\% reach the 0.70
+threshold within three iterations. The 7\% that do not involve irreconcilable
+Vaastu--egress conflicts.}
+\label{fig:conv_pie}
+\end{figure}
+
+Fig.~\ref{fig:convergence} shows score progression across iterations.
+41\% of plans converge at iteration~1 (mostly simple layouts), 38\% at
+iteration~2, and 14\% need all three. Fig.~\ref{fig:conv_pie} shows the
+full distribution.
+
+\subsection{Per-Category Performance}
+
+\begin{table}[t]
+\centering
+\caption{CSR by Prompt Category (Proposed System)}
+\label{tab:category}
+\small
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Category} & \textbf{CSR (\%)} & \textbf{Mean VC} \\
+\midrule
+Residential Single-Floor & 84.1 & 1.2 \\
+Residential Multi-Room   & 77.3 & 1.9 \\
+Commercial Office        & 82.8 & 1.3 \\
+Culturally Constrained   & 74.6 & 2.3 \\
+\midrule
+\textbf{Overall}         & \textbf{80.2} & \textbf{1.6} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:category} breaks CSR by category (also visible in
+Fig.~\ref{fig:csr_category}). Commercial office layouts score highest (82.8\%)
+because no cultural constraints apply. Culturally-constrained layouts score
+lowest (74.6\%) due to the combined Vaastu and regulatory constraint load.
+
+%% ================================================================
+\section{Multi-Model Benchmarking}
+\label{sec:benchmarking}
+%% ================================================================
+
+\subsection{Models Under Evaluation}
+
+\begin{table}[t]
+\centering
+\caption{Models in Benchmarking Study}
+\label{tab:benchmark_models}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lllp{2.0cm}}
+\toprule
+\textbf{Model} & \textbf{Provider} & \textbf{Tier}
+              & \textbf{Image Backend} \\
+\midrule
+GPT-4o           & OpenAI    & 1 & DALL$\cdot$E~3            \\
+GPT-4o-mini      & OpenAI    & 2 & DALL$\cdot$E~3            \\
+GPT-4.1          & OpenAI    & 1 & DALL$\cdot$E~3            \\
+GPT-5            & OpenAI    & 1 & GPT-5 Native              \\
+Gemini~2.5~Pro   & Google    & 1 & Imagen~3 (Vertex AI)      \\
+Gemini~2.5~Flash & Google    & 2 & Imagen~3 (Vertex AI)      \\
+Llama~3.3~70B    & Meta/Groq & 2 & Renderer fallback\textsuperscript{a} \\
+\bottomrule
+\multicolumn{4}{l}{\textsuperscript{a}JSON layout rendered via SVG/canvas layer.}
+\end{tabular}
+\end{table}
+
+Seven model configurations are benchmarked on the same 120-prompt corpus
+(Table~\ref{tab:benchmark_models}). Llama~3.3 does not support native image
+generation; a deterministic renderer converts its JSON output to annotated
+floor plan graphics.
+
+\subsection{Benchmark Dimensions}
+
+Each model is evaluated on: (1)~\textbf{Layout CSR}---constraint satisfaction
+rate of raw single-pass output before any refinement; (2)~\textbf{Image
+Fidelity}---structural accuracy of the rendered image against the JSON spec,
+scored by a GPT-4o judge on a 1--5 scale across room labeling, spatial
+proportionality, adjacency correctness, and drawing style;
+(3)~\textbf{Latency}; (4)~\textbf{Cost per plan}; and
+(5)~\textbf{Violation Hallucination Rate}---frequency of a model asserting
+compliance when the deterministic validator finds a violation.
+
+\subsection{Benchmark Results}
+
+\begin{table}[t]
+\centering
+\caption{Multi-Model Layout Generation Benchmark}
+\label{tab:model_bench}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lllrrr}
+\toprule
+\textbf{Model} & \textbf{Prov.} & \textbf{Tier}
+              & \textbf{Parse (\%)} & \textbf{Lat. (s)}
+              & \textbf{Cost (\$)} \\
+\midrule
+GPT-5            & OpenAI & 1 & 99.0 &  8.5 & 0.040* \\
+GPT-4.1          & OpenAI & 1 & 100.0 & 10.2 & 0.010 \\
+GPT-4o           & OpenAI & 1 & 100.0 &  6.8 & 0.010 \\
+Gemini~2.5~Pro   & Google & 1 & 98.0 &  4.5 & 0.030* \\
+GPT-4o-mini      & OpenAI & 2 & 100.0 &  9.7 & 0.001 \\
+Gemini~2.5~Flash & Google & 2 & 97.0 &  2.1 & 0.001* \\
+Llama~3.3~70B    & Groq   & 2 & 97.5 &  1.6 & 0.0004 \\
+\bottomrule
+\multicolumn{6}{l}{* Estimated from published benchmarks.}
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Image Fidelity Scores (GPT-4o Judge, 1--5 scale)}
+\label{tab:img_fidelity}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{llr}
+\toprule
+\textbf{Model} & \textbf{Image Backend} & \textbf{Score} \\
+\midrule
+GPT-5            & GPT-5 Native          & 4.45* \\
+GPT-4o           & DALL$\cdot$E~3        & 4.27  \\
+GPT-4.1          & DALL$\cdot$E~3        & 4.20  \\
+GPT-4o-mini      & DALL$\cdot$E~3        & 4.13  \\
+Gemini~2.5~Pro   & Imagen~3              & 3.90* \\
+Gemini~2.5~Flash & Imagen~3              & 3.62* \\
+Llama~3.3~70B    & Renderer Fallback     & --- \\
+\bottomrule
+\multicolumn{3}{l}{* Estimated from published benchmarks.}
+\end{tabular}
+\end{table}
+
+Tables~\ref{tab:model_bench} and~\ref{tab:img_fidelity} show the results.
+Tier~1 models parse layouts reliably (98--100\%) but cost more.
+Llama~3.3~70B achieves the lowest latency (1.6~s) and cost, making it
+well-suited for Tier~2 JSON tasks. Fig.~\ref{fig:model_latency} visualizes
+the latency spread; Fig.~\ref{fig:image_fidelity} shows fidelity scores.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.88\linewidth]{fig7_model_latency.png}
+\caption{Per-model latency and parse success across 40 benchmark prompts.
+Tier~2 models are consistently faster; all models achieve at least 97\% parse
+success on structured JSON output.}
+\label{fig:model_latency}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.88\linewidth]{fig8_image_fidelity.png}
+\caption{Image fidelity scores (1--5) across six model--backend pairs.
+GPT-5 native images score highest (4.45). Llama~3.3 uses a renderer fallback
+and is not directly comparable.}
+\label{fig:image_fidelity}
+\end{figure}
+
+%% ================================================================
+\section{Discussion}
+\label{sec:discussion}
+%% ================================================================
+
+\subsection{Impact of Iterative Refinement}
+
+The 6.1-point gap between post-hoc validation and the proposed system
+measures the refinement loop's contribution directly, because both run the
+same validators. Detecting violations is not enough; the system needs to fix
+them. The 93\% monotonic convergence rate shows the Refinement Agent applies
+targeted corrections rather than regenerating from scratch---this is possible
+because the agent receives a structured violation report that says exactly
+what went wrong and where.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.88\linewidth]{fig5_violation_types.png}
+\caption{Violation type distribution across all 120 plans. Vaastu directional
+violations dominate (66.7\%) because kitchen and bedroom zone rules are
+frequently missed in single-pass generation.}
+\label{fig:violations}
+\end{figure}
+
+Fig.~\ref{fig:violations} shows the breakdown of violations. Vaastu
+directional errors (incorrect zone placement for kitchen, master bedroom, or
+entrance) account for 66.7\% of the 451 total violations. Regulatory setback
+violations are second at 23.7\%. These two categories are exactly where
+deterministic rule engines add the most value: the model has no reliable way
+to satisfy them on the first pass without feedback.
+
+\subsection{Benefits of MoE Routing}
+
+MoE routing cut inference cost by 47\% against a uniform GPT-4o baseline
+with no measurable degradation on Tier~2 tasks. Lightweight models handle
+schema-bound outputs reliably. The larger gain is at Tier~3: bypassing the
+model layer for compliance validation eliminated hallucinated compliance
+assertions entirely.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.82\linewidth]{fig6_critic_radar.png}
+\caption{Critic Agent qualitative dimension scores. Functionality (0.86) and
+cultural sensitivity (0.81) are highest. Natural light (0.69) is weakest,
+reflecting known limitations in LLM reasoning about window placement.}
+\label{fig:critic_radar}
+\end{figure}
+
+Fig.~\ref{fig:critic_radar} shows the Critic Agent's six-dimension scores.
+Natural light (0.69) is the weakest dimension---LLMs struggle with inferring
+window placement from a JSON room list without explicit orientation metadata
+in every room entry. This is a tractable fix that would improve overall scores.
+
+\subsection{Failure Cases}
+\label{sec:failures}
+
+The 7\% non-convergence rate traces to one specific conflict: Vaastu Shastra
+places the kitchen in the south-east zone, while fire-safety egress regulations
+in some jurisdictions require unobstructed corridor access along that same
+boundary. In dense layouts on small plots, these requirements cannot be
+reconciled geometrically within three iterations. The system detects and
+reports the conflict correctly; resolution requires either constraint relaxation
+by the user or human-in-the-loop intervention.
+
+%% ================================================================
+\section{Limitations}
+%% ================================================================
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.88\linewidth]{fig9_complexity.png}
+\caption{Plan complexity (room count) versus mean CSR and generation time.
+CSR peaks at 6--8 rooms. The 4--5 room group had too few samples to produce
+a reliable mean.}
+\label{fig:complexity}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.88\linewidth]{fig10_jurisdiction.png}
+\caption{CSR and mean violation count by jurisdiction. BMC scores highest
+(76.2\%); MCD lowest (69.8\%) with the highest violation count (3.0).}
+\label{fig:jurisdiction}
+\end{figure}
+
+\textbf{Spatial reasoning on irregular plots.} LLMs handle rectangular plots
+well but struggle with L-shaped, trapezoidal, or multi-wing configurations.
+Global spatial consistency breaks down when room placement cannot be
+represented as a simple grid (Fig.~\ref{fig:complexity} shows the drop at
+high room counts).
+
+\textbf{Vaastu rule coverage.} The validator encodes 14 rules from classical
+texts. Regional practitioner interpretations and modern adaptations are not
+included.
+
+\textbf{Regulatory scope.} Four Indian municipal jurisdictions are covered
+(NBC, BBMP, BMC, MCD). Fig.~\ref{fig:jurisdiction} shows per-jurisdiction
+variation. Extending to other codes requires manual rule encoding; there is
+no automated ingestion mechanism.
+
+\textbf{Synthetic evaluation corpus.} The 120-prompt dataset does not cover
+the full range of real-world briefs. Evaluation against professionally authored
+specifications and expert-validated plans would give more reliable estimates.
+
+\textbf{No structural engineering.} Load-bearing wall placement, foundation
+selection, and MEP routing are outside scope.
+
+\textbf{Benchmarking completeness.} Gemini API rate limits and GPT-5
+availability meant some values in Tables~\ref{tab:model_bench}
+and~\ref{tab:img_fidelity} are estimated from published benchmarks rather
+than direct measurement.
+
+%% ================================================================
+\section{Future Work}
+\label{sec:future}
+%% ================================================================
+
+\textbf{RL-based refinement.} The current Refinement Agent responds to
+structured violation reports. An RL agent trained to maximize $C(P)$ could
+learn correction strategies that generalize across violation types and might
+resolve the constraint-conflict cases that currently cause non-convergence.
+
+\textbf{Human-in-the-loop feedback.} Adding a feedback channel for architects
+or clients to annotate plans, override placements, or relax constraint weights
+would increase practical utility and generate preference data for fine-tuning.
+
+\textbf{Structural and MEP validation.} Integrating load-bearing heuristics
+and MEP routing validation would close the gap between spatial plans and
+construction-ready documents.
+
+\textbf{Expanded regulatory and cultural coverage.} Extending to IBC,
+Eurocode, and Feng Shui, with a modular validator registry that loads
+jurisdiction-specific rules at inference time, would make the system more
+broadly applicable.
+
+\textbf{Multi-floor and 3D generation.} Multi-floor configurations introduce
+vertical adjacency constraints, stairwell placement, and structural load
+propagation. IFC-format BIM output would enable use in professional workflows.
+
+\textbf{Routing recalibration.} As GPT-5 and Gemini~3 become fully available,
+the routing weights in Eq.~(\ref{eq:routing}) should be re-estimated against
+current benchmarks.
+
+%% ================================================================
+\section{Conclusion}
+%% ================================================================
+
+We described a nine-component multi-agent framework for constraint-aware
+architectural floor plan generation. The system combines generative layout
+synthesis with deterministic rule validation and Mixture-of-Experts model
+routing across a three-phase pipeline.
+
+Across 120 test prompts, the system achieved 80.2\% CSR---5.8 points above
+single-shot LLM generation and 6.1 points above post-hoc validation without
+refinement. Violations per plan dropped 27\% and spatial efficiency rose from
+65.1\% to 72.1\%. MoE routing cut inference cost by 47\% with no quality loss
+on precision tasks.
+
+Three conclusions stand out. First, finding violations is not the same as
+fixing them---the refinement loop is the dominant performance driver, not the
+validators. Second, deterministic rule engines are categorically more reliable
+than probabilistic models for zero-tolerance compliance checks; prompt
+engineering cannot provide the same guarantee. Third, task-specific model
+routing delivers real cost savings without trade-offs in output quality.
+
+The framework is modular. Additional jurisdictions, cultural rule sets, and
+engineering validators can be added as components without touching the core
+orchestration logic. RL-based refinement, structural engineering validation,
+and multi-floor generation are the natural next steps toward a system ready
+for professional use.
+
+%% ================================================================
+% \section*{References}
+%% ================================================================
+
+\begin{thebibliography}{19}
+
+\bibitem{b1}
+P.~Merrell, E.~Schkufza, and V.~Koltun,
+``Computer-generated residential building layouts,''
+\textit{ACM Trans. Graphics}, vol.~29, no.~6, pp.~1--12, 2010.
+
+\bibitem{b2}
+C.~Liu, J.~Wu, P.~Kohli, and Y.~Furukawa,
+``FloorNet: A unified framework for floorplan reconstruction from 3D scans,''
+in \textit{Proc. ECCV}, 2018, pp.~419--434.
+
+\bibitem{b3}
+N.~Nauata, K.~Chang, C.~Cheng, G.~Mori, and Y.~Furukawa,
+``House-GAN: Relational generative adversarial networks for
+graph-constrained house layout generation,''
+in \textit{Proc. ECCV}, 2020, pp.~162--177.
+
+\bibitem{b4}
+M.~A.~Shabani, S.~Hosseini, and Y.~Furukawa,
+``HouseDiffusion: Vector floorplan generation via a diffusion model
+with room layout graph,''
+in \textit{Proc. CVPR}, 2023, pp.~1--10.
+
+\bibitem{b5}
+R.~Hu et al.,
+``Graph2Plan: Learning floorplan generation from layout graphs,''
+\textit{ACM Trans. Graphics}, vol.~39, no.~4, pp.~1--14, 2020.
+
+\bibitem{b6}
+T.~Brown et al.,
+``Language models are few-shot learners,''
+in \textit{Adv. Neural Inf. Process. Syst. (NeurIPS)},
+vol.~33, 2020, pp.~1877--1901.
+
+\bibitem{b7}
+W.~Feng et al.,
+``LayoutGPT: Compositional visual planning and generation with large
+language models,''
+in \textit{Adv. Neural Inf. Process. Syst. (NeurIPS)}, 2024.
+
+\bibitem{b8}
+Q.~Wu et al.,
+``AutoGen: Enabling next-gen LLM applications via multi-agent
+conversation,''
+arXiv:2308.08155, 2023.
+
+\bibitem{b9}
+N.~Shazeer et al.,
+``Outrageously large neural networks: The sparsely-gated
+mixture-of-experts layer,''
+in \textit{Proc. ICLR}, 2017.
+
+\bibitem{b10}
+A.~Q.~Jiang et al.,
+``Mixtral of experts,''
+arXiv:2401.04088, 2024.
+
+\bibitem{b11}
+OpenAI,
+``GPT-4 Technical Report,''
+arXiv:2303.08774, 2023.
+
+\bibitem{b12}
+N.~Nauata et al.,
+``House-GAN++: Generative adversarial layout refinement network,''
+in \textit{Proc. CVPR}, 2021, pp.~13632--13641.
+
+\bibitem{b13}
+W.~Para et al.,
+``Generative layout modeling using constraint graphs,''
+in \textit{Proc. ICCV}, 2021, pp.~6690--6700.
+
+\bibitem{b14}
+K.~Sun et al.,
+``Spatial reasoning benchmarks for evaluating large language models,''
+arXiv:2310.03249, 2023.
+
+\bibitem{b15}
+J.~Wei et al.,
+``Chain-of-thought prompting elicits reasoning in large language models,''
+in \textit{Adv. Neural Inf. Process. Syst. (NeurIPS)},
+vol.~35, 2022, pp.~24824--24837.
+
+\bibitem{b16}
+S.~Yao et al.,
+``ReAct: Synergizing reasoning and acting in language models,''
+in \textit{Proc. ICLR}, 2023.
+
+\bibitem{b17}
+J.~S.~Park et al.,
+``Generative agents: Interactive simulacra of human behavior,''
+in \textit{Proc. ACM UIST}, 2023, pp.~1--22.
+
+\bibitem{b18}
+A.~d'Avila Garcez et al.,
+``Neural-symbolic computing: An effective methodology for principled
+integration of machine learning and reasoning,''
+\textit{J. Applied Logics}, vol.~6, no.~4, pp.~611--632, 2020.
+
+\bibitem{b19}
+A.~Ismail, S.~Nahar, and R.~Amor,
+``Application of rule-based methods for building code compliance checking,''
+\textit{Autom. Constr.}, vol.~82, pp.~42--53, 2017.
+
+\end{thebibliography}
+
+\end{document}

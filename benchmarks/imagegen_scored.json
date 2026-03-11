@@ -1,0 +1,254 @@
+[
+  {
+    "model": "gpt-4o",
+    "image_backend": "dall-e-3",
+    "layout_id": "L1",
+    "category": "residential_single",
+    "latency_s": 25.49,
+    "file": "benchmark_images/gpt-4o_L1.png",
+    "url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-kfKWz6n3ktZBM6ej0KRQhU7Y/user-ZomVT66yLE4eJsL0xbdcwoA0/img-QarXXIf69cWIEPgoWyEnMlxD.png?st=2026-03-10T16%3A59%3A48Z&se=2026-03-10T18%3A59%3A48Z&sp=r&sv=2026-02-06&sr=b&rscd=inline&rsct=image/png&skoid=8eb2c87c-0531-4dab-acb3-b5e2adddce6c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-03-10T16%3A25%3A14Z&ske=2026-03-11T16%3A25%3A14Z&sks=b&skv=2026-02-06&sig=T5VfHEOmxn7nDcCQnDJZknHtFRI0xyxXS6le/ReA7Y0%3D",
+    "error": null,
+    "scores": {
+      "room_labeling": 5,
+      "spatial_proportionality": 4,
+      "adjacency_correctness": 3,
+      "drawing_style": 5,
+      "deployment_readiness": 4,
+      "notes": "Room labeling is clear and accurate. Spatial proportionality is mostly good, with well-sized rooms, but minor adjustments could enhance flow. Adjacency doesn't fully meet the expected criteria as the kitchen and bedrooms are not in specified locations. Drawing style is excellent, showing clear detail and precision. Overall, the plan is nearly ready for deployment, with minor modifications needed for spatial layout."
+    }
+  },
+  {
+    "model": "gpt-4o",
+    "image_backend": "dall-e-3",
+    "layout_id": "L2",
+    "category": "commercial_office",
+    "latency_s": 19.22,
+    "file": "benchmark_images/gpt-4o_L2.png",
+    "url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-kfKWz6n3ktZBM6ej0KRQhU7Y/user-ZomVT66yLE4eJsL0xbdcwoA0/img-48UByqhB04lYNGWdGkwVjopg.png?st=2026-03-10T17%3A00%3A06Z&se=2026-03-10T19%3A00%3A06Z&sp=r&sv=2026-02-06&sr=b&rscd=inline&rsct=image/png&skoid=ae240de5-197c-4e03-af8e-c66aed9a4539&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-03-10T09%3A47%3A37Z&ske=2026-03-11T09%3A47%3A37Z&sks=b&skv=2026-02-06&sig=oyMc1FpSlYdxft64tQWqk4yAKjtBNRTHDL7ezO15oxE%3D",
+    "error": null,
+    "scores": {
+      "room_labeling": 4,
+      "spatial_proportionality": 5,
+      "adjacency_correctness": 4,
+      "drawing_style": 5,
+      "deployment_readiness": 4,
+      "notes": "Room labeling is mostly clear but could be slightly improved for precision, particularly in smaller spaces. Spatial proportionality is excellent, with a good balance between different room sizes. Adjacency correctness is mostly accurate, though there might be a slight misplacement of the server room in the image's south-west. The drawing style is highly detailed and visually appealing. Overall, the floor plan is almost ready for deployment but would benefit from minor adjustments in labeling and room placement."
+    }
+  },
+  {
+    "model": "gpt-4o",
+    "image_backend": "dall-e-3",
+    "layout_id": "L3",
+    "category": "culturally_constrained",
+    "latency_s": 31.18,
+    "file": "benchmark_images/gpt-4o_L3.png",
+    "url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-kfKWz6n3ktZBM6ej0KRQhU7Y/user-ZomVT66yLE4eJsL0xbdcwoA0/img-ZoCm90n4Nfep6pkNcuoNrgDZ.png?st=2026-03-10T17%3A00%3A33Z&se=2026-03-10T19%3A00%3A33Z&sp=r&sv=2026-02-06&sr=b&rscd=inline&rsct=image/png&skoid=b2c0e1c0-cf97-4e19-8986-8073905d5723&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-03-10T11%3A41%3A56Z&ske=2026-03-11T11%3A41%3A56Z&sks=b&skv=2026-02-06&sig=TeCuZmuEPowaZg16sNVbYskkIpDTEwa15A7KNUk/gu8%3D",
+    "error": null,
+    "scores": {
+      "room_labeling": 4,
+      "spatial_proportionality": 4,
+      "adjacency_correctness": 4,
+      "drawing_style": 5,
+      "deployment_readiness": 4,
+      "notes": "The room labeling is clear and almost all areas are well defined. Spatial proportionality is good, with most spaces looking reasonably proportioned. Adjacency correctness follows the expected layout well, such as the kitchen in the south-east and master bedroom in the south-west, but there may be minor deviations, such as the entrance not being precisely on the east. The drawing style is professional, with clear lines and labels. Deployment readiness is high, although minor adjustments may be needed to fully match Vaastu principles."
+    }
+  },
+  {
+    "model": "gpt-4o-mini",
+    "image_backend": "dall-e-3",
+    "layout_id": "L1",
+    "category": "residential_single",
+    "latency_s": 26.19,
+    "file": "benchmark_images/gpt-4o-mini_L1.png",
+    "url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-kfKWz6n3ktZBM6ej0KRQhU7Y/user-ZomVT66yLE4eJsL0xbdcwoA0/img-HKlv3yd4YHb9TgQObnPnM3yJ.png?st=2026-03-10T17%3A01%3A04Z&se=2026-03-10T19%3A01%3A04Z&sp=r&sv=2026-02-06&sr=b&rscd=inline&rsct=image/png&skoid=b2c0e1c0-cf97-4e19-8986-8073905d5723&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-03-10T01%3A25%3A01Z&ske=2026-03-11T01%3A25%3A01Z&sks=b&skv=2026-02-06&sig=ZHePOl2ixrqmt7JNpu/k4qlyd74mBT4bzAoUhDib71k%3D",
+    "error": null,
+    "scores": {
+      "room_labeling": 5,
+      "spatial_proportionality": 4,
+      "adjacency_correctness": 4,
+      "drawing_style": 5,
+      "deployment_readiness": 4,
+      "notes": "The floor plan includes clear and accurate room labeling, making it easy to understand. Spatial proportionality is mostly accurate, but there might be slight discrepancies in room sizes compared to expectations. Adjacency of rooms is largely correct, though the kitchen is positioned towards the southeast, which is appropriate. The drawing style is clean and professional, with detailed representation of furniture and fixtures. The plan is mostly ready for deployment, but could benefit from minor adjustments to spatial layout for enhanced usability."
+    }
+  },
+  {
+    "model": "gpt-4o-mini",
+    "image_backend": "dall-e-3",
+    "layout_id": "L2",
+    "category": "commercial_office",
+    "latency_s": 33.31,
+    "file": "benchmark_images/gpt-4o-mini_L2.png",
+    "url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-kfKWz6n3ktZBM6ej0KRQhU7Y/user-ZomVT66yLE4eJsL0xbdcwoA0/img-l9mNVYnoTjVDOEq9glNACiNL.png?st=2026-03-10T17%3A01%3A30Z&se=2026-03-10T19%3A01%3A30Z&sp=r&sv=2026-02-06&sr=b&rscd=inline&rsct=image/png&skoid=32836cae-d25f-4fe9-827b-1c8c59c442cc&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-03-10T04%3A23%3A16Z&ske=2026-03-11T04%3A23%3A16Z&sks=b&skv=2026-02-06&sig=uSSPPY0gH1oK0kmmxUNxdIb3BO9YY1ilRov8fWp%2BLBw%3D",
+    "error": null,
+    "scores": {
+      "room_labeling": 4,
+      "spatial_proportionality": 4,
+      "adjacency_correctness": 5,
+      "drawing_style": 5,
+      "deployment_readiness": 4,
+      "notes": "The rooms are labeled clearly, though there are some unconventional text orientations which may affect readability. Spatial proportionality is generally appropriate for the intended function. Adjacency of rooms matches the expected layout well. The drawing style is clean and professional. Overall, it seems ready for deployment with minor adjustments."
+    }
+  },
+  {
+    "model": "gpt-4o-mini",
+    "image_backend": "dall-e-3",
+    "layout_id": "L3",
+    "category": "culturally_constrained",
+    "latency_s": 26.73,
+    "file": "benchmark_images/gpt-4o-mini_L3.png",
+    "url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-kfKWz6n3ktZBM6ej0KRQhU7Y/user-ZomVT66yLE4eJsL0xbdcwoA0/img-2CuHjDeN5J31031eQwkYGv1a.png?st=2026-03-10T17%3A02%3A04Z&se=2026-03-10T19%3A02%3A04Z&sp=r&sv=2026-02-06&sr=b&rscd=inline&rsct=image/png&skoid=0e2a3d55-e963-40c9-9c89-2a1aa28cb3ac&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-03-10T08%3A29%3A51Z&ske=2026-03-11T08%3A29%3A51Z&sks=b&skv=2026-02-06&sig=c9HtuWJIPZYAjLY1DQnqIyE8xCm4YVYoPy4r0tb6j4c%3D",
+    "error": null,
+    "scores": {
+      "room_labeling": 4,
+      "spatial_proportionality": 4,
+      "adjacency_correctness": 3,
+      "drawing_style": 4,
+      "deployment_readiness": 3,
+      "notes": "The floor plan has clear labeling, but the writing is slightly cluttered in areas. Spatial proportions are generally good, though some rooms like the kitchen may seem small compared to the living spaces. The adjacency of rooms mostly follows expected Vaastu guidelines, with slight deviations. The drawing style is clean and detailed. Deployment readiness is reasonable, with minor adjustments needed for an optimal Vaastu alignment."
+    }
+  },
+  {
+    "model": "gpt-4.1",
+    "image_backend": "dall-e-3",
+    "layout_id": "L1",
+    "category": "residential_single",
+    "latency_s": 29.62,
+    "file": "benchmark_images/gpt-4.1_L1.png",
+    "url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-kfKWz6n3ktZBM6ej0KRQhU7Y/user-ZomVT66yLE4eJsL0xbdcwoA0/img-rkkvPYyIAMckDUBBusRFjfZb.png?st=2026-03-10T17%3A02%3A31Z&se=2026-03-10T19%3A02%3A31Z&sp=r&sv=2026-02-06&sr=b&rscd=inline&rsct=image/png&skoid=8eb2c87c-0531-4dab-acb3-b5e2adddce6c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-03-10T06%3A29%3A41Z&ske=2026-03-11T06%3A29%3A41Z&sks=b&skv=2026-02-06&sig=b5Jbz5WSyFugZRV%2BmeVH4t%2Br/dD%2BcH6H0VM/nJ9EG7Q%3D",
+    "error": null,
+    "scores": {
+      "room_labeling": 4,
+      "spatial_proportionality": 4,
+      "adjacency_correctness": 4,
+      "drawing_style": 5,
+      "deployment_readiness": 4,
+      "notes": "The floor plan is well-drawn with clear labels. The spatial proportions of the rooms are generally well-balanced. The living area is positioned towards the north, but the layout slightly deviates from the expected with the kitchen not placed precisely in the south-east. The two bedrooms are mostly aligned to the east. The drawing style is excellent and visually clear. Overall, the plan is nearly deployment-ready with minor adjustments needed."
+    }
+  },
+  {
+    "model": "gpt-4.1",
+    "image_backend": "dall-e-3",
+    "layout_id": "L2",
+    "category": "commercial_office",
+    "latency_s": 23.13,
+    "file": "benchmark_images/gpt-4.1_L2.png",
+    "url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-kfKWz6n3ktZBM6ej0KRQhU7Y/user-ZomVT66yLE4eJsL0xbdcwoA0/img-IwwklLPDeEJme4iB6RCE2K4S.png?st=2026-03-10T17%3A02%3A57Z&se=2026-03-10T19%3A02%3A57Z&sp=r&sv=2026-02-06&sr=b&rscd=inline&rsct=image/png&skoid=b2c0e1c0-cf97-4e19-8986-8073905d5723&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-03-10T15%3A24%3A53Z&ske=2026-03-11T15%3A24%3A53Z&sks=b&skv=2026-02-06&sig=9EwI6MRBkGMETE5TX9GUlG8q05UYAw5q7kaadjNXiXc%3D",
+    "error": null,
+    "scores": {
+      "room_labeling": 4,
+      "spatial_proportionality": 4,
+      "adjacency_correctness": 5,
+      "drawing_style": 5,
+      "deployment_readiness": 4,
+      "notes": "The room labeling is mostly clear, but a few labels are difficult to read due to orientation and font size. Spatial proportionality is good overall, with rooms appearing balanced and functional. Adjacency of spaces aligns well with expected commercial office layout. The drawing style is clean, detailed, and professional. Slight improvements in labeling and dimensioning could enhance deployment readiness."
+    }
+  },
+  {
+    "model": "gpt-4.1",
+    "image_backend": "dall-e-3",
+    "layout_id": "L3",
+    "category": "culturally_constrained",
+    "latency_s": 25.35,
+    "file": "benchmark_images/gpt-4.1_L3.png",
+    "url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-kfKWz6n3ktZBM6ej0KRQhU7Y/user-ZomVT66yLE4eJsL0xbdcwoA0/img-fZe6Kvheh4XSHCHtc9kJnWYv.png?st=2026-03-10T17%3A03%3A22Z&se=2026-03-10T19%3A03%3A22Z&sp=r&sv=2026-02-06&sr=b&rscd=inline&rsct=image/png&skoid=38e27a3b-6174-4d3e-90ac-d7d9ad49543f&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-03-10T06%3A19%3A07Z&ske=2026-03-11T06%3A19%3A07Z&sks=b&skv=2026-02-06&sig=GNQFz95BaUDFWOEZznHd7zXCc50%2BmCcmuyrLAvKTBzM%3D",
+    "error": null,
+    "scores": {
+      "room_labeling": 4,
+      "spatial_proportionality": 4,
+      "adjacency_correctness": 4,
+      "drawing_style": 4,
+      "deployment_readiness": 4,
+      "notes": "The floor plan is well-labeled and the room sizes appear proportionate to each other. The layout mostly adheres to Vaastu guidelines with the entrance on the east, kitchen to the south-east, and master bedroom to the south-west. The pooja room is not perfectly in the north-east but is close. The drawing style is neat and clear, and the plan seems almost ready for deployment with minor adjustments needed for perfect Vaastu compliance."
+    }
+  },
+  {
+    "model": "gemini-2.5-pro",
+    "image_backend": "renderer_fallback",
+    "layout_id": "L1",
+    "category": "residential_single",
+    "latency_s": 0,
+    "file": null,
+    "error": "Imagen 3 requires Vertex AI with GCP project (not configured)",
+    "scores": null
+  },
+  {
+    "model": "gemini-2.5-pro",
+    "image_backend": "renderer_fallback",
+    "layout_id": "L2",
+    "category": "commercial_office",
+    "latency_s": 0,
+    "file": null,
+    "error": "Imagen 3 requires Vertex AI with GCP project (not configured)",
+    "scores": null
+  },
+  {
+    "model": "gemini-2.5-pro",
+    "image_backend": "renderer_fallback",
+    "layout_id": "L3",
+    "category": "culturally_constrained",
+    "latency_s": 0,
+    "file": null,
+    "error": "Imagen 3 requires Vertex AI with GCP project (not configured)",
+    "scores": null
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "image_backend": "renderer_fallback",
+    "layout_id": "L1",
+    "category": "residential_single",
+    "latency_s": 0,
+    "file": null,
+    "error": "Imagen 3 requires Vertex AI with GCP project (not configured)",
+    "scores": null
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "image_backend": "renderer_fallback",
+    "layout_id": "L2",
+    "category": "commercial_office",
+    "latency_s": 0,
+    "file": null,
+    "error": "Imagen 3 requires Vertex AI with GCP project (not configured)",
+    "scores": null
+  },
+  {
+    "model": "gemini-2.5-flash",
+    "image_backend": "renderer_fallback",
+    "layout_id": "L3",
+    "category": "culturally_constrained",
+    "latency_s": 0,
+    "file": null,
+    "error": "Imagen 3 requires Vertex AI with GCP project (not configured)",
+    "scores": null
+  },
+  {
+    "model": "llama-3.3-70b",
+    "image_backend": "renderer_fallback",
+    "layout_id": "L1",
+    "category": "residential_single",
+    "latency_s": 0,
+    "file": null,
+    "error": "No native image generation",
+    "scores": null
+  },
+  {
+    "model": "llama-3.3-70b",
+    "image_backend": "renderer_fallback",
+    "layout_id": "L2",
+    "category": "commercial_office",
+    "latency_s": 0,
+    "file": null,
+    "error": "No native image generation",
+    "scores": null
+  },
+  {
+    "model": "llama-3.3-70b",
+    "image_backend": "renderer_fallback",
+    "layout_id": "L3",
+    "category": "culturally_constrained",
+    "latency_s": 0,
+    "file": null,
+    "error": "No native image generation",
+    "scores": null
+  }
+]

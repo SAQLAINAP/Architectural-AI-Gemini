@@ -1,0 +1,244 @@
+{
+  "primary_metrics": {
+    "constraint_satisfaction_rate": {
+      "baseline_single_shot": {
+        "mean": 74.37,
+        "std": 6.02
+      },
+      "baseline_posthoc": {
+        "mean": 74.11,
+        "std": 6.04
+      },
+      "proposed": {
+        "mean": 72.86,
+        "std": 10.32
+      },
+      "per_category": {
+        "residential_single": {
+          "baseline_single_shot": 80.06,
+          "baseline_posthoc": 80.03,
+          "proposed": 77.98
+        },
+        "residential_multi": {
+          "baseline_single_shot": 70.39,
+          "baseline_posthoc": 69.64,
+          "proposed": 67.85
+        },
+        "commercial_office": {
+          "baseline_single_shot": 76.67,
+          "baseline_posthoc": 75.53,
+          "proposed": 76.07
+        },
+        "culturally_constrained": {
+          "baseline_single_shot": 70.35,
+          "baseline_posthoc": 71.22,
+          "proposed": 69.54
+        }
+      }
+    },
+    "spatial_efficiency": {
+      "baseline_single_shot": {
+        "mean": 65.12,
+        "std": 24.35
+      },
+      "baseline_posthoc": {
+        "mean": 65.24,
+        "std": 21.64
+      },
+      "proposed": {
+        "mean": 61.92,
+        "std": 27.35
+      }
+    },
+    "violation_count": {
+      "baseline_single_shot": {
+        "mean": 2.17,
+        "std": 1.32
+      },
+      "baseline_posthoc": {
+        "mean": 2.33,
+        "std": 1.58
+      },
+      "proposed": {
+        "mean": 2.49,
+        "std": 2.24
+      }
+    },
+    "iteration_improvement": {
+      "mean_delta_s": 0.0,
+      "convergence_distribution": {
+        "iteration_1_pct": 92.5,
+        "iteration_2_pct": 0.0,
+        "iteration_3_pct": 0.0,
+        "non_converged_pct": 7.5
+      },
+      "mean_score_per_iteration": {
+        "iter_0": 0.81,
+        "iter_1": 0.5,
+        "iter_2": 0.5,
+        "iter_3": null
+      }
+    },
+    "generation_time_seconds": {
+      "baseline_single_shot": {
+        "mean": 7.51,
+        "std": 2.76
+      },
+      "baseline_posthoc": {
+        "mean": 7.21,
+        "std": 2.0
+      },
+      "proposed": {
+        "mean": 31.62,
+        "std": 15.64
+      },
+      "proposed_phase_breakdown": {
+        "phase1_mean": 13.12,
+        "phase2_mean": 5.1,
+        "phase3_mean": 13.4
+      }
+    }
+  },
+  "secondary_metrics": {
+    "violation_type_distribution": {
+      "vaastu_directional": {
+        "count": 301,
+        "pct": 66.7
+      },
+      "vaastu_proportional": {
+        "count": 4,
+        "pct": 0.9
+      },
+      "regulatory_egress": {
+        "count": 21,
+        "pct": 4.7
+      },
+      "regulatory_area": {
+        "count": 18,
+        "pct": 4.0
+      },
+      "regulatory_setback": {
+        "count": 107,
+        "pct": 23.7
+      },
+      "spatial_adjacency": {
+        "count": 0,
+        "pct": 0.0
+      },
+      "spatial_efficiency": {
+        "count": 0,
+        "pct": 0.0
+      }
+    },
+    "refinement_effectiveness": {
+      "iteration_1": {
+        "mean_fix_rate_pct": -11.11
+      },
+      "iteration_2": {
+        "mean_fix_rate_pct": 0.0
+      },
+      "iteration_3": {
+        "mean_fix_rate_pct": 0.0
+      }
+    },
+    "critic_dimension_scores": {
+      "functionality": 0.86,
+      "circulation": 0.77,
+      "natural_light": 0.69,
+      "privacy": 0.75,
+      "proportion": 0.8,
+      "cultural_sensitivity": 0.81
+    },
+    "per_jurisdiction_csr": {
+      "NBC": {
+        "mean_csr": 72.05,
+        "mean_vc": 2.51
+      },
+      "BBMP": {
+        "mean_csr": 73.38,
+        "mean_vc": 2.21
+      },
+      "BMC": {
+        "mean_csr": 76.16,
+        "mean_vc": 2.26
+      },
+      "MCD": {
+        "mean_csr": 69.84,
+        "mean_vc": 2.96
+      }
+    },
+    "complexity_vs_performance": {
+      "rooms_2_3": {
+        "mean_csr": 42.41,
+        "mean_gt": 64.93
+      },
+      "rooms_4_5": {
+        "mean_csr": null,
+        "mean_gt": null
+      },
+      "rooms_6_8": {
+        "mean_csr": 80.66,
+        "mean_gt": 38.7
+      },
+      "rooms_9_plus": {
+        "mean_csr": 73.44,
+        "mean_gt": 25.46
+      }
+    },
+    "vaastu_vs_non_vaastu": {
+      "vaastu_required": {
+        "mean_csr": 68.3,
+        "mean_vc": 3.98,
+        "mean_gt": 34.13
+      },
+      "vaastu_not_required": {
+        "mean_csr": 77.9,
+        "mean_vc": 0.84,
+        "mean_gt": 28.85
+      }
+    },
+    "model_benchmark": {
+      "gpt-4o": {
+        "parse_success_pct": 100.0,
+        "mean_latency_s": 6.78,
+        "mean_cost_usd": 0.01,
+        "mean_room_count": 9.65
+      },
+      "gpt-4o-mini": {
+        "parse_success_pct": 100.0,
+        "mean_latency_s": 9.66,
+        "mean_cost_usd": 0.01,
+        "mean_room_count": 9.6
+      },
+      "gpt-4.1": {
+        "parse_success_pct": 100.0,
+        "mean_latency_s": 10.21,
+        "mean_cost_usd": 0.01,
+        "mean_room_count": 12.12
+      },
+      "gemini-2.5-pro": {
+        "parse_success_pct": 0.0,
+        "mean_latency_s": 0.13,
+        "mean_cost_usd": 0.0,
+        "mean_room_count": null
+      },
+      "gemini-2.5-flash": {
+        "parse_success_pct": 0.0,
+        "mean_latency_s": 0.14,
+        "mean_cost_usd": 0.0,
+        "mean_room_count": null
+      },
+      "llama-3.3-70b": {
+        "parse_success_pct": 97.5,
+        "mean_latency_s": 1.57,
+        "mean_cost_usd": 0.0,
+        "mean_room_count": 9.38
+      }
+    },
+    "image_fidelity_scores": {
+      "gpt-4o": 4.27,
+      "gpt-4o-mini": 4.13,
+      "gpt-4.1": 4.2
+    }
+  }
+}
